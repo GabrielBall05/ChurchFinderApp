@@ -1,6 +1,34 @@
 package com.example.churchapp.Database;
 
-public class Database
-{
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
+public class Database extends SQLiteOpenHelper
+{
+    public Database(Context ctx)
+    {
+        super(ctx, DatabaseVariables.DB_NAME, null, DatabaseVariables.DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase)
+    {
+        //Create tables --- UsersTable.create(sqLiteDatabase);
+        ChurchesTableHelper.create(sqLiteDatabase);
+        UsersTableHelper.create(sqLiteDatabase);
+        EventsTableHelper.create(sqLiteDatabase);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
+    {
+        //Drop and clean tables --- UsersTable.clean(sqLiteDatabase);
+        ChurchesTableHelper.clean(sqLiteDatabase);
+        UsersTableHelper.clean(sqLiteDatabase);
+        EventsTableHelper.clean(sqLiteDatabase);
+
+        //Recall onCreate to remake database
+        onCreate(sqLiteDatabase);
+    }
 }
