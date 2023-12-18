@@ -5,11 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UsersTableHelper
 {
-    Database db;
+    Database ctx;
 
-    public UsersTableHelper(Context ctx)
+    public UsersTableHelper(Context c)
     {
-        db = new Database(ctx);
+        ctx = new Database(c);
     }
 
     public static void create(SQLiteDatabase _db)

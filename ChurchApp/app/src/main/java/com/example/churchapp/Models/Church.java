@@ -12,8 +12,9 @@ public class Church implements Serializable
     private String statementOfFaith;
     private String streetAddress;
     private String city;
+    private String number;
 
-    public Church(String e, String p, String n, String d, String s, String a, String c)
+    public Church(String e, String p, String n, String d, String s, String a, String c, String num)
     {
         email = e;
         password = p;
@@ -22,6 +23,7 @@ public class Church implements Serializable
         statementOfFaith = s;
         streetAddress = a;
         city = c;
+        number = num;
     }
 
     public String getEmail()
@@ -57,5 +59,10 @@ public class Church implements Serializable
     public String getCity()
     {
         return city;
+    }
+
+    public String getNumber()
+    {
+        return number;
     }
 }

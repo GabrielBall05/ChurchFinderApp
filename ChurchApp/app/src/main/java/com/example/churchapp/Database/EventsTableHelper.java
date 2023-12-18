@@ -5,11 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class EventsTableHelper
 {
-    Database db;
+    Database ctx;
 
-    public EventsTableHelper(Context ctx)
+    public EventsTableHelper(Context c)
     {
-        db = new Database(ctx);
+        ctx = new Database(c);
     }
 
     public static void create(SQLiteDatabase _db)
