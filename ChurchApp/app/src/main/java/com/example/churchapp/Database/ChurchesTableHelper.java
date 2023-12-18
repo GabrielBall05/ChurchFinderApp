@@ -14,14 +14,14 @@ public class ChurchesTableHelper
 
     public static void create(SQLiteDatabase _db)
     {
-        //QUERY TO CREATE TABLE
-        //_db.execSQL(query);
+        //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city
+        final String query = "CREATE TABLE " + DatabaseVariables.CHURCHES_TABLE + " (email TEXT PRIMARY KEY NOT NULL, password TEXT NOT NULL, name TEXT NOT NULL, denomination TEXT NOT NULL, statementOfFaith TEXT NOT NULL, streetAddress TEXT NOT NULL, city TEXT NOT NULL);";
+        _db.execSQL(query);
     }
 
     public static void clean(SQLiteDatabase _db)
     {
-        //QUERY TO DROP TABLE
-        //_db.execSQL(query);
+        _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.CHURCHES_TABLE + ";");
     }
 
     //QUERIES LIKE createChurch, etc

@@ -18,6 +18,7 @@ public class Database extends SQLiteOpenHelper
         ChurchesTableHelper.create(sqLiteDatabase);
         UsersTableHelper.create(sqLiteDatabase);
         EventsTableHelper.create(sqLiteDatabase);
+        EventParticipantsTableHelper.create(sqLiteDatabase);
     }
 
     @Override
@@ -27,6 +28,7 @@ public class Database extends SQLiteOpenHelper
         ChurchesTableHelper.clean(sqLiteDatabase);
         UsersTableHelper.clean(sqLiteDatabase);
         EventsTableHelper.clean(sqLiteDatabase);
+        EventParticipantsTableHelper.clean(sqLiteDatabase);
 
         //Recall onCreate to remake database
         onCreate(sqLiteDatabase);

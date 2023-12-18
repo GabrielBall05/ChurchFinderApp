@@ -14,14 +14,14 @@ public class EventsTableHelper
 
     public static void create(SQLiteDatabase _db)
     {
-        //QUERY TO CREATE TABLE
-        //_db.execSQL(query);
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
+        final String query = "CREATE TABLE " + DatabaseVariables.EVENTS_TABLE + " (eventId INTEGER PRIMARY KEY AUTOINCREMENT, churchHostingEmail TEXT NOT NULL, churchName TEXT NOT NULL, eventName TEXT NOT NULL, address TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, desc TEXT NOT NULL, FOREIGN KEY (churchHostingEmail) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
+        _db.execSQL(query);
     }
 
     public static void clean(SQLiteDatabase _db)
     {
-        //QUERY TO DROP TABLE
-        //_db.execSQL(query);
+        _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.EVENTS_TABLE + ";");
     }
 
     //QUERIES LIKE getEventsByChurch or createEvent, etc
