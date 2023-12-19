@@ -65,4 +65,13 @@ public class Church implements Serializable
     {
         return number;
     }
+
+    public boolean isValidLogin(String enteredPassword)
+    {
+        if (enteredPassword.equals(password))
+        {
+            return true;
+        }
+        return false;
+    }
 }

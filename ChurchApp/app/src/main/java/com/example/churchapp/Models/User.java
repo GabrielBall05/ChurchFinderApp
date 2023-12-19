@@ -77,6 +77,15 @@ public class User implements Serializable
     {
         emailOfChurchAttending = e;
     }
+
+    public boolean isValidLogin(String enteredPassword)
+    {
+        if (enteredPassword.equals(password))
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 

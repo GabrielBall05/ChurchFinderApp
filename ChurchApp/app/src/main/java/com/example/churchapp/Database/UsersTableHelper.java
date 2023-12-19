@@ -63,7 +63,7 @@ public class UsersTableHelper
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM " +  DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -84,5 +84,26 @@ public class UsersTableHelper
         }
         db.close();
         return null;
+    }
+
+    /**========================================SEE IF USER HAS CHURCH (GIVEN USER'S EMAIL)========================================*/
+    @SuppressLint("Range")
+    public boolean hasChurchFindByUserEmail(String e)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst())
+        {
+            String emailOfChurchAttending = cursor.getString(cursor.getColumnIndex("emailOfChurchAttending"));
+            if (!emailOfChurchAttending.equals("")) //If it doesn't work, try using .isEmpty()
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
