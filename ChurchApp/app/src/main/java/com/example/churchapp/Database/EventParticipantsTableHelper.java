@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.churchapp.Models.EventParticipant;
+
 public class EventParticipantsTableHelper
 {
     Database ctx;
@@ -26,5 +28,21 @@ public class EventParticipantsTableHelper
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + ";");
     }
 
-    //QUERIES
+    /**========================================CREATE EVENT PARTICIPANT========================================*/
+    public void createEventParticipant(EventParticipant p)
+    {
+        //ORDER: eventId, emailOfParticipant
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "INSERT INTO " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + " VALUES ('" + p.getEventId() + "', '" + p.getEmailOfParticipant() + "');";
+        db.execSQL(query);
+        db.close();
+    }
+
+    /**========================================DELETE EVENT PARTICIPANT========================================*/
+    public void deleteEventParticipant(int id)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        db.execSQL("DELETE FROM " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + " WHERE eventId = '" + id + "';");
+        db.close();
+    }
 }
