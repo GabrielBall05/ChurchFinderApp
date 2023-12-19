@@ -19,6 +19,7 @@ public class Database extends SQLiteOpenHelper
         UsersTableHelper.create(sqLiteDatabase);
         EventsTableHelper.create(sqLiteDatabase);
         EventParticipantsTableHelper.create(sqLiteDatabase);
+        BookmarksTableHelper.create(sqLiteDatabase);
     }
 
     @Override
@@ -29,6 +30,7 @@ public class Database extends SQLiteOpenHelper
         UsersTableHelper.clean(sqLiteDatabase);
         EventsTableHelper.clean(sqLiteDatabase);
         EventParticipantsTableHelper.clean(sqLiteDatabase);
+        BookmarksTableHelper.clean(sqLiteDatabase);
 
         //Recall onCreate to remake database
         onCreate(sqLiteDatabase);
