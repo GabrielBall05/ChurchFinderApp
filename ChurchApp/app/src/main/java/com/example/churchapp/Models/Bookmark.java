@@ -9,6 +9,7 @@ public class Bookmark implements Serializable
 
     public Bookmark(String u, String c)
     {
+        //ORDER: emailOfUser, emailOfChurch
         emailOfUser = u;
         emailOfChurch = c;
     }

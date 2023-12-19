@@ -22,8 +22,8 @@ public class EventsTableHelper
 
     public static void create(SQLiteDatabase _db)
     {
-        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
-        final String query = "CREATE TABLE " + DatabaseVariables.EVENTS_TABLE + " (eventId INTEGER PRIMARY KEY AUTOINCREMENT, churchHostingEmail TEXT NOT NULL, churchName TEXT NOT NULL, eventName TEXT NOT NULL, address TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, desc TEXT NOT NULL, FOREIGN KEY (churchHostingEmail) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
+        final String query = "CREATE TABLE " + DatabaseVariables.EVENTS_TABLE + " (eventId INTEGER PRIMARY KEY AUTOINCREMENT, churchHostingEmail TEXT NOT NULL, churchName TEXT NOT NULL, eventName TEXT NOT NULL, address TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, description TEXT NOT NULL, FOREIGN KEY (churchHostingEmail) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
         _db.execSQL(query);
         Log.d("DATABASE", "Created events table");
     }
@@ -36,9 +36,9 @@ public class EventsTableHelper
     /**========================================CREATE EVENT========================================*/
     public void createEvent(Event e)
     {
-        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "INSERT INTO " + DatabaseVariables.EVENTS_TABLE + " (churchHostingEmail, churchName, eventName, address, date, time, desc) VALUES ('" + e.getChurchHostingEmail() + "', '" + e.getChurchName() + "', '" + e.getEventName() + "', '" + e.getAddress() + "', '" + e.getDate() + "', '" + e.getTime() + "', '" + e.getDesc() + "');";
+        String query = "INSERT INTO " + DatabaseVariables.EVENTS_TABLE + " (churchHostingEmail, churchName, eventName, address, date, time, description) VALUES ('" + e.getChurchHostingEmail() + "', '" + e.getChurchName() + "', '" + e.getEventName() + "', '" + e.getAddress() + "', '" + e.getDate() + "', '" + e.getTime() + "', '" + e.getDescription() + "');";
         db.execSQL(query);
         db.close();
     }
@@ -46,9 +46,9 @@ public class EventsTableHelper
     /**========================================UPDATE EVENT========================================*/
     public void updateEvent(Event e)
     {
-        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "UPDATE " + DatabaseVariables.EVENTS_TABLE + " SET churchName = '" + e.getChurchName() + "', eventName = '" + e.getEventName() + "', address = '" + e.getAddress() + "', date = '" + e.getDate() + "', time = '" + e.getTime() + "', desc = '" + e.getDesc() + "' WHERE email = '" + e.getEventId() + "';";
+        String query = "UPDATE " + DatabaseVariables.EVENTS_TABLE + " SET churchName = '" + e.getChurchName() + "', eventName = '" + e.getEventName() + "', address = '" + e.getAddress() + "', date = '" + e.getDate() + "', time = '" + e.getTime() + "', description = '" + e.getDescription() + "' WHERE email = '" + e.getEventId() + "';";
         db.execSQL(query);
         db.close();
     }
@@ -76,7 +76,7 @@ public class EventsTableHelper
         {
             do
             {
-                //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
+                //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
                 int eventId = cursor.getInt(cursor.getColumnIndex("eventId"));
                 String churchHostingEmail = cursor.getString(cursor.getColumnIndex("churchHostingEmail"));
                 String churchName = cursor.getString(cursor.getColumnIndex("churchName"));
@@ -84,9 +84,9 @@ public class EventsTableHelper
                 String address = cursor.getString(cursor.getColumnIndex("address"));
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
-                String desc = cursor.getString(cursor.getColumnIndex("desc"));
+                String description = cursor.getString(cursor.getColumnIndex("description"));
 
-                listOfEvents.add(new Event(eventId, churchHostingEmail, churchName, eventName, address, date, time, desc));
+                listOfEvents.add(new Event(eventId, churchHostingEmail, churchName, eventName, address, date, time, description));
             }
             while (cursor.moveToNext());
         }

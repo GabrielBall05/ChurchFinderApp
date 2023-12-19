@@ -9,6 +9,7 @@ public class EventParticipant implements Serializable
 
     public EventParticipant(int id, String e)
     {
+        //ORDER: eventId, emailOfParticipant
         eventId = id;
         emailOfParticipant = e;
     }

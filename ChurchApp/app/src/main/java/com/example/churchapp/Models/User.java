@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class User implements Serializable
 {
-    //ORDER: email, password, fname, lname, emailOfChurchAttending, denomination, city
+    //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
     private String email;
     private String password;
-    private String fname;
-    private String lname;
+    private String firstname;
+    private String lastname;
     private String emailOfChurchAttending;
     private String denomination;
     private String city;
@@ -16,10 +16,11 @@ public class User implements Serializable
     //Constructor with email of church attending
     public User(String e, String p, String f, String l, String eoc, String d, String c)
     {
+        //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
         email = e;
         password = p;
-        fname = f;
-        lname = l;
+        firstname = f;
+        lastname = l;
         emailOfChurchAttending = eoc;
         denomination = d;
         city = c;
@@ -28,10 +29,11 @@ public class User implements Serializable
     //Constructor without email of church attending
     public User(String e, String p, String f, String l, String d, String c)
     {
+        //ORDER: email, password, firstname, lastname, denomination, city
         email = e;
         password = p;
-        fname = f;
-        lname = l;
+        firstname = f;
+        lastname = l;
         denomination = d;
         city = c;
     }
@@ -46,14 +48,14 @@ public class User implements Serializable
         return password;
     }
 
-    public String getFname()
+    public String getFirstName()
     {
-        return fname;
+        return firstname;
     }
 
-    public String getLname()
+    public String getLastName()
     {
-        return lname;
+        return lastname;
     }
 
     public String getEmailOfChurchAttending()

@@ -19,7 +19,7 @@ public class UsersTableHelper
 
     public static void create(SQLiteDatabase _db)
     {
-        //ORDER: email, password, fname, lname, emailOfChurchAttending, denomination, city
+        //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
         final String query = "CREATE TABLE " + DatabaseVariables.USERS_TABLE + " (email TEXT PRIMARY KEY NOT NULL, password TEXT NOT NULL, firstname TEXT NOT NULL, lastname TEXT NOT NULL, emailOfChurchAttending TEXT, denomination TEXT NOT NULL, city TEXT NOT NULL, FOREIGN KEY (emailOfChurchAttending) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email));";
         _db.execSQL(query);
         Log.d("DATABASE", "Created users table");
@@ -33,9 +33,9 @@ public class UsersTableHelper
     /**========================================CREATE USER========================================*/
     public void createUser(User u)
     {
-        //ORDER: email, password, fname, lname, emailOfChurchAttending, denomination, city
+        //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES ('" + u.getEmail() + "', '" + u.getPassword() + "', '" + u.getFname() + "', '" + u.getLname() + "', '" + u.getEmailOfChurchAttending() + "', '" + u.getDenomination() + "', '" + u.getCity() + "');";
+        String query = "INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES ('" + u.getEmail() + "', '" + u.getPassword() + "', '" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getEmailOfChurchAttending() + "', '" + u.getDenomination() + "', '" + u.getCity() + "');";
         db.execSQL(query);
         db.close();
     }
@@ -43,9 +43,9 @@ public class UsersTableHelper
     /**========================================UPDATE USER========================================*/
     public void updateUser(User u)
     {
-        //ORDER: email, password, fname, lname, emailOfChurchAttending, denomination, city
+        //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "UPDATE " + DatabaseVariables.USERS_TABLE + " SET password = '" + u.getPassword() + "', fname = '" + u.getFname() + "', lname = '" + u.getLname() + "', emailOfChurchAttending = '" + u.getEmailOfChurchAttending() + "', denomination = '" + u.getDenomination() + "', city = '" + u.getCity() + "' WHERE email = '" + u.getEmail() + "';";
+        String query = "UPDATE " + DatabaseVariables.USERS_TABLE + " SET password = '" + u.getPassword() + "', firstname = '" + u.getFirstName() + "', lastname = '" + u.getLastName() + "', emailOfChurchAttending = '" + u.getEmailOfChurchAttending() + "', denomination = '" + u.getDenomination() + "', city = '" + u.getCity() + "' WHERE email = '" + u.getEmail() + "';";
         db.execSQL(query);
         db.close();
     }
@@ -69,16 +69,16 @@ public class UsersTableHelper
 
         if (cursor.moveToFirst())
         {
-            //ORDER: email, password, fname, lname, emailOfChurchAttending, denomination, city
+            //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String password = cursor.getString(cursor.getColumnIndex("password"));
-            String fname = cursor.getString(cursor.getColumnIndex("fname"));
-            String lname = cursor.getString(cursor.getColumnIndex("lname"));
+            String firstname = cursor.getString(cursor.getColumnIndex("firstname"));
+            String lastname = cursor.getString(cursor.getColumnIndex("lastname"));
             String emailOfChurchAttending = cursor.getString(cursor.getColumnIndex("emailOfChurchAttending"));
             String denomination = cursor.getString(cursor.getColumnIndex("denomination"));
             String city = cursor.getString(cursor.getColumnIndex("city"));
 
-            User userToPass = new User(email, password, fname, lname, emailOfChurchAttending, denomination, city);
+            User userToPass = new User(email, password, firstname, lastname, emailOfChurchAttending, denomination, city);
             db.close();
             return userToPass;
         }

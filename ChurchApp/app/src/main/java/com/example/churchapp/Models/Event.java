@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Event implements Serializable
 {
-    //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, desc
     private int eventId;
     private String churchHostingEmail;
     private String churchName;
@@ -12,10 +11,11 @@ public class Event implements Serializable
     private String address;
     private String date;
     private String time;
-    private String desc;
+    private String description;
 
     public Event(int id, String e, String cn, String en, String a, String d, String t, String de)
     {
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
         eventId = id;
         churchHostingEmail = e;
         churchName = cn;
@@ -23,7 +23,7 @@ public class Event implements Serializable
         address = a;
         date = d;
         time = t;
-        desc = d;
+        description = d;
     }
 
     public int getEventId()
@@ -61,8 +61,8 @@ public class Event implements Serializable
         return time;
     }
 
-    public String getDesc()
+    public String getDescription()
     {
-        return desc;
+        return description;
     }
 }
