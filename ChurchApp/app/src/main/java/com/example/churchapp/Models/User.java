@@ -26,18 +26,6 @@ public class User implements Serializable
         city = c;
     }
 
-    //Constructor without email of church attending
-    public User(String e, String p, String f, String l, String d, String c)
-    {
-        //ORDER: email, password, firstname, lastname, denomination, city
-        email = e;
-        password = p;
-        firstname = f;
-        lastname = l;
-        denomination = d;
-        city = c;
-    }
-
     public String getEmail()
     {
         return email;

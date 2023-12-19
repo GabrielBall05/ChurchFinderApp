@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.example.churchapp.Models.User;
 
+import java.util.ArrayList;
+
 public class UsersTableHelper
 {
     Database ctx;
@@ -105,5 +107,57 @@ public class UsersTableHelper
             }
         }
         return false;
+    }
+    /**========================================GET ALL USERS========================================*/
+    @SuppressLint("Range")
+    public ArrayList<User> getAllUsers()
+    {
+        ArrayList<User> listOfUsers = new ArrayList<User>();
+
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + ";";
+
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+                String email = cursor.getString(cursor.getColumnIndex("email"));
+                String password = cursor.getString(cursor.getColumnIndex("password"));
+                String firstname = cursor.getString(cursor.getColumnIndex("firstname"));
+                String lastname = cursor.getString(cursor.getColumnIndex("lastname"));
+                String emailOfChurchAttending = cursor.getString(cursor.getColumnIndex("emailOfChurchAttending"));
+                String denomination = cursor.getString(cursor.getColumnIndex("denomination"));
+                String city = cursor.getString(cursor.getColumnIndex("city"));
+
+                listOfUsers.add(new User(email, password, firstname, lastname, emailOfChurchAttending, denomination, city));
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return listOfUsers;
+    }
+
+
+    /**========================================DOES EMAIL EXIST========================================*/
+    public boolean doesEmailExist(String e)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        String selectQuery = "SELECT email FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.getCount() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

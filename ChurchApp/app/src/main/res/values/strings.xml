@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ChurchApp</string>
+
+    <string-array name="denominations">
+        <item>Non Denominational</item>
+        <item>Lutheran</item>
+        <item>Catholic</item>
+        <item>Methodist</item>
+        <item>Evangelical</item>
+        <item>Anglican</item>
+        <item>Pentecostal</item>
+        <item>Baptist</item>
+    </string-array>
 </resources>

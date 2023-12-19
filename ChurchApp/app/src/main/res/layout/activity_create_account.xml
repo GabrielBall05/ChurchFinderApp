@@ -6,4 +6,171 @@
     android:layout_height="match_parent"
     tools:context=".Other.CreateAccount">
 
+    <TextView
+        android:id="@+id/tv_createAccount_emailError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="*Email already in use*"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_createAccount_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_email" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="25dp"
+        android:text="Create Account"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_createAccount_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_createAccount_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/tv_createAccount_emailError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/et_createAccount_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/et_createAccount_firstname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createAccount_emailError" />
+
+    <EditText
+        android:id="@+id/et_createAccount_firstname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/et_createAccount_lastname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_password" />
+
+    <EditText
+        android:id="@+id/et_createAccount_lastname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/et_createAccount_city"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_firstname" />
+
+    <EditText
+        android:id="@+id/et_createAccount_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="13dp"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/sp_createAccount_denomination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_lastname" />
+
+    <Spinner
+        android:id="@+id/sp_createAccount_denomination"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_createAccount_fieldsError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_city" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="16dp"
+        android:text="*Anything can be changed later via the Edit Profile page*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_createAccount_back" />
+
+    <TextView
+        android:id="@+id/tv_createAccount_fieldsError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Please fill out all fields*"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_createAccount_register"
+        app:layout_constraintEnd_toEndOf="@+id/sp_createAccount_denomination"
+        app:layout_constraintStart_toStartOf="@+id/sp_createAccount_denomination"
+        app:layout_constraintTop_toBottomOf="@+id/sp_createAccount_denomination" />
+
+    <Button
+        android:id="@+id/btn_createAccount_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="15dp"
+        android:text="Register"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_createAccount_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createAccount_fieldsError" />
+
+    <Button
+        android:id="@+id/btn_createAccount_back"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="85dp"
+        android:text="Back"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_createAccount_register" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -226,4 +226,23 @@ public class ChurchesTableHelper
         db.close();
         return listOfChurches;
     }
+
+    /**========================================DOES EMAIL EXIST========================================*/
+    public boolean doesEmailExist(String e)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        String selectQuery = "SELECT email FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.getCount() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

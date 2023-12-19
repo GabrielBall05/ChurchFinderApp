@@ -21,6 +21,8 @@ import com.example.churchapp.Other.Session;
 import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
 import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
 {
     //GUI
@@ -32,16 +34,20 @@ public class MainActivity extends AppCompatActivity
     TextView tv_fieldsError;
     TextView tv_loginError;
 
-    //Database
+    //DATABASE
     ChurchesTableHelper churchesDb;
     UsersTableHelper usersDb;
 
-    //Intents
+    //INTENTS
     Intent userNoChurchHome;
     Intent userWithChurchHome;
     Intent churchHome;
     Intent createAccountIntent;
     Intent createChurchIntent;
+
+    //ARRAYLISTS FOR TESTING
+    ArrayList<User> listOfUsers;
+    ArrayList<Church> listOfChurches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,16 +64,25 @@ public class MainActivity extends AppCompatActivity
         tv_fieldsError = findViewById(R.id.tv_loginPage_fieldsError);
         tv_loginError = findViewById(R.id.tv_loginPage_loginError);
 
-        //Database
+        //DATABASE
         churchesDb = new ChurchesTableHelper(this);
         usersDb = new UsersTableHelper(this);
 
-        //Intents
+        //INTENTS
         userNoChurchHome = new Intent(MainActivity.this, UserNoChurchHome.class);
         userWithChurchHome = new Intent(MainActivity.this, UserWithChurchHome.class);
         churchHome = new Intent(MainActivity.this, ChurchHome.class);
         createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
         createChurchIntent = new Intent(MainActivity.this, CreateChurch.class);
+
+
+        //===TESTING===
+        listOfUsers = new ArrayList<User>();
+        listOfChurches = new ArrayList<Church>();
+        listOfUsers = usersDb.getAllUsers();
+        listOfChurches = churchesDb.getAllChurches();
+        logAllUsersAndChurches();
+        //===TESTING===
 
 
         //FUNCTIONS
@@ -76,6 +91,7 @@ public class MainActivity extends AppCompatActivity
         createChurchButtonClick();
     }
 
+    /**========================================LOGIN BUTTON PRESS========================================*/
     private void loginButtonClick()
     {
         btn_login.setOnClickListener(new View.OnClickListener()
@@ -83,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.d("BUTTON PRESS", "Login Button Press (Main Activity)");
+                Log.v("BUTTON PRESS", "Login Button Press (Main Activity)");
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
@@ -113,12 +129,12 @@ public class MainActivity extends AppCompatActivity
                             //Determine if user is a member of a church or not
                             if (usersDb.hasChurchFindByUserEmail(user.getEmail())) //Has church
                             {
-                                Log.d("BUTTON PRESS", "Login Button - Moving to UserWithChurchHome");
+                                Log.v("BUTTON PRESS", "Login Button - Moving to UserWithChurchHome");
                                 startActivity(userWithChurchHome);
                             }
                             else //Doesn't have church
                             {
-                                Log.d("BUTTON PRESS", "Login Button - Moving to UserNoChurchHome");
+                                Log.v("BUTTON PRESS", "Login Button - Moving to UserNoChurchHome");
                                 startActivity(userNoChurchHome);
                             }
                         }
@@ -129,10 +145,9 @@ public class MainActivity extends AppCompatActivity
                         if (church.isValidLogin(password)) //Check login validity
                         {
                             Session.login(church);
-                            Log.d("BUTTON PRESS", "Login Button - Moving to Church Home");
+                            Log.v("BUTTON PRESS", "Login Button - Moving to Church Home");
                             startActivity(churchHome);
                         }
-
                     }
                 }
             }
@@ -153,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 
+    /**========================================CREATE ACCOUNT BUTTON PRESS========================================*/
     private void createAccountButtonClick()
     {
         btn_createAccount.setOnClickListener(new View.OnClickListener()
@@ -160,12 +176,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.d("BUTTON PRESS", "Create Account Button Press (Main Activity) - Moving to CreateAccount");
+                Log.v("BUTTON PRESS", "Create Account Button Press (Main Activity) - Moving to CreateAccount");
                 startActivity(createAccountIntent);
             }
         });
     }
 
+    /**========================================CREATE CHURCH BUTTON PRESS========================================*/
     private void createChurchButtonClick()
     {
         btn_createChurch.setOnClickListener(new View.OnClickListener()
@@ -173,9 +190,24 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.d("BUTTON PRESS", "Create Church Button Press (Main Activity) - Moving to CreateChurch");
+                Log.v("BUTTON PRESS", "Create Church Button Press (Main Activity) - Moving to CreateChurch");
                 startActivity(createChurchIntent);
             }
         });
+    }
+
+    private void logAllUsersAndChurches()
+    {
+        Log.i("USERS", "==========ALL USERS==========");
+        for (int i = 0; i < listOfUsers.size(); i++)
+        {
+            Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword());
+            //Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword());
+        }
+        Log.i("CHURCHES", "==========ALL CHURCHES==========");
+        for (int i = 0; i < listOfUsers.size(); i++)
+        {
+            Log.i("Church:", "Email: " + listOfChurches.get(i).getEmail() + " - Password: " + listOfChurches.get(i).getPassword());
+        }
     }
 }
