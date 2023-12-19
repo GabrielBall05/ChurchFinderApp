@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity
         listOfChurches = new ArrayList<Church>();
         listOfUsers = usersDb.getAllUsers();
         listOfChurches = churchesDb.getAllChurches();
+        usersDb.dummyUsers();
+        churchesDb.dummyChurches();
         logAllUsersAndChurches();
         //===TESTING===
 
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity
                     }
                     else if (accountType.equals(Session.USER_TYPE)) //IF USER
                     {
+                        tv_loginError.setVisibility(View.INVISIBLE);
+
                         User user = usersDb.getUserByEmail(email); //Get the user
                         if (user.isValidLogin(password)) //Check login validity
                         {
@@ -138,15 +142,25 @@ public class MainActivity extends AppCompatActivity
                                 startActivity(userNoChurchHome);
                             }
                         }
+                        else
+                        {
+                            tv_loginError.setVisibility(View.VISIBLE);
+                        }
                     }
                     else if (accountType.equals(Session.CHURCH_TYPE)) //IF CHURCH
                     {
+                        tv_loginError.setVisibility(View.INVISIBLE);
+
                         Church church = churchesDb.getChurchByEmail(email); //Get the church
                         if (church.isValidLogin(password)) //Check login validity
                         {
                             Session.login(church);
                             Log.v("BUTTON PRESS", "Login Button - Moving to Church Home");
                             startActivity(churchHome);
+                        }
+                        else
+                        {
+                            tv_loginError.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -196,6 +210,9 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+
+
+    //LOGGING ALL USERS AND CHURCHES FOR TESTING
     private void logAllUsersAndChurches()
     {
         Log.i("USERS", "==========ALL USERS==========");
@@ -205,7 +222,7 @@ public class MainActivity extends AppCompatActivity
             //Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword());
         }
         Log.i("CHURCHES", "==========ALL CHURCHES==========");
-        for (int i = 0; i < listOfUsers.size(); i++)
+        for (int i = 0; i < listOfChurches.size(); i++)
         {
             Log.i("Church:", "Email: " + listOfChurches.get(i).getEmail() + " - Password: " + listOfChurches.get(i).getPassword());
         }

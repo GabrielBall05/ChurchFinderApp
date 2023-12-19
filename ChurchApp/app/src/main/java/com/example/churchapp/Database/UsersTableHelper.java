@@ -160,4 +160,18 @@ public class UsersTableHelper
             return true;
         }
     }
+
+    /**========================================INITIALIZE USERS TABLE========================================*/
+    public void dummyUsers()
+    {
+        if (getAllUsers().size() == 0)
+        {
+            SQLiteDatabase db = ctx.getWritableDatabase();
+            //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+            db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('puffsplusblue@gmail.com', 'password', 'Derek', 'Ball', 'bridgepoint@gmail.com', 'Baptist', 'Temperance');");
+            db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('nicholeball@gmail.com', 'password', 'Nichole', 'Ball', 'gracelutheran@gmail.com', 'Lutheran', 'Monroe');");
+            db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('elijahball@gmail.com', 'password', 'Elijah', 'Ball', '', 'Non Denominational', 'Toledo');");
+            db.close();
+        }
+    }
 }

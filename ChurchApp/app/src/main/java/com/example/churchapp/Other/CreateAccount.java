@@ -97,6 +97,8 @@ public class CreateAccount extends AppCompatActivity
                 String city = et_city.getText().toString();
                 String denomination = sp_denomination.getSelectedItem().toString();
 
+                tv_emailError.setVisibility(View.INVISIBLE);
+
                 //One of the fields are empty
                 if (email.equals("") || password.equals("") || firstname.equals("") || lastname.equals("") || city.equals(""))
                 {
@@ -145,16 +147,12 @@ public class CreateAccount extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("SPINNER ITEM SELECTED", "Selected spinner item");
+                //Log.v("SPINNER ITEM SELECTED", "Selected spinner item");
                 String text = parent.getItemAtPosition(i).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 

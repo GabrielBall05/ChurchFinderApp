@@ -15,7 +15,7 @@ public class Church implements Serializable
 
     public Church(String e, String p, String n, String d, String s, String a, String c, String num)
     {
-        //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city
+        //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
         email = e;
         password = p;
         name = n;

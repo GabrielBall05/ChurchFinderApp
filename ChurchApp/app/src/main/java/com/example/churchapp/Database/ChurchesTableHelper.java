@@ -232,7 +232,7 @@ public class ChurchesTableHelper
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
 
-        String selectQuery = "SELECT email FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
+        String selectQuery = "SELECT email FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE email = '" + e + "';";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -243,6 +243,19 @@ public class ChurchesTableHelper
         else
         {
             return true;
+        }
+    }
+
+    /**========================================INITIALIZE CHURCHES TABLE========================================*/
+    public void dummyChurches()
+    {
+        if (getAllChurches().size() == 0)
+        {
+            SQLiteDatabase db = ctx.getWritableDatabase();
+            //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
+            db.execSQL("INSERT INTO " + DatabaseVariables.CHURCHES_TABLE + " VALUES('bridgepoint@gmail.com', 'password', 'BridgePoint Church', 'Baptist', 'We belive that Jesus is God', '9875 Lewis Ave', 'Temperance', '123-456-7890');");
+            db.execSQL("INSERT INTO " + DatabaseVariables.CHURCHES_TABLE + " VALUES('gracelutheran@gmail.com', 'password', 'Grace Lutheran Church', 'Lutheran', 'We believe in the Bible', '630 N Monroe St', 'Monroe', '987-654-3210');");
+            db.close();
         }
     }
 }
