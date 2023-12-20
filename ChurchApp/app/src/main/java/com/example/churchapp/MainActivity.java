@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity
     UsersTableHelper usersDb;
 
     //INTENTS
-    Intent userNoChurchHome;
-    Intent userWithChurchHome;
-    Intent churchHome;
+    Intent userNoChurchHomeIntent;
+    Intent userWithChurchHomeIntent;
+    Intent churchHomeIntent;
     Intent createAccountIntent;
     Intent createChurchIntent;
 
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity
         usersDb = new UsersTableHelper(this);
 
         //INTENTS
-        userNoChurchHome = new Intent(MainActivity.this, UserNoChurchHome.class);
-        userWithChurchHome = new Intent(MainActivity.this, UserWithChurchHome.class);
-        churchHome = new Intent(MainActivity.this, ChurchHome.class);
+        userNoChurchHomeIntent = new Intent(MainActivity.this, UserNoChurchHome.class);
+        userWithChurchHomeIntent = new Intent(MainActivity.this, UserWithChurchHome.class);
+        churchHomeIntent = new Intent(MainActivity.this, ChurchHome.class);
         createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
         createChurchIntent = new Intent(MainActivity.this, CreateChurch.class);
 
@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity
                             if (usersDb.hasChurchFindByUserEmail(user.getEmail())) //Has church
                             {
                                 Log.v("BUTTON PRESS", "Login Button - Moving to UserWithChurchHome");
-                                startActivity(userWithChurchHome);
+                                startActivity(userWithChurchHomeIntent);
                             }
                             else //Doesn't have church
                             {
                                 Log.v("BUTTON PRESS", "Login Button - Moving to UserNoChurchHome");
-                                startActivity(userNoChurchHome);
+                                startActivity(userNoChurchHomeIntent);
                             }
                         }
                         else
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             Session.login(church);
                             Log.v("BUTTON PRESS", "Login Button - Moving to Church Home");
-                            startActivity(churchHome);
+                            startActivity(churchHomeIntent);
                         }
                         else
                         {
