@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.churchapp.Confirmations.DeleteConfirmation;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.User;
@@ -55,6 +56,7 @@ public class ChurchHome extends AppCompatActivity
         viewMembersIntent = new Intent(ChurchHome.this, ViewMembers.class);
         createEventIntent = new Intent(ChurchHome.this, CreateEvent.class);
         editProfileIntent = new Intent(ChurchHome.this, EditChurchProfile.class);
+        deleteConfirmationIntent = new Intent(ChurchHome.this, DeleteConfirmation.class);
 
         //FUNCTIONS
         viewMembersButtonClick();
@@ -64,6 +66,7 @@ public class ChurchHome extends AppCompatActivity
         listViewItemLongClick();
     }
 
+    /**========================================LIST VIEW ITEM CLICK========================================*/
     private void listViewItemClick()
     {
         lv_myEvents.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -73,11 +76,14 @@ public class ChurchHome extends AppCompatActivity
             {
                 Log.v("List View Click", "List view item click in ChurchHome (lv_myEvents) - Moving to EditEvent");
                                                             /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
+                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
+                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
                 startActivity(editEventIntent);
             }
         });
     }
 
+    /**========================================LIST VIEW ITEM LONG CLICK========================================*/
     private void listViewItemLongClick()
     {
         lv_myEvents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
@@ -87,6 +93,8 @@ public class ChurchHome extends AppCompatActivity
             {
                 Log.v("List View Long Click", "List view long click in ChurchHome (lv_myEvents) - Moving to DeleteConfirmation");
                                                             /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
+                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
+                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
                 startActivity(deleteConfirmationIntent);
 
                 return false;
@@ -94,6 +102,7 @@ public class ChurchHome extends AppCompatActivity
         });
     }
 
+    /**========================================VIEW MEMBERS BUTTON PRESS========================================*/
     private void viewMembersButtonClick()
     {
         btn_viewMembers.setOnClickListener(new View.OnClickListener()
@@ -107,6 +116,7 @@ public class ChurchHome extends AppCompatActivity
         });
     }
 
+    /**========================================CREATE EVENT BUTTON PRESS========================================*/
     private void createEventButtonClick()
     {
         btn_createEvent.setOnClickListener(new View.OnClickListener()
@@ -120,6 +130,7 @@ public class ChurchHome extends AppCompatActivity
         });
     }
 
+    /**========================================EDIT PROFILE BUTTON PRESS========================================*/
     private void editProfileButtonClick()
     {
         btn_editProfile.setOnClickListener(new View.OnClickListener()
