@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             Session.login(user);
                             //Determine if user is a member of a church or not
-                            if (usersDb.hasChurchFindByUserEmail(user.getEmail())) //Has church
+                            if (usersDb.doesUserHaveChurch(user.getEmail())) //Has church
                             {
                                 Log.v("BUTTON PRESS", "Login Button - Moving to UserWithChurchHome");
                                 startActivity(userWithChurchHomeIntent);
@@ -218,13 +218,13 @@ public class MainActivity extends AppCompatActivity
         Log.i("USERS", "==========ALL USERS==========");
         for (int i = 0; i < listOfUsers.size(); i++)
         {
-            Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword());
             //Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword());
+            Log.i("User:", "Email: " + listOfUsers.get(i).getEmail() + " - Password: " + listOfUsers.get(i).getPassword() + " - Church Attending: " + listOfUsers.get(i).getEmailOfChurchAttending());
         }
         Log.i("CHURCHES", "==========ALL CHURCHES==========");
         for (int i = 0; i < listOfChurches.size(); i++)
         {
-            Log.i("Church:", "Email: " + listOfChurches.get(i).getEmail() + " - Password: " + listOfChurches.get(i).getPassword());
+            Log.i("Church:", "Email: " + listOfChurches.get(i).getEmail() + " - Password: " + listOfChurches.get(i).getPassword() + " - Name: " + listOfChurches.get(i).getName());
         }
     }
 }

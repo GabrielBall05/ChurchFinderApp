@@ -88,9 +88,48 @@ public class UsersTableHelper
         return null;
     }
 
+    /**========================================UPDATE USER'S CHURCH ATTENDING (GIVEN USER'S EMAIL & CHURCH EMAIL or "")========================================*/
+    public void updateUserChurchAttending(String userEmail, String churchEmail)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "UPDATE " + DatabaseVariables.USERS_TABLE + " SET emailOfChurchAttending = '" + churchEmail + "' WHERE email = '" + userEmail + "';";
+        db.execSQL(query);
+        db.close();
+    }
+
     /**========================================SEE IF USER HAS CHURCH (GIVEN USER'S EMAIL)========================================*/
     @SuppressLint("Range")
-    public boolean hasChurchFindByUserEmail(String e)
+    public ArrayList<User> getAllUsersAttendingChurch(String e)
+    {
+        ArrayList<User> listOfUsersAttendingThisChurch = new ArrayList<User>();
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + " WHERE emailOfChurchAttending = '" + e + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+                String email = cursor.getString(cursor.getColumnIndex("email"));
+                String password = cursor.getString(cursor.getColumnIndex("password"));
+                String firstname = cursor.getString(cursor.getColumnIndex("firstname"));
+                String lastname = cursor.getString(cursor.getColumnIndex("lastname"));
+                String emailOfChurchAttending = cursor.getString(cursor.getColumnIndex("emailOfChurchAttending"));
+                String denomination = cursor.getString(cursor.getColumnIndex("denomination"));
+                String city = cursor.getString(cursor.getColumnIndex("city"));
+
+                listOfUsersAttendingThisChurch.add(new User(email, password, firstname, lastname, emailOfChurchAttending, denomination, city));
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return listOfUsersAttendingThisChurch;
+    }
+
+    /**========================================SEE IF USER HAS CHURCH (GIVEN USER'S EMAIL)========================================*/
+    @SuppressLint("Range")
+    public boolean doesUserHaveChurch(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
 
