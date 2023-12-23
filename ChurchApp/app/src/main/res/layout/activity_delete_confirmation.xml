@@ -6,4 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".Confirmations.DeleteConfirmation">
 
+    <TextView
+        android:id="@+id/tv_deleteConfirmation_areYouSure"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to delete?"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="139dp" />
+
+    <Button
+        android:id="@+id/btn_deleteConfirmation_yes"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:text="Yes"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <Button
+        android:id="@+id/btn_deleteConfirmation_no"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:text="No"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="230dp"
+        tools:layout_editor_absoluteY="293dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

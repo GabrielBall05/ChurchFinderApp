@@ -10,11 +10,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.churchapp.Adapters.MyEventsAdapter;
+import com.example.churchapp.Adapters.MyMembersAdapter;
 import com.example.churchapp.Confirmations.DeleteConfirmation;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
+import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.User;
+import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
+
+import java.util.ArrayList;
 
 public class ChurchHome extends AppCompatActivity
 {
@@ -34,6 +40,12 @@ public class ChurchHome extends AppCompatActivity
     Intent createEventIntent;
     Intent editProfileIntent;
     Intent deleteConfirmationIntent;
+
+    //ADAPTER
+    MyEventsAdapter adapter;
+
+    //MY EVENTS ARRAY
+    ArrayList<Event> listOfMyEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,12 +70,24 @@ public class ChurchHome extends AppCompatActivity
         editProfileIntent = new Intent(ChurchHome.this, EditChurchProfile.class);
         deleteConfirmationIntent = new Intent(ChurchHome.this, DeleteConfirmation.class);
 
+        //ARRAYLIST
+        listOfMyEvents = new ArrayList<Event>();
+        listOfMyEvents = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
+
         //FUNCTIONS
         viewMembersButtonClick();
         createEventButtonClick();
         editProfileButtonClick();
         listViewItemClick();
         listViewItemLongClick();
+        fillListView();
+    }
+
+    /**========================================FILL LIST VIEW========================================*/
+    private void fillListView()
+    {
+        adapter = new MyEventsAdapter(this, listOfMyEvents);
+        lv_myEvents.setAdapter(adapter);
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -72,12 +96,10 @@ public class ChurchHome extends AppCompatActivity
         lv_myEvents.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
                 Log.v("List View Click", "List view item click in ChurchHome (lv_myEvents) - Moving to EditEvent");
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO EDITEVENT INTENT==============================*/
+                editEventIntent.putExtra("myEvent", listOfMyEvents.get(i));
                 startActivity(editEventIntent);
             }
         });
@@ -89,14 +111,12 @@ public class ChurchHome extends AppCompatActivity
         lv_myEvents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id)
             {
                 Log.v("List View Long Click", "List view long click in ChurchHome (lv_myEvents) - Moving to DeleteConfirmation");
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
-                                                            /**==============================MAKE A NEW EVENT GIVEN THE INFO AT int position AND .putExtra() IT TO DELETECONFIRMATION INTENT==============================*/
+                deleteConfirmationIntent.putExtra("cameFrom", "churchHomeIntent");
+                deleteConfirmationIntent.putExtra("eventToDelete", listOfMyEvents.get(i));
                 startActivity(deleteConfirmationIntent);
-
                 return false;
             }
         });

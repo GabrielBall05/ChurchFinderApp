@@ -128,7 +128,7 @@ public class CreateAccount extends AppCompatActivity
                         User user = new User(email, password, firstname, lastname, "", denomination, city);
                         usersDb.createUser(user);
                         startActivity(userNoChurchHome);
-                        Log.v("BUTTON PRESS", "Create Account Button Press - Moving to UserNoChurchHome");
+                        Log.v("CREATED", "Created Account - Moving to UserNoChurchHome");
                     }
                     else //If it's not unique
                     {

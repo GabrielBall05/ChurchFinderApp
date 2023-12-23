@@ -64,7 +64,7 @@ public class ViewMembers extends AppCompatActivity
         listViewItemSelect();
     }
 
-    /**========================================LIST VIEW ITEM SELECTED========================================*/
+    /**========================================FILL LIST VIEW========================================*/
     private void fillListView()
     {
         adapter = new MyMembersAdapter(this, listOfMyMembers);

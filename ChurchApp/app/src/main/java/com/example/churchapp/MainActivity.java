@@ -133,12 +133,12 @@ public class MainActivity extends AppCompatActivity
                             //Determine if user is a member of a church or not
                             if (usersDb.doesUserHaveChurch(user.getEmail())) //Has church
                             {
-                                Log.v("BUTTON PRESS", "Login Button - Moving to UserWithChurchHome");
+                                Log.v("LOG IN", "Logged in - Moving to UserWithChurchHome");
                                 startActivity(userWithChurchHomeIntent);
                             }
                             else //Doesn't have church
                             {
-                                Log.v("BUTTON PRESS", "Login Button - Moving to UserNoChurchHome");
+                                Log.v("LOG IN", "Logged in - Moving to UserNoChurchHome");
                                 startActivity(userNoChurchHomeIntent);
                             }
                         }
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity
                         if (church.isValidLogin(password)) //Check login validity
                         {
                             Session.login(church);
-                            Log.v("BUTTON PRESS", "Login Button - Moving to Church Home");
+                            Log.v("LOG IN", "Logged in - Moving to Church Home");
                             startActivity(churchHomeIntent);
                         }
                         else

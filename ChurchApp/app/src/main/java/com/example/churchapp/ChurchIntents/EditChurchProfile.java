@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.churchapp.Confirmations.DeleteConfirmation;
 import com.example.churchapp.Database.ChurchesTableHelper;
+import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
@@ -35,6 +36,8 @@ public class EditChurchProfile extends AppCompatActivity
     Button btn_delete;
     Button btn_createEvent;
     Button btn_churchHome;
+    Button btn_signOut;
+
     //DATABASE
     ChurchesTableHelper churchesDb;
 
@@ -42,6 +45,7 @@ public class EditChurchProfile extends AppCompatActivity
     Intent churchHomeIntent;
     Intent createEventIntent;
     Intent deleteConfirmationIntent;
+    Intent mainActivityIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +66,7 @@ public class EditChurchProfile extends AppCompatActivity
         btn_delete = findViewById(R.id.btn_editChurchProfile_delete);
         btn_createEvent = findViewById(R.id.btn_editChurchProfile_createEvent);
         btn_churchHome = findViewById(R.id.btn_editChurchProfile_churchHome);
+        btn_signOut = findViewById(R.id.btn_editChurchProfile_signOut);
 
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
@@ -70,6 +75,7 @@ public class EditChurchProfile extends AppCompatActivity
         churchHomeIntent = new Intent(EditChurchProfile.this, ChurchHome.class);
         createEventIntent = new Intent(EditChurchProfile.this, CreateEvent.class);
         deleteConfirmationIntent = new Intent(EditChurchProfile.this, DeleteConfirmation.class);
+        mainActivityIntent = new Intent(EditChurchProfile.this, MainActivity.class);
 
         //Fill in text boxes with current info
         fillInTextBoxes();
@@ -87,6 +93,7 @@ public class EditChurchProfile extends AppCompatActivity
         createEventButtonClick();
         churchHomeButtonClick();
         denominationSelect();
+        signOutButtonClick();
     }
 
     /**========================================UPDATE BUTTON PRESS========================================*/
@@ -119,7 +126,7 @@ public class EditChurchProfile extends AppCompatActivity
                     churchesDb.updateChurch(church);
                     Session.login(church);
                     startActivity(churchHomeIntent);
-                    Log.v("Button Press", "Update Account Button Click - Moving to ChurchHome");
+                    Log.v("UPDATED", "Updated Profile - Moving to ChurchHome");
                 }
             }
         });
@@ -151,11 +158,7 @@ public class EditChurchProfile extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("Button Press", "Delete Account Button Click - Moving to DeleteConfirmation");
-
-                /**==============================.PUTEXTRA() THE INFORMATION NEEDED FOR DELETING IN THE DELETE CONFIRMATION INTENT==============================*/
-                /**==============================.PUTEXTRA() THE INFORMATION NEEDED FOR DELETING IN THE DELETE CONFIRMATION INTENT==============================*/
-                /**==============================.PUTEXTRA() THE INFORMATION NEEDED FOR DELETING IN THE DELETE CONFIRMATION INTENT==============================*/
-
+                deleteConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
                 startActivity(deleteConfirmationIntent);
             }
         });
@@ -198,5 +201,19 @@ public class EditChurchProfile extends AppCompatActivity
         et_city.setText(Session.getChurch().getCity());
         et_statement.setText(Session.getChurch().getStatementOfFaith());
         et_password.setText(Session.getChurch().getPassword());
+    }
+
+    /**========================================SIGN OUT========================================*/
+    private void signOutButtonClick()
+    {
+        btn_signOut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON PRESS - SIGNING OUT", "Signing out - Moving to MainActivity");
+                startActivity(mainActivityIntent);
+            }
+        });
     }
 }

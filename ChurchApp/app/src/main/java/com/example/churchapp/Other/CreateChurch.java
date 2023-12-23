@@ -135,7 +135,7 @@ public class CreateChurch extends AppCompatActivity
                         Church church = new Church(email, password, name, denomination, statement, address, city, number);
                         churchesDb.createChurch(church);
                         startActivity(churchHomeIntent);
-                        Log.v("BUTTON PRESS", "Create Church Button Press - Moving to ChurchHome");
+                        Log.v("CREATED", "Created account - Moving to ChurchHome");
                     }
                     else //If it's not unique
                     {

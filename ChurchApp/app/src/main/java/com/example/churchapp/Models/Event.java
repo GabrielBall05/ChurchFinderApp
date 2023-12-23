@@ -23,7 +23,19 @@ public class Event implements Serializable
         address = a;
         date = d;
         time = t;
-        description = d;
+        description = de;
+    }
+
+    public Event(String e, String cn, String en, String a, String d, String t, String de)
+    {
+        //Order: churchHostingEmail, churchName, eventName, address, date, time, description
+        churchHostingEmail = e;
+        churchName = cn;
+        eventName = en;
+        address = a;
+        date = d;
+        time = t;
+        description = de;
     }
 
     public int getEventId()
@@ -64,5 +76,10 @@ public class Event implements Serializable
     public String getDescription()
     {
         return description;
+    }
+
+    public void setEventId(int id)
+    {
+        eventId = id;
     }
 }

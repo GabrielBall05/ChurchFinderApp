@@ -48,7 +48,7 @@ public class EventsTableHelper
     {
         //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "UPDATE " + DatabaseVariables.EVENTS_TABLE + " SET churchName = '" + e.getChurchName() + "', eventName = '" + e.getEventName() + "', address = '" + e.getAddress() + "', date = '" + e.getDate() + "', time = '" + e.getTime() + "', description = '" + e.getDescription() + "' WHERE email = '" + e.getEventId() + "';";
+        String query = "UPDATE " + DatabaseVariables.EVENTS_TABLE + " SET churchName = '" + e.getChurchName() + "', eventName = '" + e.getEventName() + "', address = '" + e.getAddress() + "', date = '" + e.getDate() + "', time = '" + e.getTime() + "', description = '" + e.getDescription() + "' WHERE eventId = '" + e.getEventId() + "';";
         db.execSQL(query);
         db.close();
     }
