@@ -11,4 +11,11 @@
         <item>Pentecostal</item>
         <item>Baptist</item>
     </string-array>
+
+    <string-array name="filter">
+        <item>All churches</item>
+        <item>Search by name</item>
+        <item>Search by denomination</item>
+        <item>Search by city</item>
+    </string-array>
 </resources>

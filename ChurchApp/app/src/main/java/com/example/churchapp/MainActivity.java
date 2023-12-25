@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /**========================================GET THE ACCOUNT TYPE ASSOCIATED WITH THIS EMAIL========================================*/
     public String getEmailAccountType(String email)
     {
         if (usersDb.getUserByEmail(email) != null)
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    //LOGGING ALL USERS AND CHURCHES FOR TESTING
+    /**========================================LOGGIN ALL USERS AND CHURCHES FOR TESTING (EMAILS & PASSWORDS)========================================*/
     private void logAllUsersAndChurches()
     {
         Log.i("USERS", "==========ALL USERS==========");

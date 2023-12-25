@@ -165,7 +165,7 @@ public class ChurchesTableHelper
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
 
-        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE city = '" + c + "';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE city LIKE '%" + c + "%';";
 
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

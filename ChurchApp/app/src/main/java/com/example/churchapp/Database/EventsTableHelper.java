@@ -89,9 +89,40 @@ public class EventsTableHelper
                 listOfEvents.add(new Event(eventId, churchHostingEmail, churchName, eventName, address, date, time, description));
             }
             while (cursor.moveToNext());
-        }
 
+            db.close();
+            return listOfEvents;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**========================================DOES CHURCH HAVE ANY EVENTS========================================*/
+    @SuppressLint("Range")
+    public boolean doesChurchHaveEvents(String e)
+    {
+        ArrayList<Event> listOfEvents = new ArrayList<Event>();
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.EVENTS_TABLE + " WHERE churchHostingEmail = '" + e + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void deleteChurchEvents(String e)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "DELETE FROM " + DatabaseVariables.EVENTS_TABLE + " WHERE churchHostingEmail = '" + e + "';";
+        db.execSQL(query);
         db.close();
-        return listOfEvents;
     }
 }

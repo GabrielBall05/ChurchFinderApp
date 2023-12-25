@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.churchapp.ChurchIntents.ChurchHome;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.MainActivity;
@@ -77,7 +78,7 @@ public class CreateChurch extends AppCompatActivity
 
         //INTENTS
         mainActivityIntent = new Intent(CreateChurch.this, MainActivity.class);
-        churchHomeIntent = new Intent(CreateChurch.this, UserNoChurchHome.class);
+        churchHomeIntent = new Intent(CreateChurch.this, ChurchHome.class);
 
         //FUNCTIONS
         registerButtonClick();
@@ -134,8 +135,8 @@ public class CreateChurch extends AppCompatActivity
                         //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
                         Church church = new Church(email, password, name, denomination, statement, address, city, number);
                         churchesDb.createChurch(church);
-                        startActivity(churchHomeIntent);
                         Log.v("CREATED", "Created account - Moving to ChurchHome");
+                        startActivity(churchHomeIntent);
                     }
                     else //If it's not unique
                     {

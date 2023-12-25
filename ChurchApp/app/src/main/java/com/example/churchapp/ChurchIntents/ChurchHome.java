@@ -72,7 +72,11 @@ public class ChurchHome extends AppCompatActivity
 
         //ARRAYLIST
         listOfMyEvents = new ArrayList<Event>();
-        listOfMyEvents = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
+        if (eventsDb.doesChurchHaveEvents(Session.getChurch().getEmail()))
+        {
+            listOfMyEvents = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
+            fillListView();
+        }
 
         //FUNCTIONS
         viewMembersButtonClick();
@@ -80,7 +84,6 @@ public class ChurchHome extends AppCompatActivity
         editProfileButtonClick();
         listViewItemClick();
         listViewItemLongClick();
-        fillListView();
     }
 
     /**========================================FILL LIST VIEW========================================*/

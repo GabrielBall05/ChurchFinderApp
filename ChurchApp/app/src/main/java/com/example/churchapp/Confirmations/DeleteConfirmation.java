@@ -107,6 +107,7 @@ public class DeleteConfirmation extends AppCompatActivity
                 else if (cameFrom.equals("editChurchProfileIntent"))
                 {
                     Log.v("Button Press", "Deleting Church - Moving to MainActivity");
+                    eventsDb.deleteChurchEvents(Session.getChurch().getEmail());
                     churchesDb.deleteChurch(Session.getChurch().getEmail());
                     startActivity(mainActivityIntent);
                 }
@@ -136,7 +137,6 @@ public class DeleteConfirmation extends AppCompatActivity
                 }
                 else if (cameFrom.equals("editChurchProfileIntent"))
                 {
-
                     Log.v("Button Press", "Not Deleting - Moving back to ");
                     startActivity(editChurchProfileIntent);
                 }
