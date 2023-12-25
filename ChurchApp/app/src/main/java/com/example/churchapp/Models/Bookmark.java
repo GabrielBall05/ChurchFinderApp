@@ -7,11 +7,11 @@ public class Bookmark implements Serializable
     private String emailOfUser;
     private String emailOfChurch;
 
-    public Bookmark(String u, String c)
+    public Bookmark(String c, String u)
     {
-        //ORDER: emailOfUser, emailOfChurch
-        emailOfUser = u;
+        //ORDER: emailOfChurch, emailOfUser
         emailOfChurch = c;
+        emailOfUser = u;
     }
 
     public String getEmailOfUser()

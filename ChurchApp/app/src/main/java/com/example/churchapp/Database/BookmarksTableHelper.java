@@ -37,16 +37,16 @@ public class BookmarksTableHelper
     public void createBookmark(Bookmark b)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
-        String query = "INSERT INTO " + DatabaseVariables.BOOKMARKS_TABLE + "VALUES ('" + b.getEmailOfUser() + "', '" + b.getEmailOfChurch() + "');";
+        String query = "INSERT INTO " + DatabaseVariables.BOOKMARKS_TABLE + " VALUES ('" + b.getEmailOfUser() + "', '" + b.getEmailOfChurch() + "');";
         db.execSQL(query);
         db.close();
     }
 
     /**========================================DELETE BOOKMARK========================================*/
-    public void deleteBookmark(String e)
+    public void deleteBookmark(String churchEmail, String userEmail)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
-        db.execSQL("DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + e + "';");
+        db.execSQL("DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + churchEmail + "' AND emailOfUser = '" + userEmail + "';");
         db.close();
     }
 
@@ -76,5 +76,22 @@ public class BookmarksTableHelper
 
         db.close();
         return listOfBookmarks;
+    }
+
+    /**========================================DOES BOOKMARK EXIST========================================*/
+    public boolean doesBookmarkExist(String churchEmail, String userEmail) //Given church's email and user's email
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + churchEmail + "' AND emailOfUser = '" + userEmail + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
