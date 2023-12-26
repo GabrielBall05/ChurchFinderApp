@@ -77,14 +77,14 @@ public class EditChurchProfile extends AppCompatActivity
         masterConfirmationIntent = new Intent(EditChurchProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditChurchProfile.this, MainActivity.class);
 
-        //Fill in text boxes with current info
+        //FILL TEXT BOXES WITH CURRENT INFO
         fillInTextBoxes();
 
         //SPINNER
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.denominations, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_denomination.setAdapter(adapter);
-        //Set spinner selection equal to the church's info
+        //Set spinner selection equal to the church's denomination
         sp_denomination.setSelection(adapter.getPosition(Session.getChurch().getDenomination()));
 
         //FUNCTIONS
@@ -157,7 +157,7 @@ public class EditChurchProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Delete Account Button Click - Moving to MasterConfirmation");
+                Log.v("Button Press", "Delete Church Account Button Click - Moving to MasterConfirmation");
                 masterConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
                 startActivity(masterConfirmationIntent);
             }

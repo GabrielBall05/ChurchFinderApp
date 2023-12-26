@@ -198,7 +198,7 @@
         android:id="@+id/btn_editChurchProfile_signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="1dp"
         android:text="Sign Out"
         android:textAlignment="center"

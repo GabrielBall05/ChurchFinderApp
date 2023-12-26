@@ -22,6 +22,8 @@ import com.example.churchapp.Models.Event;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 import com.example.churchapp.UserNoChurchIntents.ChurchDetails;
+import com.example.churchapp.UserNoChurchIntents.EditUserProfile;
+import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
 import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
 
 public class MasterConfirmation extends AppCompatActivity
@@ -42,6 +44,7 @@ public class MasterConfirmation extends AppCompatActivity
     Intent mainActivityIntent;
     Intent churchHomeIntent;
     Intent editChurchProfileIntent;
+    Intent editUserProfileIntent;
     Intent churchDetailsIntent;
     Intent userWithChurchHome;
 
@@ -72,6 +75,7 @@ public class MasterConfirmation extends AppCompatActivity
         mainActivityIntent = new Intent(MasterConfirmation.this, MainActivity.class);
         churchHomeIntent = new Intent(MasterConfirmation.this, ChurchHome.class);
         editChurchProfileIntent = new Intent(MasterConfirmation.this, EditChurchProfile.class);
+        editUserProfileIntent = new Intent(MasterConfirmation.this, EditUserProfile.class);
         churchDetailsIntent = new Intent(MasterConfirmation.this, ChurchDetails.class);
         userWithChurchHome = new Intent(MasterConfirmation.this, UserWithChurchHome.class);
 
@@ -101,7 +105,7 @@ public class MasterConfirmation extends AppCompatActivity
         {
             tv_areYouSure.setText("Are you sure you want to delete this event?");
         }
-        else if (cameFrom.equals("editChurchProfileIntent"))
+        else if (cameFrom.equals("editChurchProfileIntent") || cameFrom.equals("editUserProfileIntent"))
         {
             tv_areYouSure.setText("Are you sure you want to delete your account?");
         }
@@ -121,7 +125,7 @@ public class MasterConfirmation extends AppCompatActivity
             {
                 Log.v("Button Press", "'YES' Button Click");
 
-                //DELETE IT
+                //DO IT
                 if (cameFrom.equals("churchHomeIntent"))
                 {
                     Log.v("Button Press", "Deleting Event - Moving to ChurchHome");
@@ -133,6 +137,13 @@ public class MasterConfirmation extends AppCompatActivity
                     Log.v("Button Press", "Deleting Church - Moving to MainActivity");
                     eventsDb.deleteChurchEvents(Session.getChurch().getEmail());
                     churchesDb.deleteChurch(Session.getChurch().getEmail());
+                    startActivity(mainActivityIntent);
+                }
+                else if (cameFrom.equals("editUserProfileIntent"))
+                {
+                    Log.v("Button Press", "Deleting User - Moving to MainActivity");
+                    bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail());
+                    usersDb.deleteUser(Session.getUser().getEmail());
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
