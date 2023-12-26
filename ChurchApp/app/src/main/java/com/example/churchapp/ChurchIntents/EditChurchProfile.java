@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.churchapp.Confirmations.DeleteConfirmation;
+import com.example.churchapp.Confirmations.MasterConfirmation;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.Church;
@@ -44,7 +44,7 @@ public class EditChurchProfile extends AppCompatActivity
     //INTENTS
     Intent churchHomeIntent;
     Intent createEventIntent;
-    Intent deleteConfirmationIntent;
+    Intent masterConfirmationIntent;
     Intent mainActivityIntent;
 
     @Override
@@ -74,7 +74,7 @@ public class EditChurchProfile extends AppCompatActivity
         //INTENTS
         churchHomeIntent = new Intent(EditChurchProfile.this, ChurchHome.class);
         createEventIntent = new Intent(EditChurchProfile.this, CreateEvent.class);
-        deleteConfirmationIntent = new Intent(EditChurchProfile.this, DeleteConfirmation.class);
+        masterConfirmationIntent = new Intent(EditChurchProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditChurchProfile.this, MainActivity.class);
 
         //Fill in text boxes with current info
@@ -157,9 +157,9 @@ public class EditChurchProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Delete Account Button Click - Moving to DeleteConfirmation");
-                deleteConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
-                startActivity(deleteConfirmationIntent);
+                Log.v("Button Press", "Delete Account Button Click - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
+                startActivity(masterConfirmationIntent);
             }
         });
     }

@@ -11,12 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.churchapp.Adapters.MyEventsAdapter;
-import com.example.churchapp.Adapters.MyMembersAdapter;
-import com.example.churchapp.Confirmations.DeleteConfirmation;
+import com.example.churchapp.Confirmations.MasterConfirmation;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Event;
-import com.example.churchapp.Models.User;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 
@@ -39,7 +37,7 @@ public class ChurchHome extends AppCompatActivity
     Intent viewMembersIntent;
     Intent createEventIntent;
     Intent editProfileIntent;
-    Intent deleteConfirmationIntent;
+    Intent masterConfirmationIntent;
 
     //ADAPTER
     MyEventsAdapter adapter;
@@ -68,7 +66,7 @@ public class ChurchHome extends AppCompatActivity
         viewMembersIntent = new Intent(ChurchHome.this, ViewMembers.class);
         createEventIntent = new Intent(ChurchHome.this, CreateEvent.class);
         editProfileIntent = new Intent(ChurchHome.this, EditChurchProfile.class);
-        deleteConfirmationIntent = new Intent(ChurchHome.this, DeleteConfirmation.class);
+        masterConfirmationIntent = new Intent(ChurchHome.this, MasterConfirmation.class);
 
         //ARRAYLIST
         listOfMyEvents = new ArrayList<Event>();
@@ -116,10 +114,10 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Long Click", "List view long click in ChurchHome (lv_myEvents) - Moving to DeleteConfirmation");
-                deleteConfirmationIntent.putExtra("cameFrom", "churchHomeIntent");
-                deleteConfirmationIntent.putExtra("eventToDelete", listOfMyEvents.get(i));
-                startActivity(deleteConfirmationIntent);
+                Log.v("List View Long Click", "List view long click in ChurchHome (lv_myEvents) - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "churchHomeIntent");
+                masterConfirmationIntent.putExtra("eventToDelete", listOfMyEvents.get(i));
+                startActivity(masterConfirmationIntent);
                 return false;
             }
         });

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.churchapp.Adapters.ListOfChurchesAdapter;
@@ -35,6 +36,7 @@ public class UserNoChurchHome extends AppCompatActivity
     ListView lv_churches;
     Button btn_bookmarks;
     Button btn_editProfile;
+    TextView tv_noResults;
 
     //DATABASE
     ChurchesTableHelper churchesDb;
@@ -75,6 +77,7 @@ public class UserNoChurchHome extends AppCompatActivity
         lv_churches = findViewById(R.id.lv_userNCHome_churches);
         btn_bookmarks = findViewById(R.id.btn_userNCHome_bookmarks);
         btn_editProfile = findViewById(R.id.btn_userNCHome_editProfile);
+        tv_noResults = findViewById(R.id.tv_userNCHome_noResults);
 
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
@@ -147,6 +150,7 @@ public class UserNoChurchHome extends AppCompatActivity
             {
                 Log.v("List View Item Select", "List View item selected - Moving to ChurchDetails");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i));
+                churchDetailsIntent.putExtra("cameFrom", "userNoChurchHomeIntent");
                 startActivity(churchDetailsIntent);
             }
         });
@@ -258,6 +262,8 @@ public class UserNoChurchHome extends AppCompatActivity
     {
         adapter = new ListOfChurchesAdapter(this, listOfChurches);
         lv_churches.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================BOOKMARKS BUTTON PRESS========================================*/
@@ -286,5 +292,19 @@ public class UserNoChurchHome extends AppCompatActivity
                 startActivity(editUserProfileIntent);
             }
         });
+    }
+
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+
+        if (listOfChurches.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

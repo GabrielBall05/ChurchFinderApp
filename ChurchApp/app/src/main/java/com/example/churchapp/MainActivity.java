@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.churchapp.ChurchIntents.ChurchHome;
+import com.example.churchapp.Database.BookmarksTableHelper;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     //DATABASE
     ChurchesTableHelper churchesDb;
     UsersTableHelper usersDb;
+    BookmarksTableHelper bookmarksDb;
 
     //INTENTS
     Intent userNoChurchHomeIntent;
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
         usersDb = new UsersTableHelper(this);
+        bookmarksDb = new BookmarksTableHelper(this);
 
         //INTENTS
         userNoChurchHomeIntent = new Intent(MainActivity.this, UserNoChurchHome.class);

@@ -127,6 +127,7 @@ public class CreateAccount extends AppCompatActivity
                         //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                         User user = new User(email, password, firstname, lastname, "", denomination, city);
                         usersDb.createUser(user);
+                        Session.login(user); //LOGIN
                         startActivity(userNoChurchHome);
                         Log.v("CREATED", "Created Account - Moving to UserNoChurchHome");
                     }

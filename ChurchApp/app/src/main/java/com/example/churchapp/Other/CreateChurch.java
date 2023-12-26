@@ -135,6 +135,7 @@ public class CreateChurch extends AppCompatActivity
                         //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
                         Church church = new Church(email, password, name, denomination, statement, address, city, number);
                         churchesDb.createChurch(church);
+                        Session.login(church); //LOGIN
                         Log.v("CREATED", "Created account - Moving to ChurchHome");
                         startActivity(churchHomeIntent);
                     }
@@ -173,6 +174,7 @@ public class CreateChurch extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON PRESS", "Back Button Press (From CreateChurch)");
+                startActivity(mainActivityIntent);
             }
         });
     }

@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".UserNoChurchIntents.ChurchDetails">
 
+    <Button
+        android:id="@+id/btn_churchDetails_bookmarks"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="Book\nmarks"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_churchDetails_home"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="1dp"
+        android:text="Home Page"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchDetails_editProfile"
+        app:layout_constraintStart_toEndOf="@+id/btn_churchDetails_bookmarks" />
+
+    <Button
+        android:id="@+id/btn_churchDetails_editProfile"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="Edit Profile"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
@@ -100,24 +138,10 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_city" />
 
     <Button
-        android:id="@+id/btn_churchDetails_back"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="56dp"
-        android:text="Back"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_churchDetails_becomeMember" />
-
-    <Button
         android:id="@+id/btn_churchDetails_becomeMember"
         android:layout_width="170dp"
         android:layout_height="100dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="8dp"
         android:text="Become\nMember"
@@ -133,7 +157,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="31dp"
         android:text="Bookmark\nChurch"
         android:textAlignment="center"
         android:textSize="24sp"

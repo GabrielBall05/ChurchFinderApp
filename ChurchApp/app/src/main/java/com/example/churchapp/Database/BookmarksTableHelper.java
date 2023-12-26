@@ -23,7 +23,7 @@ public class BookmarksTableHelper
     public static void create(SQLiteDatabase _db)
     {
         //Order: emailOfUser, emailOfChurch
-        final String query = "CREATE TABLE " + DatabaseVariables.BOOKMARKS_TABLE + " (emailOfUser TEXT PRIMARY KEY NOT NULL, emailOfChurch TEXT NOT NULL, FOREIGN KEY (emailOfUser) REFERENCES " + DatabaseVariables.USERS_TABLE + " (email) ON DELETE CASCADE, FOREIGN KEY (emailOfChurch) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
+        final String query = "CREATE TABLE " + DatabaseVariables.BOOKMARKS_TABLE + " (emailOfUser TEXT NOT NULL, emailOfChurch TEXT NOT NULL, FOREIGN KEY (emailOfUser) REFERENCES " + DatabaseVariables.USERS_TABLE + " (email) ON DELETE CASCADE, FOREIGN KEY (emailOfChurch) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
         _db.execSQL(query);
         Log.d("DATABASE", "Created bookmarks table");
     }
@@ -50,9 +50,17 @@ public class BookmarksTableHelper
         db.close();
     }
 
+    /**========================================DELETE ALL BOOKMARKS========================================*/
+    public void deleteAllBookmarks()
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        db.execSQL("DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + ";");
+        db.close();
+    }
+
     /**========================================GET ALL BOOKMARKS BY USER'S EMAIL========================================*/
     @SuppressLint("Range")
-    public ArrayList<Bookmark> getAllBookmarksByUserEmail(String e)
+    public ArrayList<Bookmark> getAllBookmarksUnderUser(String e)
     {
         ArrayList<Bookmark> listOfBookmarks = new ArrayList<Bookmark>();
 
@@ -94,4 +102,23 @@ public class BookmarksTableHelper
             return false;
         }
     }
+
+    /**========================================DELETE USER BOOKMARKS (CALLED WHEN USER DELETES ACCOUNT)========================================*/
+    public void deleteUserBookmarks(String userEmail)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "';";
+        db.execSQL(query);
+        db.close();
+    }
+
+    /**========================================DELETE CHURCH BOOKMARKS (CALLED WHEN CHURCH DELETES ACCOUNT)========================================*/
+    public void deleteChurchBookmarks(String churchEmail)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + churchEmail + "';";
+        db.execSQL(query);
+        db.close();
+    }
+
 }
