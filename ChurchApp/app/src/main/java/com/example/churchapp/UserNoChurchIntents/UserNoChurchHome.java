@@ -150,7 +150,6 @@ public class UserNoChurchHome extends AppCompatActivity
             {
                 Log.v("List View Item Select", "List View item selected - Moving to ChurchDetails");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i));
-                churchDetailsIntent.putExtra("cameFrom", "userNoChurchHomeIntent");
                 startActivity(churchDetailsIntent);
             }
         });

@@ -18,17 +18,16 @@ import java.util.ArrayList;
 
 public class ListOfBookmarksAdapter extends BaseAdapter
 {
+    //I want an instance of the churches table because it's easier than joining tables in a query and because I can
+    ChurchesTableHelper churchesDb;
     Context context;
     ArrayList<Bookmark> listOfBookmarks;
-    ArrayList<String> listOfNames;
-    ArrayList<String> listOfDenominations;
 
-    public ListOfBookmarksAdapter(Context c, ArrayList<Bookmark> ls, ArrayList<String> names, ArrayList<String> denoms)
+    public ListOfBookmarksAdapter(Context c, ArrayList<Bookmark> ls)
     {
         context = c;
         listOfBookmarks = ls;
-        listOfNames = names;
-        listOfDenominations = denoms;
+        churchesDb = new ChurchesTableHelper(c);
     }
 
     @Override
@@ -62,8 +61,9 @@ public class ListOfBookmarksAdapter extends BaseAdapter
         TextView tv_denomination = view.findViewById(R.id.tv_myBookmarksCC_denomination);
         Bookmark bookmark = listOfBookmarks.get(i);
 
-        tv_name.setText(listOfNames.get(i));
-        tv_denomination.setText(listOfDenominations.get(i));
+        Church church = churchesDb.getChurchByEmail(bookmark.getEmailOfChurch());
+        tv_name.setText(church.getName());
+        tv_denomination.setText(church.getDenomination());
 
         return view;
     }

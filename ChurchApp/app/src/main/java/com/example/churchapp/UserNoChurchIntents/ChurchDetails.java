@@ -44,7 +44,6 @@ public class ChurchDetails extends AppCompatActivity
 
     //EXTRA
     Church church;
-    String cameFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,7 +77,6 @@ public class ChurchDetails extends AppCompatActivity
         //EXTRA
         Intent origin = getIntent();
         church = (Church) origin.getSerializableExtra("thisChurch");
-        cameFrom = origin.getStringExtra("cameFrom");
 
         //FUNCTIONS
         fillTextBoxes();
@@ -100,7 +98,7 @@ public class ChurchDetails extends AppCompatActivity
         tv_statement.setText("Statement of Faith: " + church.getStatementOfFaith());
 
         //Correct the bookmark button text
-        if(bookmarksDb.doesBookmarkExist(church.getEmail(), Session.getUser().getEmail()))
+        if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
         {
             btn_bookmark.setText("Remove\nBookmark");
         }
@@ -134,20 +132,20 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if(bookmarksDb.doesBookmarkExist(church.getEmail(), Session.getUser().getEmail()))
+                if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
                 {
                     Log.v("BUTTON PRESS - UN-BOOKMARKING", "Un/Bookmark button press - UN-BOOKMARKING");
-                    bookmarksDb.deleteBookmark(church.getEmail(), Session.getUser().getEmail());
+                    bookmarksDb.deleteBookmark(Session.getUser().getEmail(), church.getEmail());
                 }
                 else
                 {
                     Log.v("BUTTON PRESS - BOOKMARKING", "Un/Bookmark button press - BOOKMARKING");
-                    Bookmark bookmark = new Bookmark(church.getEmail(), Session.getUser().getEmail());
+                    Bookmark bookmark = new Bookmark(Session.getUser().getEmail(), church.getEmail());
                     bookmarksDb.createBookmark(bookmark);
                 }
 
                 //Correct the bookmark button text
-                if(bookmarksDb.doesBookmarkExist(church.getEmail(), Session.getUser().getEmail()))
+                if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
                 {
                     btn_bookmark.setText("Remove\nBookmark");
                 }

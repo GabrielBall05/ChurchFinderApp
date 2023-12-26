@@ -43,10 +43,10 @@ public class BookmarksTableHelper
     }
 
     /**========================================DELETE BOOKMARK========================================*/
-    public void deleteBookmark(String churchEmail, String userEmail)
+    public void deleteBookmark(String userEmail, String churchEmail)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
-        db.execSQL("DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + churchEmail + "' AND emailOfUser = '" + userEmail + "';");
+        db.execSQL("DELETE FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "' AND emailOfChurch = '" + churchEmail + "';");
         db.close();
     }
 
@@ -87,10 +87,10 @@ public class BookmarksTableHelper
     }
 
     /**========================================DOES BOOKMARK EXIST========================================*/
-    public boolean doesBookmarkExist(String churchEmail, String userEmail) //Given church's email and user's email
+    public boolean doesBookmarkExist(String userEmail, String churchEmail) //Given user's email and church's email
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + churchEmail + "' AND emailOfUser = '" + userEmail + "';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "' AND emailOfChurch = '" + churchEmail + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())
@@ -101,6 +101,30 @@ public class BookmarksTableHelper
         {
             return false;
         }
+    }
+
+    /**========================================DELETE USER BOOKMARKS (CALLED WHEN USER DELETES ACCOUNT)========================================*/
+    @SuppressLint("Range")
+    public Bookmark getBookmarkByChurchEmail(String e)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " +  DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + e + "';";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            //Order: emailOfUser, emailOfChurch
+            String emailOfUser = cursor.getString(cursor.getColumnIndex("emailOfUser"));
+            String emailOfChurch = cursor.getString(cursor.getColumnIndex("emailOfChurch"));
+
+            Bookmark bookmark = new Bookmark(emailOfUser, emailOfChurch);
+            db.close();
+            return bookmark;
+        }
+        db.close();
+        return null;
     }
 
     /**========================================DELETE USER BOOKMARKS (CALLED WHEN USER DELETES ACCOUNT)========================================*/
