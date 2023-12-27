@@ -97,5 +97,22 @@ public class EventParticipantsTableHelper
         return listOfParticipants;
     }
 
+    /**========================================IS USER SIGNED UP FOR EVENT========================================*/
+    public boolean isUserSignedUpForEvent(int id, String e)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + " WHERE eventId = '" + id + "' AND emailOfParticipant = '" + e + "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     /**========================================DUMMY PARTICIPANTS========================================*/
 }
