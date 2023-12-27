@@ -139,7 +139,7 @@ public class EditEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "View Participants Button Click - Moving to Participants");
+                Log.v("Button Press", "View Participants Button Click - Moving to EventParticipantsPage");
                 participantsIntent.putExtra("myEvent", event);
                 startActivity(participantsIntent);
             }

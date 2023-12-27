@@ -89,7 +89,7 @@ public class UsersTableHelper
     }
 
     /**========================================UPDATE USER'S CHURCH ATTENDING (GIVEN USER'S EMAIL & CHURCH EMAIL or "")========================================*/
-    public void becomeMember(String userEmail, String churchEmail)
+    public void becomeMemberOrLeaveChurch(String userEmail, String churchEmail)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
         String query = "UPDATE " + DatabaseVariables.USERS_TABLE + " SET emailOfChurchAttending = '" + churchEmail + "' WHERE email = '" + userEmail + "';";

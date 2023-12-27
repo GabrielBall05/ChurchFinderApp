@@ -6,4 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".ChurchIntents.EventParticipantsPage">
 
+    <TextView
+        android:id="@+id/tv_eventPartsPage_title"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
+        android:text="All members signed up for '(event name)' on (date) at (time)"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_eventPartsPage_back"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="56dp"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lv_eventPartsPage_participants" />
+
+    <TextView
+        android:id="@+id/tv_eventPartsPage_noResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginEnd="155dp"
+        android:text="*No Results*"
+        android:textAlignment="center"
+        android:textColor="#A7A2A9"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eventPartsPage_title" />
+
+    <ListView
+        android:id="@+id/lv_eventPartsPage_participants"
+        android:layout_width="409dp"
+        android:layout_height="425dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eventPartsPage_noResults" />
 </androidx.constraintlayout.widget.ConstraintLayout>

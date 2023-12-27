@@ -114,5 +114,12 @@ public class EventParticipantsTableHelper
         }
     }
 
-    /**========================================DUMMY PARTICIPANTS========================================*/
+    /**========================================REMOVE USER FROM ALL EVENTS========================================*/
+    public void removeUserFromAllEvents(String e)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "DELETE FROM " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + " WHERE emailOfParticipant = '" + e + "';";
+        db.execSQL(query);
+        db.close();
+    }
 }

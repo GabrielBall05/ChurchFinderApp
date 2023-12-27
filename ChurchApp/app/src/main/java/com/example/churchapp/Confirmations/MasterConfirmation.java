@@ -19,11 +19,13 @@ import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
+import com.example.churchapp.Models.User;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 import com.example.churchapp.UserNoChurchIntents.ChurchDetails;
 import com.example.churchapp.UserNoChurchIntents.EditUserProfile;
 import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
+import com.example.churchapp.UserWithChurchIntents.MyChurch;
 import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
 
 public class MasterConfirmation extends AppCompatActivity
@@ -37,7 +39,7 @@ public class MasterConfirmation extends AppCompatActivity
     ChurchesTableHelper churchesDb;
     UsersTableHelper usersDb;
     EventsTableHelper eventsDb;
-    EventParticipantsTableHelper eventPartsDb;
+    EventParticipantsTableHelper participantsDb;
     BookmarksTableHelper bookmarksDb;
 
     //INTENTS
@@ -46,7 +48,9 @@ public class MasterConfirmation extends AppCompatActivity
     Intent editChurchProfileIntent;
     Intent editUserProfileIntent;
     Intent churchDetailsIntent;
-    Intent userWithChurchHome;
+    Intent userWithChurchHomeIntent;
+    Intent userNoChurchHomeIntent;
+    Intent myChurchIntent;
 
     //OTHER
     String cameFrom;
@@ -68,7 +72,7 @@ public class MasterConfirmation extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
         usersDb = new UsersTableHelper(this);
         eventsDb = new EventsTableHelper(this);
-        eventPartsDb = new EventParticipantsTableHelper(this);
+        participantsDb = new EventParticipantsTableHelper(this);
         bookmarksDb = new BookmarksTableHelper(this);
 
         //INTENTS
@@ -77,7 +81,9 @@ public class MasterConfirmation extends AppCompatActivity
         editChurchProfileIntent = new Intent(MasterConfirmation.this, EditChurchProfile.class);
         editUserProfileIntent = new Intent(MasterConfirmation.this, EditUserProfile.class);
         churchDetailsIntent = new Intent(MasterConfirmation.this, ChurchDetails.class);
-        userWithChurchHome = new Intent(MasterConfirmation.this, UserWithChurchHome.class);
+        userWithChurchHomeIntent = new Intent(MasterConfirmation.this, UserWithChurchHome.class);
+        userNoChurchHomeIntent = new Intent(MasterConfirmation.this, UserNoChurchHome.class);
+        myChurchIntent = new Intent(MasterConfirmation.this, MyChurch.class);
 
         Intent origin = getIntent();
         cameFrom = origin.getStringExtra("cameFrom");
@@ -90,6 +96,10 @@ public class MasterConfirmation extends AppCompatActivity
         else if (cameFrom.equals("churchDetailsIntent"))
         {
             church = (Church) origin.getSerializableExtra("thisChurch");
+        }
+        else if (cameFrom.equals("myChurchIntent"))
+        {
+            church = (Church) origin.getSerializableExtra("myChurch");
         }
 
         //FUNCTIONS
@@ -111,7 +121,11 @@ public class MasterConfirmation extends AppCompatActivity
         }
         else if (cameFrom.equals("churchDetailsIntent"))
         {
-            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "?");
+            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "? You can leave at any time in the 'My Church' page. You bookmarks will stay");
+        }
+        else if (cameFrom.equals("myChurchIntent"))
+        {
+            tv_areYouSure.setText("Are you sure you want to leave " + church.getName() + "? This will also remove you from any events you are signed up for at this church.");
         }
     }
 
@@ -149,8 +163,21 @@ public class MasterConfirmation extends AppCompatActivity
                 else if (cameFrom.equals("churchDetailsIntent"))
                 {
                     Log.v("Button Press", "Becoming Member of " + church.getName() + " - Moving to UserWithChurchHome");
-                    usersDb.becomeMember(Session.getUser().getEmail(), church.getEmail());
-                    startActivity(userWithChurchHome);
+                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), church.getEmail());
+                    //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+                    User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
+                    Session.login(user);
+                    startActivity(userWithChurchHomeIntent);
+                }
+                else if (cameFrom.equals("myChurchIntent"))
+                {
+                    Log.v("Button Press", "Leaving " + church.getName() + " & removing user from events - Moving to UserNoChurchHome");
+                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), "");
+                    //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+                    User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());
+                    Session.login(user);
+                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
+                    startActivity(userNoChurchHomeIntent);
                 }
             }
         });
@@ -182,6 +209,11 @@ public class MasterConfirmation extends AppCompatActivity
                     Log.v("Button Press", "Not Becoming Member - Moving back to ChurchDetails");
                     churchDetailsIntent.putExtra("thisChurch", church);
                     startActivity(churchDetailsIntent);
+                }
+                else if (cameFrom.equals("myChurchIntent"))
+                {
+                    Log.v("Button Press", "Staying Member - Moving back to MyChurch");
+                    startActivity(myChurchIntent);
                 }
             }
         });
