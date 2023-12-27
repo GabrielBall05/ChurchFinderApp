@@ -13,6 +13,20 @@
         android:theme="@style/Theme.ChurchApp"
         tools:targetApi="31">
         <activity
+            android:name=".UserWithChurchIntents.EventDetails"
+            android:exported="false" />
+        <activity
+            android:name=".UserWithChurchIntents.MyChurchEvents"
+            android:exported="false" />
+        <activity
+            android:name=".UserWithChurchIntents.EditUserProfile2"
+            android:exported="false" />
+        <activity
+            android:name=".UserWithChurchIntents.MyChurch"
+            android:exported="false"
+            android:label="@string/title_activity_my_church"
+            android:theme="@style/Theme.ChurchApp" />
+        <activity
             android:name=".UserNoChurchIntents.EditUserProfile"
             android:exported="false" />
         <activity

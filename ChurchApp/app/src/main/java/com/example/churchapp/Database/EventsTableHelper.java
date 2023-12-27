@@ -61,6 +61,36 @@ public class EventsTableHelper
         db.close();
     }
 
+    /**========================================GET EVENT BY ID========================================*/
+    @SuppressLint("Range")
+    public Event getEventById(int id)
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " +  DatabaseVariables.EVENTS_TABLE + " WHERE eventId = '" + id + "';";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
+            int eventId = cursor.getInt(cursor.getColumnIndex("eventId"));
+            String churchHostingEmail = cursor.getString(cursor.getColumnIndex("churchHostingEmail"));
+            String churchName = cursor.getString(cursor.getColumnIndex("churchName"));
+            String eventName = cursor.getString(cursor.getColumnIndex("eventName"));
+            String address = cursor.getString(cursor.getColumnIndex("address"));
+            String date = cursor.getString(cursor.getColumnIndex("date"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String description = cursor.getString(cursor.getColumnIndex("description"));
+
+            Event event = new Event(eventId, churchHostingEmail, churchName, eventName, address, date, time, description);
+            db.close();
+            return event;
+        }
+        db.close();
+        return null;
+    }
+
     /**========================================GET ALL EVENTS BY CHURCH'S EMAIL========================================*/
     @SuppressLint("Range")
     public ArrayList<Event> getAllEventsByChurchEmail(String e)
@@ -118,11 +148,23 @@ public class EventsTableHelper
         }
     }
 
+    /**========================================DELETE CHURCH'S EVENTS========================================*/
     public void deleteChurchEvents(String e)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
         String query = "DELETE FROM " + DatabaseVariables.EVENTS_TABLE + " WHERE churchHostingEmail = '" + e + "';";
         db.execSQL(query);
+        db.close();
+    }
+
+    /**========================================DUMMY EVENTS========================================*/
+    public void dummyEvents()
+    {
+        //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        db.execSQL("INSERT INTO " + DatabaseVariables.EVENTS_TABLE + " (churchHostingEmail, churchName, eventName, address, date, time, description) VALUES ('bridgepoint@gmail.com', 'BridgePoint Church', 'Pancake Breakfast', '9875 Lewis Ave', '12-27-23', '8am', 'Pancake Breakfast Fundraiser for Youth Group');");
+        db.execSQL("INSERT INTO " + DatabaseVariables.EVENTS_TABLE + " (churchHostingEmail, churchName, eventName, address, date, time, description) VALUES ('bridgepoint@gmail.com', 'BridgePoint Church', 'Trivia Night', '9875 Lewis Ave', '01-17-24', '5pm', 'Trivia Night Fundraiser for Youth Group');");
+        db.execSQL("INSERT INTO " + DatabaseVariables.EVENTS_TABLE + " (churchHostingEmail, churchName, eventName, address, date, time, description) VALUES ('gracelutheran@gmail.com', 'Grace Lutheran Church', 'Christmas Dinner', '630 N Monroe St', '12-22-23', '6pm', 'Christmas Dinner Fundraiser for Youth Group');");
         db.close();
     }
 }
