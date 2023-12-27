@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.example.churchapp.Adapters.ListOfChurchesAdapter;
 import com.example.churchapp.Adapters.SignedUpEventsAdapter;
+import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
+import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Models.User;
@@ -35,6 +37,7 @@ public class UserWithChurchHome extends AppCompatActivity
     //DATABASE
     EventsTableHelper eventsDb;
     EventParticipantsTableHelper participantsDb;
+    ChurchesTableHelper churchesDb;
 
     //INTENTS
     Intent myChurchIntent;
@@ -65,6 +68,7 @@ public class UserWithChurchHome extends AppCompatActivity
         //DATABASE
         eventsDb = new EventsTableHelper(this);
         participantsDb = new EventParticipantsTableHelper(this);
+        churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
         myChurchIntent = new Intent(UserWithChurchHome.this, MyChurch.class);
@@ -83,11 +87,19 @@ public class UserWithChurchHome extends AppCompatActivity
         }
 
         //FUNCTIONS
+        fillButtonText();
         fillListView();
         listViewClick();
         myChurchEventsClick();
         myChurchClick();
         editProfileClick();
+    }
+
+    /**========================================FILL BUTTON TEXT========================================*/
+    private void fillButtonText()
+    {
+        Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
+        btn_myChurchEvents.setText("See all " + church.getName() + "'s Events");
     }
 
     /**========================================FILL LIST VIEW========================================*/

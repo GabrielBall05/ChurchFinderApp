@@ -52,10 +52,10 @@ public class MyEventsAdapter extends BaseAdapter
         }
 
         TextView tv_name = view.findViewById(R.id.tv_myEventsCC_name);
-        TextView tv_date = view.findViewById(R.id.tv_myEventsCC_date);
+        TextView tv_dateTime = view.findViewById(R.id.tv_myEventsCC_dateTime);
         Event event = listOfMyEvents.get(i);
         tv_name.setText(event.getEventName());
-        tv_date.setText(event.getDate());
+        tv_dateTime.setText(event.getDate() + " @" + event.getTime());
 
         return view;
     }
