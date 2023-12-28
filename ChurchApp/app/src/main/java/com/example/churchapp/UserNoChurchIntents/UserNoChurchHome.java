@@ -296,7 +296,6 @@ public class UserNoChurchHome extends AppCompatActivity
     /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
     private void ifNoResultsShow()
     {
-
         if (listOfChurches.size() == 0)
         {
             tv_noResults.setVisibility(View.VISIBLE);

@@ -96,6 +96,8 @@ public class EventParticipantsPage extends AppCompatActivity
     {
         adapter = new ParticipantsAdapter(this, listOfUsers);
         lv_participants.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================BACK BUTTON CLICK========================================*/
@@ -111,5 +113,17 @@ public class EventParticipantsPage extends AppCompatActivity
                 startActivity(editEventIntent);
             }
         });
+    }
+
+    private void ifNoResultsShow()
+    {
+        if (listOfUsers.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

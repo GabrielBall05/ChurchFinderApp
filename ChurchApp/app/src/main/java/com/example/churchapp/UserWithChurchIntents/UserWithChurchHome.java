@@ -107,6 +107,8 @@ public class UserWithChurchHome extends AppCompatActivity
     {
         adapter = new SignedUpEventsAdapter(this, listOfEvents);
         lv_events.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -165,5 +167,18 @@ public class UserWithChurchHome extends AppCompatActivity
                 startActivity(editUserProfile2Intent);
             }
         });
+    }
+
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+        if (listOfEvents.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

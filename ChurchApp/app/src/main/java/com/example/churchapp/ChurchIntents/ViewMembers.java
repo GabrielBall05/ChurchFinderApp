@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.churchapp.Adapters.MyMembersAdapter;
 import com.example.churchapp.Database.UsersTableHelper;
@@ -23,6 +24,7 @@ public class ViewMembers extends AppCompatActivity
     //GUI
     Button btn_back;
     ListView lv_members;
+    TextView tv_noResults;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -46,6 +48,7 @@ public class ViewMembers extends AppCompatActivity
         //GUI
         btn_back = findViewById(R.id.btn_viewMembers_back);
         lv_members = findViewById(R.id.lv_viewMembers_members);
+        tv_noResults = findViewById(R.id.tv_viewMembers_noResults);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
@@ -69,6 +72,8 @@ public class ViewMembers extends AppCompatActivity
     {
         adapter = new MyMembersAdapter(this, listOfMyMembers);
         lv_members.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================LIST VIEW ITEM SELECTED========================================*/
@@ -99,5 +104,17 @@ public class ViewMembers extends AppCompatActivity
                 startActivity(churchHomeIntent);
             }
         });
+    }
+
+    private void ifNoResultsShow()
+    {
+        if (listOfMyMembers.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

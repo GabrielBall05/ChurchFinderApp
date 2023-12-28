@@ -93,20 +93,10 @@ public class BookmarkedChurches extends AppCompatActivity
     /**========================================FILL LIST VIEW========================================*/
     private void fillListView()
     {
-//        //String arrays to pass to the adapter because it doesn't like reading from database in there
-//        ArrayList<String> names = new ArrayList<String>();
-//        ArrayList<String> denominations = new ArrayList<String>();
-//        for (int i = 0; i < listOfBookmarks.size(); i++)
-//        {
-//            Church church = churchesDb.getChurchByEmail(listOfBookmarks.get(i).getEmailOfChurch());
-//            names.add(church.getName());
-//            denominations.add(church.getDenomination());
-//        }
-//
-//        adapter = new ListOfBookmarksAdapter(this, listOfBookmarks, names, denominations);
-
         adapter = new ListOfBookmarksAdapter(this, listOfBookmarks);
         lv_churches.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -176,5 +166,18 @@ public class BookmarkedChurches extends AppCompatActivity
                 startActivity(editProfileIntent);
             }
         });
+    }
+
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+        if (listOfBookmarks.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

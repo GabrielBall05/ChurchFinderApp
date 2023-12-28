@@ -80,11 +80,11 @@ public class EventDetails extends AppCompatActivity
     private void fillTextBoxes()
     {
         tv_churchName.setText("Church Name: " + event.getChurchName());
-        tv_eventName.setText("Church Name: " + event.getEventName());
-        tv_address.setText("Church Name: " + event.getAddress());
-        tv_date.setText("Church Name: " + event.getDate());
-        tv_time.setText("Church Name: " + event.getTime());
-        tv_desc.setText("Church Name: " + event.getDescription());
+        tv_eventName.setText("Event Name: " + event.getEventName());
+        tv_address.setText("Address: " + event.getAddress());
+        tv_date.setText("Date: " + event.getDate());
+        tv_time.setText("Time: " + event.getTime());
+        tv_desc.setText("Description: " + event.getDescription());
 
         //Correct the bookmark button text
         if(participantsDb.isUserSignedUpForEvent(event.getEventId(), Session.getUser().getEmail()))

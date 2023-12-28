@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.churchapp.Adapters.MyEventsAdapter;
 import com.example.churchapp.Confirmations.MasterConfirmation;
@@ -27,6 +28,7 @@ public class ChurchHome extends AppCompatActivity
     Button btn_viewMembers;
     Button btn_createEvent;
     Button btn_editProfile;
+    TextView tv_noResults;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -56,6 +58,7 @@ public class ChurchHome extends AppCompatActivity
         btn_createEvent = findViewById(R.id.btn_churchHome_createEvent);
         btn_editProfile = findViewById(R.id.btn_churchHome_editProfile);
         btn_viewMembers = findViewById(R.id.btn_churchHome_viewMembers);
+        tv_noResults = findViewById(R.id.tv_churchHome_noResults);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
@@ -75,6 +78,10 @@ public class ChurchHome extends AppCompatActivity
             listOfMyEvents = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
             fillListView();
         }
+        else
+        {
+            ifNoResultsShow();
+        }
 
         //FUNCTIONS
         viewMembersButtonClick();
@@ -89,6 +96,8 @@ public class ChurchHome extends AppCompatActivity
     {
         adapter = new MyEventsAdapter(this, listOfMyEvents);
         lv_myEvents.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -163,5 +172,17 @@ public class ChurchHome extends AppCompatActivity
                 startActivity(editProfileIntent);
             }
         });
+    }
+
+    private void ifNoResultsShow()
+    {
+        if (listOfMyEvents.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

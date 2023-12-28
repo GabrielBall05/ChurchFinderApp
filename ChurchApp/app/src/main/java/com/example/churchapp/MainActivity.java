@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.churchapp.ChurchIntents.ChurchHome;
 import com.example.churchapp.Database.BookmarksTableHelper;
 import com.example.churchapp.Database.ChurchesTableHelper;
+import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     UsersTableHelper usersDb;
     BookmarksTableHelper bookmarksDb;
     EventsTableHelper eventsDb;
+    EventParticipantsTableHelper participantsDb;
 
     //INTENTS
     Intent userNoChurchHomeIntent;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         usersDb = new UsersTableHelper(this);
         bookmarksDb = new BookmarksTableHelper(this);
         eventsDb = new EventsTableHelper(this);
+        participantsDb = new EventParticipantsTableHelper(this);
 
         //INTENTS
         userNoChurchHomeIntent = new Intent(MainActivity.this, UserNoChurchHome.class);
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity
         usersDb.dummyUsers();
         churchesDb.dummyChurches();
         eventsDb.dummyEvents();
+        participantsDb.removeUserFromAllEvents("nicholeball@gmail.com");
         logAllUsersAndChurches();
         //===TESTING===
 

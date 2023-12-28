@@ -66,11 +66,18 @@ public class MyChurchEvents extends AppCompatActivity
 
         //ARRAYLIST
         listOfEvents = new ArrayList<Event>();
-        listOfEvents = eventsDb.getAllEventsByChurchEmail(Session.getUser().getEmailOfChurchAttending());
+        if (eventsDb.doesChurchHaveEvents(Session.getUser().getEmailOfChurchAttending()))
+        {
+            listOfEvents = eventsDb.getAllEventsByChurchEmail(Session.getUser().getEmailOfChurchAttending());
+            fillListView();
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
 
         //FUNCTIONS
         fillTitleText();
-        fillListView();
         listViewItemClick();
         backButtonClick();
     }
@@ -87,6 +94,8 @@ public class MyChurchEvents extends AppCompatActivity
     {
         adapter = new MyEventsAdapter(this, listOfEvents);
         lv_events.setAdapter(adapter);
+
+        ifNoResultsShow();
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -117,5 +126,18 @@ public class MyChurchEvents extends AppCompatActivity
                 startActivity(userWithChurchHomeIntent);
             }
         });
+    }
+
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+        if (listOfEvents.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
     }
 }

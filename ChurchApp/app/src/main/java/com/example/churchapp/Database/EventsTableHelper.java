@@ -197,7 +197,6 @@ public class EventsTableHelper
         }
     }
 
-
     /**========================================DUMMY EVENTS========================================*/
     public void dummyEvents()
     {

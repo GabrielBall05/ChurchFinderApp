@@ -143,6 +143,7 @@ public class MasterConfirmation extends AppCompatActivity
                 if (cameFrom.equals("churchHomeIntent"))
                 {
                     Log.v("Button Press", "Deleting Event - Moving to ChurchHome");
+                    participantsDb.removeAllParticipantsFromEvent(eventToDelete.getEventId());
                     eventsDb.deleteEvent(eventToDelete.getEventId());
                     startActivity(churchHomeIntent);
                 }
