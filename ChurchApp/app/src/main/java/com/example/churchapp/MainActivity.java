@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         usersDb.dummyUsers();
         churchesDb.dummyChurches();
         eventsDb.dummyEvents();
-        participantsDb.removeUserFromAllEvents("nicholeball@gmail.com");
         logAllUsersAndChurches();
         //===TESTING===
 
