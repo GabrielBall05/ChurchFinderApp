@@ -88,11 +88,12 @@ public class MainActivity extends AppCompatActivity
         //===TESTING===
         listOfUsers = new ArrayList<User>();
         listOfChurches = new ArrayList<Church>();
-        listOfUsers = usersDb.getAllUsers();
-        listOfChurches = churchesDb.getAllChurches();
         usersDb.dummyUsers();
         churchesDb.dummyChurches();
         eventsDb.dummyEvents();
+        //dummy participants? that will be very hard and time consuming, and i don't want to do that (at least not yet)
+        listOfUsers = usersDb.getAllUsers();
+        listOfChurches = churchesDb.getAllChurches();
         logAllUsersAndChurches();
         //===TESTING===
 
