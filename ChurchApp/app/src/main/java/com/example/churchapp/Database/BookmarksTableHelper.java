@@ -103,13 +103,35 @@ public class BookmarksTableHelper
         }
     }
 
-    /**========================================DELETE USER BOOKMARKS (CALLED WHEN USER DELETES ACCOUNT)========================================*/
+    /**========================================GET BOOKMARK UNDER USER WHERE CHURCH EMAIL EQUALS GIVEN STRING========================================*/
     @SuppressLint("Range")
-    public Bookmark getBookmarkByChurchEmail(String e)
+    public Bookmark getBookmarkUnderUserWhereChurchEmailEquals(String e) //Such a long function name, but I need this query to make searching bookmarks work lol
+    {
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        String query = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + e + "';";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+        {
+            //Order: emailOfUser, emailOfChurch
+            String emailOfUser = cursor.getString(cursor.getColumnIndex("emailOfUser"));
+            String emailOfChurch = cursor.getString(cursor.getColumnIndex("emailOfChurch"));
+
+            Bookmark bookmark = new Bookmark(emailOfUser, emailOfChurch);
+            db.close();
+            return bookmark;
+        }
+        db.close();
+        return null;
+    }
+
+    /**========================================GET BOOKMARK========================================*/
+    @SuppressLint("Range")
+    public Bookmark getBookmark(String userEmail, String churchEmail)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM " +  DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfChurch = '" + e + "';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "' AND emailOfChurch = '" + churchEmail + "';";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 

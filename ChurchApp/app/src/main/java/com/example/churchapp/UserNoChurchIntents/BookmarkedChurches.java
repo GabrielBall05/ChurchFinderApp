@@ -111,12 +111,14 @@ public class BookmarkedChurches extends AppCompatActivity
             {
                 String text = s.toString();
                 listOfChurches = new ArrayList<Church>();
-                listOfChurches = churchesDb.getChurchesByName(text);
                 listOfBookmarks = new ArrayList<Bookmark>();
-                for(int i = 0; i < listOfChurches.size(); i++)
+                listOfChurches = churchesDb.getChurchesByName(text);
+                for (int i = 0; i < listOfChurches.size(); i++)
                 {
-                    Bookmark bookmark = bookmarksDb.getBookmarkByChurchEmail(listOfChurches.get(i).getEmail());
-                    listOfBookmarks.add(bookmark);
+                    if (bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), listOfChurches.get(i).getEmail()))
+                    {
+                        listOfBookmarks.add(bookmarksDb.getBookmarkUnderUserWhereChurchEmailEquals(listOfChurches.get(i).getEmail()));
+                    }
                 }
 
                 fillListView();

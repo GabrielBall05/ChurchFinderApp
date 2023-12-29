@@ -121,7 +121,7 @@ public class MasterConfirmation extends AppCompatActivity
         }
         else if (cameFrom.equals("churchDetailsIntent"))
         {
-            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "? You can leave at any time in the 'My Church' page. You bookmarks will stay");
+            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "? You can leave at any time in the 'My Church' page. Your bookmarks will remain intact");
         }
         else if (cameFrom.equals("myChurchIntent"))
         {
