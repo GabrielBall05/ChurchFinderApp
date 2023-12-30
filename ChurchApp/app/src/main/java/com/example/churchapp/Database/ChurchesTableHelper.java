@@ -91,13 +91,13 @@ public class ChurchesTableHelper
         return null;
     }
 
-    /**========================================GET CHURCHES BY DENOMINATION========================================*/
+    /**========================================GET CHURCHES BY DENOMINATION (ALPHABETICAL)========================================*/
     @SuppressLint("Range")
-    public ArrayList<Church> getChurchesByDenomination(String d)
+    public ArrayList<Church> getChurchesByDenominationAlphabetical(String d)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
 
-        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE denomination = '" + d + "';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE denomination = '" + d + "' ORDER BY name ASC;";
 
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -125,13 +125,13 @@ public class ChurchesTableHelper
         return listOfChurches;
     }
 
-    /**========================================GET CHURCHES BY NAME========================================*/
+    /**========================================GET CHURCHES BY NAME (ALPHABETICAL)========================================*/
     @SuppressLint("Range")
-    public ArrayList<Church> getChurchesByName(String n)
+    public ArrayList<Church> getChurchesByNameAlphabetical(String n)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
 
-        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE name LIKE '%" + n + "%';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE name LIKE '%" + n + "%' ORDER BY name ASC;";
 
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -159,16 +159,48 @@ public class ChurchesTableHelper
         return listOfChurches;
     }
 
-    /**========================================GET CHURCHES BY CITY========================================*/
+    /**========================================GET CHURCHES BY CITY (ALPHABETICAL)========================================*/
     @SuppressLint("Range")
-    public ArrayList<Church> getChurchesByCity(String c)
+    public ArrayList<Church> getChurchesByCityAlphabetical(String c)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
 
-        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE city LIKE '%" + c + "%';";
+        String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE city LIKE '%" + c + "%' ORDER BY name ASC;";
 
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
+                String email = cursor.getString(cursor.getColumnIndex("email"));
+                String password = cursor.getString(cursor.getColumnIndex("password"));
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String denomination = cursor.getString(cursor.getColumnIndex("denomination"));
+                String statement = cursor.getString(cursor.getColumnIndex("statementOfFaith"));
+                String streetAddress = cursor.getString(cursor.getColumnIndex("streetAddress"));
+                String city = cursor.getString(cursor.getColumnIndex("city"));
+                String number = cursor.getString(cursor.getColumnIndex("number"));
+
+                listOfChurches.add(new Church(email, password, name, denomination, statement, streetAddress, city, number));
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        return listOfChurches;
+    }
+
+    /**========================================GET ALL CHURCHES (ALPHABETICAL)========================================*/
+    @SuppressLint("Range")
+    public ArrayList<Church> getAllChurchesAlphabetical()
+    {
+        ArrayList<Church> listOfChurches = new ArrayList<Church>();
+        String query = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " ORDER BY name ASC;";
+        SQLiteDatabase db = ctx.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst())
         {

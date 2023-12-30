@@ -100,7 +100,7 @@ public class UserNoChurchHome extends AppCompatActivity
 
         //ARRAYLIST
         listOfChurches = new ArrayList<Church>();
-        listOfChurches = churchesDb.getAllChurches();
+        listOfChurches = churchesDb.getAllChurchesAlphabetical();
 
         //FUNCTIONS
         fillListView();
@@ -127,11 +127,11 @@ public class UserNoChurchHome extends AppCompatActivity
 
                 if (searchingByName)
                 {
-                    listOfChurches = churchesDb.getChurchesByName(text);
+                    listOfChurches = churchesDb.getChurchesByNameAlphabetical(text);
                 }
                 else if (searchingByCity)
                 {
-                    listOfChurches = churchesDb.getChurchesByCity(text);
+                    listOfChurches = churchesDb.getChurchesByCityAlphabetical(text);
                 }
 
                 fillListView();
@@ -180,7 +180,7 @@ public class UserNoChurchHome extends AppCompatActivity
 
                     sp_denominations.setSelection(denominationsAdapter.getPosition(Session.getUser().getDenomination()));
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getChurchesByDenomination(sp_denominations.getSelectedItem().toString());
+                    listOfChurches = churchesDb.getChurchesByDenominationAlphabetical(sp_denominations.getSelectedItem().toString());
                     fillListView();
                 }
                 else if (text.equals(searchByName)) //IF THE USER WANTS TO SEARCH BY NAME
@@ -196,7 +196,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     Log.v("SEARCHING BY: ", "Searching by name");
 
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getAllChurches(); //Keep them all there for now, changing the text in the search bar updates it
+                    listOfChurches = churchesDb.getAllChurchesAlphabetical(); //Keep them all there for now, changing the text in the search bar updates it
                     fillListView();
                 }
                 else if (text.equals(searchByCity)) //IF THE USER WANTS TO SEARCH BY CITY
@@ -212,7 +212,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     Log.v("SEARCHING BY: ", "Searching by city");
 
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getChurchesByCity(Session.getUser().getCity());
+                    listOfChurches = churchesDb.getChurchesByCityAlphabetical(Session.getUser().getCity());
                     fillListView();
                 }
                 else if (text.equals(allChurches)) //IF THE USER WANTS TO SEE ALL CHURCHES
@@ -226,7 +226,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     searchingByCity = false;
 
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getAllChurches();
+                    listOfChurches = churchesDb.getAllChurchesAlphabetical();
                     fillListView();
                 }
             }
@@ -249,7 +249,7 @@ public class UserNoChurchHome extends AppCompatActivity
                 if (searchingByDenomination)
                 {
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getChurchesByDenomination(text);
+                    listOfChurches = churchesDb.getChurchesByDenominationAlphabetical(text);
                     fillListView();
                 }
             }
