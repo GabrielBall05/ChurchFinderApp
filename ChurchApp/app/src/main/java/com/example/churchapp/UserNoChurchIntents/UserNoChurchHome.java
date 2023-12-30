@@ -59,6 +59,7 @@ public class UserNoChurchHome extends AppCompatActivity
 
     //ADAPTER
     ListOfChurchesAdapter adapter;
+    ArrayAdapter<CharSequence> denominationsAdapter;
 
     //ARRAYLIST
     ArrayList<Church> listOfChurches;
@@ -93,7 +94,7 @@ public class UserNoChurchHome extends AppCompatActivity
         sp_filter.setAdapter(filterAdapter);
 
         //DENOMINATIONS SPINNER
-        ArrayAdapter<CharSequence> denominationsAdapter = ArrayAdapter.createFromResource(this, R.array.denominations, android.R.layout.simple_spinner_item);
+        denominationsAdapter = ArrayAdapter.createFromResource(this, R.array.denominations, android.R.layout.simple_spinner_item);
         denominationsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_denominations.setAdapter(denominationsAdapter);
 
@@ -177,6 +178,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     searchingByCity = false;
                     Log.v("SEARCHING BY: ", "Searching by denomination");
 
+                    sp_denominations.setSelection(denominationsAdapter.getPosition(Session.getUser().getDenomination()));
                     listOfChurches = new ArrayList<Church>();
                     listOfChurches = churchesDb.getChurchesByDenomination(sp_denominations.getSelectedItem().toString());
                     fillListView();
@@ -202,7 +204,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     sp_denominations.setVisibility(View.INVISIBLE);
                     et_search.setVisibility(View.VISIBLE);
                     et_search.setHint("Search by city");
-                    et_search.setText("");
+                    et_search.setText(Session.getUser().getCity());
 
                     searchingByName = false;
                     searchingByDenomination = false;
@@ -210,7 +212,7 @@ public class UserNoChurchHome extends AppCompatActivity
                     Log.v("SEARCHING BY: ", "Searching by city");
 
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getAllChurches(); //Keep them all there for now, changing the text in the search bar updates it
+                    listOfChurches = churchesDb.getChurchesByCity(Session.getUser().getCity());
                     fillListView();
                 }
                 else if (text.equals(allChurches)) //IF THE USER WANTS TO SEE ALL CHURCHES

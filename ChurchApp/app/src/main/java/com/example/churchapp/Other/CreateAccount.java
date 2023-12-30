@@ -26,13 +26,14 @@ public class CreateAccount extends AppCompatActivity
     //GUI
     EditText et_email;
     EditText et_password;
+    EditText et_confirmPassword;
     EditText et_firstname;
     EditText et_lastname;
     EditText et_city;
     Spinner sp_denomination;
     Button btn_register;
     Button btn_back;
-    TextView tv_fieldsError;
+    TextView tv_error;
     TextView tv_emailError;
 
     //DATABASE
@@ -52,13 +53,14 @@ public class CreateAccount extends AppCompatActivity
         //GUI
         et_email = findViewById(R.id.et_createAccount_email);
         et_password = findViewById(R.id.et_createAccount_password);
+        et_confirmPassword = findViewById(R.id.et_createAccount_confirmPassword);
         et_firstname = findViewById(R.id.et_createAccount_firstname);
         et_lastname = findViewById(R.id.et_createAccount_lastname);
         et_city = findViewById(R.id.et_createAccount_city);
         sp_denomination = findViewById(R.id.sp_createAccount_denomination);
         btn_register = findViewById(R.id.btn_createAccount_register);
         btn_back = findViewById(R.id.btn_createAccount_back);
-        tv_fieldsError = findViewById(R.id.tv_createAccount_fieldsError);
+        tv_error = findViewById(R.id.tv_createAccount_error);
         tv_emailError = findViewById(R.id.tv_createAccount_emailError);
 
         //SPINNER
@@ -92,6 +94,7 @@ public class CreateAccount extends AppCompatActivity
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
+                String confirmPassword = et_confirmPassword.getText().toString();
                 String firstname = et_firstname.getText().toString();
                 String lastname = et_lastname.getText().toString();
                 String city = et_city.getText().toString();
@@ -99,42 +102,54 @@ public class CreateAccount extends AppCompatActivity
 
                 tv_emailError.setVisibility(View.INVISIBLE);
 
-                //One of the fields are empty
-                if (email.equals("") || password.equals("") || firstname.equals("") || lastname.equals("") || city.equals(""))
+
+                boolean isUnique = true;
+
+                if (usersDb.doesEmailExist(email)) //Check if email exists in users database
                 {
-                    tv_fieldsError.setVisibility(View.VISIBLE); //Tell them
+                    isUnique = false;
                 }
-                else
+                if (churchesDb.doesEmailExist(email)) //Check if email exists in churches database
                 {
-                    tv_fieldsError.setVisibility(View.INVISIBLE);
+                    isUnique = false;
+                }
 
-                    boolean isUnique = true;
+                if (isUnique)
+                {
+                    tv_emailError.setVisibility(View.INVISIBLE);
 
-                    if (usersDb.doesEmailExist(email)) //Check if email exists in users database
+                    //One of the fields are empty
+                    if (email.equals("") || password.equals("") || firstname.equals("") || lastname.equals("") || city.equals("") || confirmPassword.equals(""))
                     {
-                        isUnique = false;
+                        tv_error.setText("*Please fill out all fields*");
+                        tv_error.setVisibility(View.VISIBLE); //Tell them
                     }
-                    if (churchesDb.doesEmailExist(email)) //Check if email exists in churches database
+                    else
                     {
-                        isUnique = false;
-                    }
+                        tv_error.setVisibility(View.INVISIBLE);
 
-                    //If it's still unique, create the account
-                    if (isUnique)
-                    {
-                        tv_emailError.setVisibility(View.INVISIBLE);
+                        if (!password.equals(confirmPassword))
+                        {
+                            tv_error.setText("*Passwords do not match*");
+                            tv_error.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            tv_error.setVisibility(View.INVISIBLE);
 
-                        //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
-                        User user = new User(email, password, firstname, lastname, "", denomination, city);
-                        usersDb.createUser(user);
-                        Session.login(user); //LOGIN
-                        startActivity(userNoChurchHome);
-                        Log.v("CREATED", "Created Account - Moving to UserNoChurchHome");
+                            //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
+                            User user = new User(email, password, firstname, lastname, "", denomination, city);
+                            usersDb.createUser(user);
+                            Session.login(user); //LOGIN
+                            startActivity(userNoChurchHome);
+                            Log.v("CREATED", "Created Account - Moving to UserNoChurchHome");
+                        }
                     }
-                    else //If it's not unique
-                    {
-                        tv_emailError.setVisibility(View.VISIBLE); //Tell them
-                    }
+                }
+                else //Email taken
+                {
+                    tv_emailError.setVisibility(View.VISIBLE); //Tell them
+                    tv_error.setVisibility(View.INVISIBLE);
                 }
             }
         });

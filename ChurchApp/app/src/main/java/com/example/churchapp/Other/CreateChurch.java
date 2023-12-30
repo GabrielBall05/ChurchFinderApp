@@ -19,15 +19,14 @@ import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.Church;
-import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
 
 public class CreateChurch extends AppCompatActivity
 {
     //GUI
     EditText et_email;
     EditText et_password;
+    EditText et_confirmPassword;
     EditText et_name;
     EditText et_address;
     EditText et_city;
@@ -36,8 +35,7 @@ public class CreateChurch extends AppCompatActivity
     Spinner sp_denomination;
     Button btn_register;
     Button btn_back;
-    TextView tv_fieldsError;
-    TextView tv_emailError;
+    TextView tv_error;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -56,14 +54,14 @@ public class CreateChurch extends AppCompatActivity
         //GUI
         et_email = findViewById(R.id.et_createChurch_email);
         et_password = findViewById(R.id.et_createChurch_password);
+        et_confirmPassword = findViewById(R.id.et_createChurch_confirmPassword);
         et_name = findViewById(R.id.et_createChurch_name);
         et_address = findViewById(R.id.et_createChurch_address);
         et_city = findViewById(R.id.et_createChurch_city);
         et_number = findViewById(R.id.et_createChurch_number);
         et_statement = findViewById(R.id.et_createChurch_statement);
         sp_denomination = findViewById(R.id.sp_createChurch_denomination);
-        tv_fieldsError = findViewById(R.id.tv_createChurch_fieldsError);
-        tv_emailError = findViewById(R.id.tv_createChurch_emailError);
+        tv_error = findViewById(R.id.tv_createChurch_error);
         btn_register = findViewById(R.id.btn_createChurch_register);
         btn_back = findViewById(R.id.btn_createChurch_back);
 
@@ -98,6 +96,7 @@ public class CreateChurch extends AppCompatActivity
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
+                String confirmPassword = et_confirmPassword.getText().toString();
                 String name = et_name.getText().toString();
                 String address = et_address.getText().toString();
                 String city = et_city.getText().toString();
@@ -105,16 +104,17 @@ public class CreateChurch extends AppCompatActivity
                 String statement = et_statement.getText().toString();
                 String denomination = sp_denomination.getSelectedItem().toString();
 
-                tv_emailError.setVisibility(View.INVISIBLE);
+                tv_error.setVisibility(View.INVISIBLE);
 
                 //One of the fields are empty
-                if (email.equals("") || password.equals("") || name.equals("") || address.equals("") || city.equals("") || number.equals("") || statement.equals(""))
+                if (email.equals("") || password.equals("") || name.equals("") || address.equals("") || city.equals("") || number.equals("") || statement.equals("") || confirmPassword.equals(""))
                 {
-                    tv_fieldsError.setVisibility(View.VISIBLE); //Tell them
+                    tv_error.setText("*Please fill out all fields*");
+                    tv_error.setVisibility(View.VISIBLE); //Tell them
                 }
                 else
                 {
-                    tv_fieldsError.setVisibility(View.INVISIBLE);
+                    tv_error.setVisibility(View.INVISIBLE);
 
                     boolean isUnique = true;
 
@@ -130,18 +130,30 @@ public class CreateChurch extends AppCompatActivity
                     //If it's still unique, create the account
                     if (isUnique)
                     {
-                        tv_emailError.setVisibility(View.INVISIBLE);
+                        tv_error.setVisibility(View.INVISIBLE);
 
-                        //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
-                        Church church = new Church(email, password, name, denomination, statement, address, city, number);
-                        churchesDb.createChurch(church);
-                        Session.login(church); //LOGIN
-                        Log.v("CREATED", "Created account - Moving to ChurchHome");
-                        startActivity(churchHomeIntent);
+
+                        if (password.equals(confirmPassword))
+                        {
+                            tv_error.setVisibility(View.INVISIBLE);
+
+                            //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
+                            Church church = new Church(email, password, name, denomination, statement, address, city, number);
+                            churchesDb.createChurch(church);
+                            Session.login(church); //LOGIN
+                            Log.v("CREATED", "Created account - Moving to ChurchHome");
+                            startActivity(churchHomeIntent);
+                        }
+                        else
+                        {
+                            tv_error.setText("*Passwords do not match*");
+                            tv_error.setVisibility(View.VISIBLE);
+                        }
                     }
                     else //If it's not unique
                     {
-                        tv_emailError.setVisibility(View.VISIBLE); //Tell them
+                        tv_error.setText("*Email already in use*");
+                        tv_error.setVisibility(View.VISIBLE); //Tell them
                     }
                 }
             }
