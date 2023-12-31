@@ -1,5 +1,4 @@
-# ChurchFinderApp
-# Gabriel Ball 
+# ChurchFinderApp - Gabriel Ball 
 
 # Logging in
 Can log in as user or church. If user, will be taken to either church finder or user home page depending on whether or not the user is a member of a church.
