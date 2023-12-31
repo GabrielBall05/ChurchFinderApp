@@ -54,7 +54,9 @@ public class MyMembersAdapter extends BaseAdapter
         //GUI
         TextView tv_fnameLname = view.findViewById(R.id.tv_myMembersCC_fnameLname);
 
+        //Get user
         User user = listOfMembers.get(i);
+        //Fill in text view with first name and last name
         tv_fnameLname.setText(user.getFirstName() + " " + user.getLastName());
 
         return view;

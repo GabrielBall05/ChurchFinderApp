@@ -74,8 +74,10 @@ public class BookmarkedChurches extends AppCompatActivity
 
         //ARRAYLISTS
         listOfBookmarks = new ArrayList<Bookmark>();
+        //Have to first get all bookmarks that the user has
         listOfBookmarks = bookmarksDb.getAllBookmarksUnderUser(Session.getUser().getEmail());
         listOfChurches = new ArrayList<Church>();
+        //Then have to cycle through bookmarks to make a list of churches to show the info of the churches
         for(int i = 0; i < listOfBookmarks.size(); i++)
         {
             Church church = churchesDb.getChurchByEmail(listOfBookmarks.get(i).getEmailOfChurch());
@@ -112,7 +114,9 @@ public class BookmarkedChurches extends AppCompatActivity
                 String text = s.toString();
                 listOfChurches = new ArrayList<Church>();
                 listOfBookmarks = new ArrayList<Bookmark>();
+                //Get all churches with the name that contains what the user searched
                 listOfChurches = churchesDb.getChurchesByNameAlphabetical(text);
+                //Cycle through the churches to add to the list of bookmarks if the user has a bookmark of that church
                 for (int i = 0; i < listOfChurches.size(); i++)
                 {
                     if (bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), listOfChurches.get(i).getEmail()))
@@ -121,7 +125,7 @@ public class BookmarkedChurches extends AppCompatActivity
                     }
                 }
 
-                fillListView();
+                fillListView(); //Update list
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -136,8 +140,8 @@ public class BookmarkedChurches extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("LIST VIEW ITEM CLICK", "List View Item Click - Moving to ChurchDetails");
-                churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i));
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
+                churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
                 startActivity(churchDetailsIntent);
             }
         });
@@ -150,7 +154,7 @@ public class BookmarkedChurches extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Home Button Click - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
                 startActivity(userNoChurchHomeIntent);
             }
         });
@@ -164,7 +168,7 @@ public class BookmarkedChurches extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Edit Profile (User) Button Click - Moving to EditUserProfile");
+                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
                 startActivity(editProfileIntent);
             }
         });

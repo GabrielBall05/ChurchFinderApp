@@ -51,9 +51,13 @@ public class MyEventsAdapter extends BaseAdapter
             view = mInflater.inflate(R.layout.my_events_custom_cell, null);
         }
 
+        //GUI
         TextView tv_name = view.findViewById(R.id.tv_myEventsCC_name);
         TextView tv_dateTime = view.findViewById(R.id.tv_myEventsCC_dateTime);
+
+        //Get the event
         Event event = listOfMyEvents.get(i);
+        //Set the text views with name, date, and time
         tv_name.setText(event.getEventName());
         tv_dateTime.setText(event.getDate() + " @" + event.getTime());
 

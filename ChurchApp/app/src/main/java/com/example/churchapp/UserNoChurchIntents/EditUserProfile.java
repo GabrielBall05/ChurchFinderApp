@@ -73,7 +73,7 @@ public class EditUserProfile extends AppCompatActivity
         masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditUserProfile.this, MainActivity.class);
 
-        //FILL TEXT BOXES WITH CURRENT INFO
+        //Fill text boxes with current info
         fillInTextBoxes();
 
         //SPINNER
@@ -117,7 +117,7 @@ public class EditUserProfile extends AppCompatActivity
         });
     }
 
-    /**========================================UPDATE BUTTON PRESS========================================*/
+    /**========================================UPDATE BUTTON CLICK========================================*/
     private void updateButtonClick()
     {
         btn_update.setOnClickListener(new View.OnClickListener()
@@ -125,7 +125,7 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Update Account Button Click");
+                Log.v("BUTTON CLICK", "Update Account Button Clicked");
 
                 String fname = et_fname.getText().toString();
                 String lname = et_lname.getText().toString();
@@ -142,16 +142,16 @@ public class EditUserProfile extends AppCompatActivity
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), password, fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
-                    usersDb.updateUser(user);
-                    Session.login(user);
+                    usersDb.updateUser(user); //Update user in database
+                    Session.login(user); //Log the user in so Session... works properly
                     startActivity(userNoChurchHomeIntent);
-                    Log.v("UPDATED", "Updated Profile - Moving to UserNoChurchHome");
+                    Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to UserNoChurchHome");
                 }
             }
         });
     }
 
-    /**========================================DELETE BUTTON PRESS========================================*/
+    /**========================================DELETE BUTTON CLICK========================================*/
     private void deleteButtonClick()
     {
         btn_delete.setOnClickListener(new View.OnClickListener()
@@ -159,14 +159,14 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Delete User Account Button Click - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent");
+                Log.v("BUTTON CLICK", "Delete User Account Button Clicked - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 startActivity(masterConfirmationIntent);
             }
         });
     }
 
-    /**========================================BOOKMARKS BUTTON PRESS========================================*/
+    /**========================================BOOKMARKS BUTTON CLICK========================================*/
     private void bookmarksButtonClick()
     {
         btn_bookmarks.setOnClickListener(new View.OnClickListener()
@@ -174,13 +174,13 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Bookmarks Button Click - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to BookmarkedChurches");
                 startActivity(bookmarksIntent);
             }
         });
     }
 
-    /**========================================HOME BUTTON PRESS========================================*/
+    /**========================================HOME BUTTON CLICK========================================*/
     private void homeButtonClick()
     {
         btn_home.setOnClickListener(new View.OnClickListener()
@@ -188,13 +188,13 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Home Button Click - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
                 startActivity(userNoChurchHomeIntent);
             }
         });
     }
 
-    /**========================================SIGN OUT BUTTON PRESS========================================*/
+    /**========================================SIGN OUT BUTTON CLICk========================================*/
     private void signOutButtonClick()
     {
         btn_signOut.setOnClickListener(new View.OnClickListener()
@@ -202,7 +202,7 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS - SIGNING OUT", "Signing out - Moving to MainActivity");
+                Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
                 startActivity(mainActivityIntent);
             }
         });

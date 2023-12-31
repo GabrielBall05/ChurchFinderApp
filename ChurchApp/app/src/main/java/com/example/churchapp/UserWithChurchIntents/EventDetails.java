@@ -66,8 +66,8 @@ public class EventDetails extends AppCompatActivity
 
         //EXTRA
         Intent origin = getIntent();
-        cameFrom = origin.getStringExtra("cameFrom");
-        event = (Event) origin.getSerializableExtra("thisEvent");
+        cameFrom = origin.getStringExtra("cameFrom"); //Get the name of the previous intent
+        event = (Event) origin.getSerializableExtra("thisEvent"); //Get the event passed to me
 
         //FUNCTIONS
         fillTextBoxes();
@@ -87,6 +87,7 @@ public class EventDetails extends AppCompatActivity
         tv_desc.setText("Description: " + event.getDescription());
 
         //Correct the bookmark button text
+        //Checks if the user is signed up for the event passed to me
         if(participantsDb.isUserSignedUpForEvent(event.getEventId(), Session.getUser().getEmail()))
         {
             btn_sign.setText("Leave\nEvent");
@@ -107,15 +108,15 @@ public class EventDetails extends AppCompatActivity
             {
                 if(participantsDb.isUserSignedUpForEvent(event.getEventId(), Session.getUser().getEmail()))
                 {
-                    Log.v("Button Press", "LEAVING EVENT");
+                    Log.v("BUTTON CLICK", "LEAVING EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
-                    participantsDb.deleteEventParticipant(p);
+                    participantsDb.deleteEventParticipant(p); //Remove user from event
                 }
                 else
                 {
-                    Log.v("Button Press", "SIGNING UP FOR EVENT");
+                    Log.v("BUTTON CLICK", "SIGNING UP FOR EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
-                    participantsDb.createEventParticipant(p);
+                    participantsDb.createEventParticipant(p); //Add user as participant to this event
                 }
 
                 //Correct the bookmark button text
@@ -139,7 +140,7 @@ public class EventDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Home Button Press - Moving back to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserWithChurchHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });
@@ -153,14 +154,14 @@ public class EventDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (cameFrom.equals("myChurchEventsIntent"))
+                if (cameFrom.equals("myChurchEventsIntent")) //If came from MyChurchEvents, go back there
                 {
-                    Log.v("Button Press", "Back Button Press - Moving back to MyChurchEvents");
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to MyChurchEvents");
                     startActivity(myChurchEventsIntent);
                 }
-                else if (cameFrom.equals("userWithChurchHomeIntent"))
+                else if (cameFrom.equals("userWithChurchHomeIntent")) //If came from UserWithChurchHome, go back there
                 {
-                    Log.v("Button Press", "Back Button Press - Moving back to UserWithChurchHome");
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserWithChurchHome");
                     startActivity(userWithChurchHomeIntent);
                 }
 

@@ -54,7 +54,9 @@ public class ParticipantsAdapter extends BaseAdapter
         //GUI
         TextView tv_name = view.findViewById(R.id.tv_participantsCC_name);
 
+        //Get the user
         User user = listOfParticipants.get(i);
+        //Set text view with first name and last name
         tv_name.setText(user.getFirstName() + " " + user.getLastName());
 
         return view;

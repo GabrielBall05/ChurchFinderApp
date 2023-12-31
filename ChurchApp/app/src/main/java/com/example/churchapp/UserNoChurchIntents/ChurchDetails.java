@@ -76,7 +76,7 @@ public class ChurchDetails extends AppCompatActivity
 
         //EXTRA
         Intent origin = getIntent();
-        church = (Church) origin.getSerializableExtra("thisChurch");
+        church = (Church) origin.getSerializableExtra("thisChurch"); //Get the church passed to me
 
         //FUNCTIONS
         fillTextBoxes();
@@ -98,6 +98,7 @@ public class ChurchDetails extends AppCompatActivity
         tv_statement.setText("Statement of Faith: " + church.getStatementOfFaith());
 
         //Correct the bookmark button text
+        //Checks if the user has a bookmark of this church
         if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
         {
             btn_bookmark.setText("Remove\nBookmark");
@@ -116,9 +117,9 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Become Member button press - are you sure? - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "churchDetailsIntent");
-                masterConfirmationIntent.putExtra("thisChurch", church);
+                Log.v("BUTTON CLICK", "Become Member Button Clicked - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "churchDetailsIntent"); //Put extra the name of this intent
+                masterConfirmationIntent.putExtra("thisChurch", church); //Put extra the church the user is looking at
                 startActivity(masterConfirmationIntent);
             }
         });
@@ -134,14 +135,14 @@ public class ChurchDetails extends AppCompatActivity
             {
                 if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
                 {
-                    Log.v("BUTTON PRESS - UN-BOOKMARKING", "Un/Bookmark button press - UN-BOOKMARKING");
-                    bookmarksDb.deleteBookmark(Session.getUser().getEmail(), church.getEmail());
+                    Log.v("BUTTON CLICK", "Un/Bookmark Bookmark Clicked - UN-BOOKMARKING");
+                    bookmarksDb.deleteBookmark(Session.getUser().getEmail(), church.getEmail()); //Delete the bookmark from the database
                 }
                 else
                 {
-                    Log.v("BUTTON PRESS - BOOKMARKING", "Un/Bookmark button press - BOOKMARKING");
+                    Log.v("BUTTON CLICK", "Un/Bookmark Button Clicked - BOOKMARKING");
                     Bookmark bookmark = new Bookmark(Session.getUser().getEmail(), church.getEmail());
-                    bookmarksDb.createBookmark(bookmark);
+                    bookmarksDb.createBookmark(bookmark); //Create a bookmark in the database with the emails of the user and the church
                 }
 
                 //Correct the bookmark button text
@@ -165,7 +166,7 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Show Bookmarks Button Click - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Show Bookmarks Button Clicked - Moving to BookmarkedChurches");
                 startActivity(bookmarkedChurchesIntent);
             }
         });
@@ -179,7 +180,7 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Home Button Click - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
                 startActivity(userNoChurchHomeIntent);
             }
         });
@@ -193,7 +194,7 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Edit Profile (User) Button Click - Moving to EditUserProfile");
+                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
                 startActivity(editProfileIntent);
             }
         });

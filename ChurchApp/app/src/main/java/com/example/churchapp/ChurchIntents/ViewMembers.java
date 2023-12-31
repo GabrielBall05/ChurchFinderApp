@@ -36,7 +36,7 @@ public class ViewMembers extends AppCompatActivity
     //ADAPTER
     MyMembersAdapter adapter;
 
-    //MY MEMBERS ARRAY
+    //ARRAYLIST
     ArrayList<User> listOfMyMembers;
 
     @Override
@@ -84,9 +84,9 @@ public class ViewMembers extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Item Click", "List View Item Click - Moving to MemberDetails");
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to MemberDetails");
 
-                memberDetailsIntent.putExtra("myMember", listOfMyMembers.get(i));
+                memberDetailsIntent.putExtra("myMember", listOfMyMembers.get(i)); //Put extra the member
                 startActivity(memberDetailsIntent);
             }
         });
@@ -100,7 +100,7 @@ public class ViewMembers extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Back Button Click (from ViewMembers) - Moving to ChurchHome");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to ChurchHome");
                 startActivity(churchHomeIntent);
             }
         });

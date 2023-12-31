@@ -10,19 +10,16 @@ public class Session
     private static String sessionType;
     private static User user;
     private static Church church;
-    private static boolean loggedIn;
 
-    public static void login(User u)
+    public static void login(User u) //Log the User in
     {
         sessionType = USER_TYPE;
-        loggedIn = true;
         user = u;
     }
 
-    public static void login(Church c)
+    public static void login(Church c) //Log the church in
     {
         sessionType = CHURCH_TYPE;
-        loggedIn = true;
         church = c;
     }
 

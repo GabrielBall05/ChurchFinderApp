@@ -67,12 +67,14 @@ public class EventParticipantsPage extends AppCompatActivity
 
         //EXTRA
         Intent origin = getIntent();
-        event = (Event) origin.getSerializableExtra("myEvent");
+        event = (Event) origin.getSerializableExtra("myEvent"); //Get the event passed
 
         //ARRAYLISTS
         listOfParticipants = new ArrayList<EventParticipant>();
+        //Get participants of the event
         listOfParticipants = participantsDb.getParticipantsOfEvent(event.getEventId());
         listOfUsers = new ArrayList<User>();
+        //Cycle through participants to make a list of users to display their information
         for (int i = 0; i < listOfParticipants.size(); i++)
         {
             User user = usersDb.getUserByEmail(listOfParticipants.get(i).getEmailOfParticipant());
@@ -108,8 +110,8 @@ public class EventParticipantsPage extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Back Button Click - Moving to EditEvent");
-                editEventIntent.putExtra("myEvent", event);
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to EditEvent");
+                editEventIntent.putExtra("myEvent", event); //Put extra the event
                 startActivity(editEventIntent);
             }
         });

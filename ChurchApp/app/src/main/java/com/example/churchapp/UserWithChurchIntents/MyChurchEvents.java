@@ -66,14 +66,15 @@ public class MyChurchEvents extends AppCompatActivity
 
         //ARRAYLIST
         listOfEvents = new ArrayList<Event>();
-        if (eventsDb.doesChurchHaveEvents(Session.getUser().getEmailOfChurchAttending()))
+        if (eventsDb.doesChurchHaveEvents(Session.getUser().getEmailOfChurchAttending())) //If the user's church has events
         {
+            //Get all the events from the user's church
             listOfEvents = eventsDb.getAllEventsByChurchEmail(Session.getUser().getEmailOfChurchAttending());
             fillListView();
         }
         else
         {
-            tv_noResults.setVisibility(View.VISIBLE);
+            tv_noResults.setVisibility(View.VISIBLE); //Show no results
         }
 
         //FUNCTIONS
@@ -95,7 +96,7 @@ public class MyChurchEvents extends AppCompatActivity
         adapter = new MyEventsAdapter(this, listOfEvents);
         lv_events.setAdapter(adapter);
 
-        ifNoResultsShow();
+        ifNoResultsShow(); //Check if there are any results every time the list view is updated
     }
 
     /**========================================LIST VIEW ITEM CLICK========================================*/
@@ -106,9 +107,9 @@ public class MyChurchEvents extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Item Select", "List View item selected - Moving to EventDetails");
-                eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i));
-                eventDetailsIntent.putExtra("cameFrom", "myChurchEventsIntent");
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to EventDetails");
+                eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i)); //Put extra the clicked event
+                eventDetailsIntent.putExtra("cameFrom", "myChurchEventsIntent"); //Put extra the name of this intent
                 startActivity(eventDetailsIntent);
             }
         });
@@ -122,7 +123,7 @@ public class MyChurchEvents extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Back Button Press - Moving to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserWithChurchHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });

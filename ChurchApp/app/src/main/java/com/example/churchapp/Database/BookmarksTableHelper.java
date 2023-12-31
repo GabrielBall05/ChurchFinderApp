@@ -20,14 +20,16 @@ public class BookmarksTableHelper
         ctx = new Database(c);
     }
 
+    /**========================================CREATE TABLE========================================*/
     public static void create(SQLiteDatabase _db)
     {
         //Order: emailOfUser, emailOfChurch
         final String query = "CREATE TABLE " + DatabaseVariables.BOOKMARKS_TABLE + " (emailOfUser TEXT NOT NULL, emailOfChurch TEXT NOT NULL, FOREIGN KEY (emailOfUser) REFERENCES " + DatabaseVariables.USERS_TABLE + " (email) ON DELETE CASCADE, FOREIGN KEY (emailOfChurch) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
         _db.execSQL(query);
-        Log.d("DATABASE", "Created bookmarks table");
+        Log.d("DATABASE", "Created Bookmarks Table");
     }
 
+    /**========================================DROP TABLE========================================*/
     public static void clean(SQLiteDatabase _db)
     {
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.BOOKMARKS_TABLE + ";");
@@ -50,7 +52,7 @@ public class BookmarksTableHelper
         db.close();
     }
 
-    /**========================================DELETE ALL BOOKMARKS========================================*/
+    /**========================================DELETE ALL BOOKMARKS (USED FOR TESTING)========================================*/
     public void deleteAllBookmarks()
     {
         SQLiteDatabase db = ctx.getWritableDatabase();
@@ -63,9 +65,7 @@ public class BookmarksTableHelper
     public ArrayList<Bookmark> getAllBookmarksUnderUser(String e)
     {
         ArrayList<Bookmark> listOfBookmarks = new ArrayList<Bookmark>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + e + "';";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -93,7 +93,7 @@ public class BookmarksTableHelper
         String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "' AND emailOfChurch = '" + churchEmail + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst())
+        if (cursor.moveToFirst()) //Bookmark exists
         {
             return true;
         }
@@ -130,9 +130,7 @@ public class BookmarksTableHelper
     public Bookmark getBookmark(String userEmail, String churchEmail)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.BOOKMARKS_TABLE + " WHERE emailOfUser = '" + userEmail + "' AND emailOfChurch = '" + churchEmail + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())

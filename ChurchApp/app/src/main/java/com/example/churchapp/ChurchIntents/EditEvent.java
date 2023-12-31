@@ -37,7 +37,7 @@ public class EditEvent extends AppCompatActivity
     //DATABASE
     EventsTableHelper eventsDb;
 
-    //OTHER
+    //EXTRA
     Event event;
 
     @Override
@@ -66,7 +66,7 @@ public class EditEvent extends AppCompatActivity
 
         //GET EXTRA STUFF
         Intent cameFrom = getIntent();
-        event = (Event) cameFrom.getSerializableExtra("myEvent");
+        event = (Event) cameFrom.getSerializableExtra("myEvent"); //Get the event passed
 
         //FUNCTIONS
         fillTextBoxes();
@@ -85,7 +85,7 @@ public class EditEvent extends AppCompatActivity
         et_desc.setText(event.getDescription());
     }
 
-    /**========================================UPDATE BUTTON========================================*/
+    /**========================================UPDATE BUTTON CLICK========================================*/
     private void updateButtonClick()
     {
         btn_update.setOnClickListener(new View.OnClickListener()
@@ -93,7 +93,7 @@ public class EditEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Update Button Click");
+                Log.v("BUTTON CLICK", "Update Button Clicked");
 
                 String name = et_name.getText().toString();
                 String address = et_address.getText().toString();
@@ -101,23 +101,24 @@ public class EditEvent extends AppCompatActivity
                 String time = et_time.getText().toString();
                 String desc = et_desc.getText().toString();
 
+                //A field is empty
                 if (name.equals("") || address.equals("") || date.equals("") || time.equals("") || desc.equals(""))
                 {
-                    tv_fieldsError.setVisibility(View.VISIBLE);
+                    tv_fieldsError.setVisibility(View.VISIBLE); //Tell them
                 }
                 else
                 {
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
                     eventsDb.updateEvent(new Event(event.getEventId(), Session.getChurch().getEmail(), Session.getChurch().getName(), name, address, date, time, desc));
-                    Log.v("UPDATED", "Updated Event - Moving to ChurchHome");
+                    Log.v("UPDATED EVENT", "Updated Event - Moving to ChurchHome");
                     startActivity(churchHomeIntent);
                 }
             }
         });
     }
 
-    /**========================================BACK BUTTON========================================*/
+    /**========================================BACK BUTTON CLICK========================================*/
     private void backButtonClick()
     {
         btn_back.setOnClickListener(new View.OnClickListener()
@@ -125,13 +126,13 @@ public class EditEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Back Button Click (from EditEvent) - Moving to ChurchHome");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to ChurchHome");
                 startActivity(churchHomeIntent);
             }
         });
     }
 
-    /**========================================VIEW PARTICIPANTS BUTTON========================================*/
+    /**========================================VIEW PARTICIPANTS BUTTON CLICK========================================*/
     private void viewParticipantsButtonClick()
     {
         btn_viewParticipants.setOnClickListener(new View.OnClickListener()
@@ -139,8 +140,8 @@ public class EditEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "View Participants Button Click - Moving to EventParticipantsPage");
-                participantsIntent.putExtra("myEvent", event);
+                Log.v("BUTTON CLICK", "View Participants Button Clicked - Moving to EventParticipantsPage");
+                participantsIntent.putExtra("myEvent", event); //Put extra the event
                 startActivity(participantsIntent);
             }
         });

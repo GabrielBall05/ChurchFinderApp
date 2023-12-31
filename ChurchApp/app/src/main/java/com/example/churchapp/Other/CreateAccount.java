@@ -82,7 +82,7 @@ public class CreateAccount extends AppCompatActivity
         denominationSelect();
     }
 
-    /**========================================REGISTER BUTTON PRESS========================================*/
+    /**========================================REGISTER BUTTON CLICK========================================*/
     private void registerButtonClick()
     {
         btn_register.setOnClickListener(new View.OnClickListener()
@@ -90,7 +90,7 @@ public class CreateAccount extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Create Account Button Press");
+                Log.v("BUTTON CLICK", "Create Account Button Clicked");
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
@@ -102,9 +102,7 @@ public class CreateAccount extends AppCompatActivity
 
                 tv_emailError.setVisibility(View.INVISIBLE);
 
-
                 boolean isUnique = true;
-
                 if (usersDb.doesEmailExist(email)) //Check if email exists in users database
                 {
                     isUnique = false;
@@ -114,6 +112,7 @@ public class CreateAccount extends AppCompatActivity
                     isUnique = false;
                 }
 
+                //If the email is still unique, move on
                 if (isUnique)
                 {
                     tv_emailError.setVisibility(View.INVISIBLE);
@@ -124,11 +123,11 @@ public class CreateAccount extends AppCompatActivity
                         tv_error.setText("*Please fill out all fields*");
                         tv_error.setVisibility(View.VISIBLE); //Tell them
                     }
-                    else
+                    else //Fields are filled out
                     {
                         tv_error.setVisibility(View.INVISIBLE);
 
-                        if (!password.equals(confirmPassword))
+                        if (!password.equals(confirmPassword)) //Check if password fields match
                         {
                             tv_error.setText("*Passwords do not match*");
                             tv_error.setVisibility(View.VISIBLE);
@@ -139,10 +138,10 @@ public class CreateAccount extends AppCompatActivity
 
                             //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                             User user = new User(email, password, firstname, lastname, "", denomination, city);
-                            usersDb.createUser(user);
-                            Session.login(user); //LOGIN
+                            usersDb.createUser(user); //Create the user in the database
+                            Session.login(user); //Log the User in
                             startActivity(userNoChurchHome);
-                            Log.v("CREATED", "Created Account - Moving to UserNoChurchHome");
+                            Log.v("CREATED USER", "Created User Account - Moving to UserNoChurchHome");
                         }
                     }
                 }
@@ -163,7 +162,6 @@ public class CreateAccount extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
-                //Log.v("SPINNER ITEM SELECTED", "Selected spinner item");
                 String text = parent.getItemAtPosition(i).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
             }
@@ -172,7 +170,7 @@ public class CreateAccount extends AppCompatActivity
         });
     }
 
-    /**========================================BACK BUTTON PRESS========================================*/
+    /**========================================BACK BUTTON CLICK========================================*/
     private void backButtonClick()
     {
         btn_back.setOnClickListener(new View.OnClickListener()
@@ -180,7 +178,7 @@ public class CreateAccount extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Back Button Press (From CreateAccount)");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to MainActivity");
                 startActivity(mainActivityIntent);
             }
         });

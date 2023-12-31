@@ -71,6 +71,7 @@ public class MyChurch extends AppCompatActivity
     /**========================================FILL TEXT========================================*/
     private void fillText()
     {
+        //Get the church that the user attends to fill in the text boxes
         Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
         tv_name.setText("You attend " + church.getName());
         tv_denomination.setText(church.getName() + " is a " + church.getDenomination() + " church");
@@ -89,10 +90,10 @@ public class MyChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Leave Church Button Press - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "myChurchIntent");
+                Log.v("BUTTON CLICK", "Leave Church Button Clicked - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "myChurchIntent"); //Put extra the name of this intent
                 Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
-                masterConfirmationIntent.putExtra("myChurch", church);
+                masterConfirmationIntent.putExtra("myChurch", church); //Put extra the church that the usr attends
                 startActivity(masterConfirmationIntent);
             }
         });
@@ -106,7 +107,7 @@ public class MyChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Home Button Press - Moving to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserWithChurchHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });
@@ -120,7 +121,7 @@ public class MyChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Edit Profile Button Press - Moving to EditUserProfile2");
+                Log.v("BUTTON CLICK", "Edit Profile Button Clicked - Moving to EditUserProfile2");
                 startActivity(editUserProfile2Intent);
             }
         });

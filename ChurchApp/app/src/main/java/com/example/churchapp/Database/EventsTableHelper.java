@@ -20,14 +20,16 @@ public class EventsTableHelper
         ctx = new Database(c);
     }
 
+    /**========================================CREATE TABLE========================================*/
     public static void create(SQLiteDatabase _db)
     {
         //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
         final String query = "CREATE TABLE " + DatabaseVariables.EVENTS_TABLE + " (eventId INTEGER PRIMARY KEY AUTOINCREMENT, churchHostingEmail TEXT NOT NULL, churchName TEXT NOT NULL, eventName TEXT NOT NULL, address TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, description TEXT NOT NULL, FOREIGN KEY (churchHostingEmail) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email) ON DELETE CASCADE);";
         _db.execSQL(query);
-        Log.d("DATABASE", "Created events table");
+        Log.d("DATABASE", "Created Events Table");
     }
 
+    /**========================================DROP TABLE========================================*/
     public static void clean(SQLiteDatabase _db)
     {
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.EVENTS_TABLE + ";");
@@ -66,9 +68,7 @@ public class EventsTableHelper
     public Event getEventById(int id)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " +  DatabaseVariables.EVENTS_TABLE + " WHERE eventId = '" + id + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())
@@ -96,9 +96,7 @@ public class EventsTableHelper
     public ArrayList<Event> getAllEventsByChurchEmail(String e)
     {
         ArrayList<Event> listOfEvents = new ArrayList<Event>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.EVENTS_TABLE + " WHERE churchHostingEmail = '" + e + "';";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -134,7 +132,6 @@ public class EventsTableHelper
     @SuppressLint("Range")
     public boolean doesChurchHaveEvents(String e)
     {
-        ArrayList<Event> listOfEvents = new ArrayList<Event>();
         SQLiteDatabase db = ctx.getReadableDatabase();
         String selectQuery = "SELECT * FROM " + DatabaseVariables.EVENTS_TABLE + " WHERE churchHostingEmail = '" + e + "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -163,9 +160,7 @@ public class EventsTableHelper
     public ArrayList<Event> getAllEvents()
     {
         ArrayList<Event> listOfEvents = new ArrayList<Event>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.EVENTS_TABLE + ";";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 

@@ -86,18 +86,17 @@ public class MasterConfirmation extends AppCompatActivity
         myChurchIntent = new Intent(MasterConfirmation.this, MyChurch.class);
 
         Intent origin = getIntent();
-        cameFrom = origin.getStringExtra("cameFrom");
-        Log.v("CAME FROM: ", "Came from: " + cameFrom);
+        cameFrom = origin.getStringExtra("cameFrom"); //Get the name of the previous intent
 
-        if (cameFrom.equals("churchHomeIntent"))
+        if (cameFrom.equals("churchHomeIntent")) //If previous intent is ChurchHome, get the event
         {
             eventToDelete = (Event) origin.getSerializableExtra("eventToDelete");
         }
-        else if (cameFrom.equals("churchDetailsIntent"))
+        else if (cameFrom.equals("churchDetailsIntent")) //If previous intent is ChurchDetails, get the church
         {
             church = (Church) origin.getSerializableExtra("thisChurch");
         }
-        else if (cameFrom.equals("myChurchIntent"))
+        else if (cameFrom.equals("myChurchIntent")) //If previous intent is MyChurch, get the church
         {
             church = (Church) origin.getSerializableExtra("myChurch");
         }
@@ -137,47 +136,48 @@ public class MasterConfirmation extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "'YES' Button Click");
+                Log.v("BUTTON CLICK", "'YES' Button Clicked in MasterConfirmation");
 
                 //DO IT
                 if (cameFrom.equals("churchHomeIntent"))
                 {
-                    Log.v("Button Press", "Deleting Event - Moving to ChurchHome");
-                    participantsDb.removeAllParticipantsFromEvent(eventToDelete.getEventId());
-                    eventsDb.deleteEvent(eventToDelete.getEventId());
+                    Log.v("DELETING", "Deleting Event - Moving to ChurchHome");
+                    participantsDb.removeAllParticipantsFromEvent(eventToDelete.getEventId()); //Remove all participants of that event
+                    eventsDb.deleteEvent(eventToDelete.getEventId()); //Delete the event
                     startActivity(churchHomeIntent);
                 }
                 else if (cameFrom.equals("editChurchProfileIntent"))
                 {
-                    Log.v("Button Press", "Deleting Church - Moving to MainActivity");
-                    eventsDb.deleteChurchEvents(Session.getChurch().getEmail());
-                    churchesDb.deleteChurch(Session.getChurch().getEmail());
+                    Log.v("DELETING", "Deleting Church - Moving to MainActivity");
+                    eventsDb.deleteChurchEvents(Session.getChurch().getEmail()); //Delete the church's events
+                    bookmarksDb.deleteChurchBookmarks(Session.getChurch().getEmail()); //Delete bookmarks (that any user has) of the church
+                    churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("editUserProfileIntent"))
                 {
-                    Log.v("Button Press", "Deleting User - Moving to MainActivity");
-                    bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail());
-                    usersDb.deleteUser(Session.getUser().getEmail());
+                    Log.v("DELETING", "Deleting User - Moving to MainActivity");
+                    bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail()); //Delete bookmarks that the user has
+                    usersDb.deleteUser(Session.getUser().getEmail()); //Delete the user
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
                 {
-                    Log.v("Button Press", "Becoming Member of " + church.getName() + " - Moving to UserWithChurchHome");
-                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), church.getEmail());
+                    Log.v("BECOMING MEMBER", "Becoming Member of " + church.getName() + " - Moving to UserWithChurchHome");
+                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), church.getEmail()); //Become member of church (update emailOfChurchAttending column)
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
-                    Session.login(user);
+                    Session.login(user); //Log the user in again as to update the user's information in Session
                     startActivity(userWithChurchHomeIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
-                    Log.v("Button Press", "Leaving " + church.getName() + " & removing user from events - Moving to UserNoChurchHome");
-                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), "");
+                    Log.v("LEAVING CHURCH", "Leaving " + church.getName() + " & removing user from events - Moving to UserNoChurchHome");
+                    usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), ""); //Leave the church (pass "")
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());
-                    Session.login(user);
-                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
+                    Session.login(user);  //Log the user in again as to update the user's information in Session
+                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail()); //Remove the user from any events
                     startActivity(userNoChurchHomeIntent);
                 }
             }
@@ -192,28 +192,28 @@ public class MasterConfirmation extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "'NO' Button Click");
+                Log.v("BUTTON CLICK", "'NO' Button Clicked");
 
                 //GO BACK
                 if (cameFrom.equals("churchHomeIntent"))
                 {
-                    Log.v("Button Press", "Not Deleting - Moving back to ChurchHome");
+                    Log.v("NO", "Not Deleting - Moving back to ChurchHome");
                     startActivity(churchHomeIntent);
                 }
                 else if (cameFrom.equals("editChurchProfileIntent"))
                 {
-                    Log.v("Button Press", "Not Deleting - Moving back to EditChurchProfile");
+                    Log.v("NO", "Not Deleting - Moving back to EditChurchProfile");
                     startActivity(editChurchProfileIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
                 {
-                    Log.v("Button Press", "Not Becoming Member - Moving back to ChurchDetails");
+                    Log.v("NO", "Not Becoming Member - Moving back to ChurchDetails");
                     churchDetailsIntent.putExtra("thisChurch", church);
                     startActivity(churchDetailsIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
-                    Log.v("Button Press", "Staying Member - Moving back to MyChurch");
+                    Log.v("NO", "Staying Member - Moving back to MyChurch");
                     startActivity(myChurchIntent);
                 }
             }

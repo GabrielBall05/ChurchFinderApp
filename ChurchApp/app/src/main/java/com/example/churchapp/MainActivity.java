@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
     Button btn_login;
     Button btn_createAccount;
     Button btn_createChurch;
-    TextView tv_fieldsError;
     TextView tv_loginError;
 
     //DATABASE
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity
         btn_login = findViewById(R.id.btn_loginPage_login);
         btn_createAccount = findViewById(R.id.btn_loginPage_createAccount);
         btn_createChurch = findViewById(R.id.btn_loginPage_createChurch);
-        tv_fieldsError = findViewById(R.id.tv_loginPage_fieldsError);
         tv_loginError = findViewById(R.id.tv_loginPage_loginError);
 
         //DATABASE
@@ -84,18 +82,20 @@ public class MainActivity extends AppCompatActivity
         createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
         createChurchIntent = new Intent(MainActivity.this, CreateChurch.class);
 
-
-        //===TESTING===
-        listOfUsers = new ArrayList<User>();
-        listOfChurches = new ArrayList<Church>();
+        //INITIALIZE DATABASE TABLES WITH DUMMY DATA
         usersDb.dummyUsers();
         churchesDb.dummyChurches();
         eventsDb.dummyEvents();
-        //dummy participants? that will be very hard and time consuming, and i don't want to do that (at least not yet)
-        listOfUsers = usersDb.getAllUsers();
-        listOfChurches = churchesDb.getAllChurches();
-        logAllUsersAndChurches();
-        //===TESTING===
+        //Can't really do participants, would be difficult since eventId is auto-incrementing
+
+
+//        //===TESTING===
+//        listOfUsers = new ArrayList<User>();
+//        listOfChurches = new ArrayList<Church>();
+//        listOfUsers = usersDb.getAllUsers();
+//        listOfChurches = churchesDb.getAllChurches();
+//        logAllUsersAndChurches();
+//        //===TESTING===
 
 
         //FUNCTIONS
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         createChurchButtonClick();
     }
 
-    /**========================================LOGIN BUTTON PRESS========================================*/
+    /**========================================LOGIN BUTTON CLICK========================================*/
     private void loginButtonClick()
     {
         btn_login.setOnClickListener(new View.OnClickListener()
@@ -112,19 +112,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.v("BUTTON PRESS", "Login Button Press (Main Activity)");
+                Log.v("BUTTON CLICK", "Login Button Clicked");
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-                //Check to make sure both fields are filled
-                if (email.equals("") || password.equals(""))
+
+                if (email.equals("") || password.equals("")) //Check to make sure both fields are filled
                 {
-                    tv_fieldsError.setVisibility(View.VISIBLE); //Show error
+                    tv_loginError.setVisibility(View.VISIBLE); //Show error
                 }
                 else
                 {
-                    tv_fieldsError.setVisibility(View.INVISIBLE);
+                    tv_loginError.setVisibility(View.INVISIBLE);
 
                     //Fields are filled, move on to getting account type
                     String accountType = getEmailAccountType(email);
@@ -133,23 +133,23 @@ public class MainActivity extends AppCompatActivity
                     {
                         tv_loginError.setVisibility(View.VISIBLE); //Tell user
                     }
-                    else if (accountType.equals(Session.USER_TYPE)) //IF USER
+                    else if (accountType.equals(Session.USER_TYPE)) //If user
                     {
                         tv_loginError.setVisibility(View.INVISIBLE);
 
-                        User user = usersDb.getUserByEmail(email); //Get the user
+                        User user = usersDb.getUserByEmail(email); //Get the user from the database
                         if (user.isValidLogin(password)) //Check login validity
                         {
-                            Session.login(user);
+                            Session.login(user); //Log the user in
                             //Determine if user is a member of a church or not
                             if (usersDb.doesUserHaveChurch(user.getEmail())) //Has church
                             {
-                                Log.v("LOG IN", "Logged in - Moving to UserWithChurchHome");
+                                Log.v("LOGGING IN", "Logged in User - Moving to UserWithChurchHome");
                                 startActivity(userWithChurchHomeIntent);
                             }
                             else //Doesn't have church
                             {
-                                Log.v("LOG IN", "Logged in - Moving to UserNoChurchHome");
+                                Log.v("LOGGING IN", "Logged in User - Moving to UserNoChurchHome");
                                 startActivity(userNoChurchHomeIntent);
                             }
                         }
@@ -158,15 +158,15 @@ public class MainActivity extends AppCompatActivity
                             tv_loginError.setVisibility(View.VISIBLE);
                         }
                     }
-                    else if (accountType.equals(Session.CHURCH_TYPE)) //IF CHURCH
+                    else if (accountType.equals(Session.CHURCH_TYPE)) //If church
                     {
                         tv_loginError.setVisibility(View.INVISIBLE);
 
-                        Church church = churchesDb.getChurchByEmail(email); //Get the church
+                        Church church = churchesDb.getChurchByEmail(email); //Get the church from the database
                         if (church.isValidLogin(password)) //Check login validity
                         {
-                            Session.login(church);
-                            Log.v("LOG IN", "Logged in - Moving to Church Home");
+                            Session.login(church); //Log in church
+                            Log.v("LOGGING IN", "Logged in Church - Moving to ChurchHome");
                             startActivity(churchHomeIntent);
                         }
                         else
@@ -182,19 +182,19 @@ public class MainActivity extends AppCompatActivity
     /**========================================GET THE ACCOUNT TYPE ASSOCIATED WITH THIS EMAIL========================================*/
     public String getEmailAccountType(String email)
     {
-        if (usersDb.getUserByEmail(email) != null)
+        if (usersDb.getUserByEmail(email) != null) //The email exists in the users table
         {
-            return Session.USER_TYPE;
+            return Session.USER_TYPE; //It is a user
         }
-        else if (churchesDb.getChurchByEmail(email) != null)
+        else if (churchesDb.getChurchByEmail(email) != null) //The email exists in the churches table
         {
-            return Session.CHURCH_TYPE;
+            return Session.CHURCH_TYPE; //It is a church
         }
 
-        return null;
+        return null; //Not in either table
     }
 
-    /**========================================CREATE ACCOUNT BUTTON PRESS========================================*/
+    /**========================================CREATE ACCOUNT BUTTON CLICK========================================*/
     private void createAccountButtonClick()
     {
         btn_createAccount.setOnClickListener(new View.OnClickListener()
@@ -202,13 +202,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.v("BUTTON PRESS", "Create Account Button Press (Main Activity) - Moving to CreateAccount");
+                Log.v("BUTTON CLICK", "Create Account Button Clicked - Moving to CreateAccount");
                 startActivity(createAccountIntent);
             }
         });
     }
 
-    /**========================================CREATE CHURCH BUTTON PRESS========================================*/
+    /**========================================CREATE CHURCH BUTTON CLICK========================================*/
     private void createChurchButtonClick()
     {
         btn_createChurch.setOnClickListener(new View.OnClickListener()
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.v("BUTTON PRESS", "Create Church Button Press (Main Activity) - Moving to CreateChurch");
+                Log.v("BUTTON CLICK", "Create Church Button Clicked - Moving to CreateChurch");
                 startActivity(createChurchIntent);
             }
         });

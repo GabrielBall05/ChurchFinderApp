@@ -27,7 +27,7 @@ public class ListOfBookmarksAdapter extends BaseAdapter
     {
         context = c;
         listOfBookmarks = ls;
-        churchesDb = new ChurchesTableHelper(c);
+        churchesDb = new ChurchesTableHelper(c); //Use the context passed to get an instance of the churches table
     }
 
     @Override
@@ -57,11 +57,15 @@ public class ListOfBookmarksAdapter extends BaseAdapter
             view = mInflater.inflate(R.layout.my_bookmarks_custom_cell, null);
         }
 
+        //GUI
         TextView tv_name = view.findViewById(R.id.tv_myBookmarksCC_name);
         TextView tv_denomination = view.findViewById(R.id.tv_myBookmarksCC_denomination);
-        Bookmark bookmark = listOfBookmarks.get(i);
 
+        //Get the bookmark
+        Bookmark bookmark = listOfBookmarks.get(i);
+        //Get the church from the database given the email from the bookmark
         Church church = churchesDb.getChurchByEmail(bookmark.getEmailOfChurch());
+        //Set the text views to the name and denomination
         tv_name.setText(church.getName());
         tv_denomination.setText(church.getDenomination());
 

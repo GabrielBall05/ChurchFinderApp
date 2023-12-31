@@ -14,7 +14,6 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
-        //Create tables --- UsersTable.create(sqLiteDatabase);
         ChurchesTableHelper.create(sqLiteDatabase);
         UsersTableHelper.create(sqLiteDatabase);
         EventsTableHelper.create(sqLiteDatabase);
@@ -25,7 +24,6 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
     {
-        //Drop and clean tables --- UsersTable.clean(sqLiteDatabase);
         ChurchesTableHelper.clean(sqLiteDatabase);
         UsersTableHelper.clean(sqLiteDatabase);
         EventsTableHelper.clean(sqLiteDatabase);

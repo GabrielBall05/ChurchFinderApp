@@ -21,9 +21,9 @@
         android:id="@+id/et_loginPage_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="216dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginEnd="54dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="text"
@@ -36,9 +36,9 @@
         android:id="@+id/et_loginPage_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="54dp"
         android:layout_marginTop="17dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginEnd="54dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="text"
@@ -48,65 +48,28 @@
         app:layout_constraintTop_toBottomOf="@+id/et_loginPage_email" />
 
     <TextView
-        android:id="@+id/tv_loginPage_fieldsError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*Please make sure to fill out both fields*"
-        android:textColor="#FF0000"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/btn_loginPage_login"
-        app:layout_constraintTop_toBottomOf="@+id/tv_loginPage_loginError" />
-
-    <TextView
         android:id="@+id/tv_loginPage_loginError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
+        android:layout_marginEnd="20dp"
         android:text="*Invalid login. Check fields again*"
         android:textColor="#FF0000"
         android:textSize="14sp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/tv_loginPage_fieldsError"
+        app:layout_constraintEnd_toEndOf="@+id/btn_loginPage_login"
         app:layout_constraintTop_toBottomOf="@+id/et_loginPage_password" />
 
     <Button
         android:id="@+id/btn_loginPage_login"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:text="Login"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_loginPage_fieldsError" />
-
-    <Button
-        android:id="@+id/btn_loginPage_createAccount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="151dp"
-        android:text="Create Account"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_loginPage_createChurch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:text="Create Church Account"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_loginPage_createAccount" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_loginPage_loginError" />
 
     <TextView
         android:id="@+id/textView3"
@@ -119,4 +82,34 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_loginPage_createAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_loginPage_createAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="169dp"
+        android:text="Create Account"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_loginPage_loginError" />
+
+    <Button
+        android:id="@+id/btn_loginPage_createChurch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="42dp"
+        android:text="Create Church Account"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_loginPage_createAccount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

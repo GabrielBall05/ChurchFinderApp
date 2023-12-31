@@ -2,6 +2,7 @@ package com.example.churchapp.Models;
 
 public class Denominations
 {
+    //List of Denominations - Static so they're accessible anywhere
     public static String DENOMINATION_TYPE_BAPTIST = "Baptist";
     public static String DENOMINATION_TYPE_LUTHERAN = "Lutheran";
     public static String DENOMINATION_TYPE_CATHOLIC = "Catholic";

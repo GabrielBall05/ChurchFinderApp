@@ -51,10 +51,13 @@ public class SignedUpEventsAdapter extends BaseAdapter
             view = mInflater.inflate(R.layout.signed_up_events_custom_cell, null);
         }
 
+        //GUI
         TextView tv_name = view.findViewById(R.id.tv_signedUpEventsCC_name);
         TextView tv_dateTime = view.findViewById(R.id.tv_signedUpEventsCC_dateTime);
 
+        //Get the event
         Event event = listOfEvents.get(i);
+        //Fill in text views with name, date, and time
         tv_name.setText(event.getEventName());
         tv_dateTime.setText(event.getDate() + " @" + event.getTime());
 

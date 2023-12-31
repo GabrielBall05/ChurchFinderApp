@@ -84,7 +84,7 @@ public class CreateChurch extends AppCompatActivity
         denominationSelect();
     }
 
-    /**========================================REGISTER BUTTON PRESS========================================*/
+    /**========================================REGISTER BUTTON CLICK========================================*/
     private void registerButtonClick()
     {
         btn_register.setOnClickListener(new View.OnClickListener()
@@ -92,7 +92,7 @@ public class CreateChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Create Church Button Press");
+                Log.v("BUTTON CLICK", "Create Church Button Clicked");
 
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
@@ -106,7 +106,7 @@ public class CreateChurch extends AppCompatActivity
 
                 tv_error.setVisibility(View.INVISIBLE);
 
-                //One of the fields are empty
+                //If one of the fields are empty
                 if (email.equals("") || password.equals("") || name.equals("") || address.equals("") || city.equals("") || number.equals("") || statement.equals("") || confirmPassword.equals(""))
                 {
                     tv_error.setText("*Please fill out all fields*");
@@ -127,27 +127,26 @@ public class CreateChurch extends AppCompatActivity
                         isUnique = false;
                     }
 
-                    //If it's still unique, create the account
+                    //If it's still unique, move on to check if password fields match
                     if (isUnique)
                     {
                         tv_error.setVisibility(View.INVISIBLE);
 
-
-                        if (password.equals(confirmPassword))
+                        if (password.equals(confirmPassword)) //If the password fields match
                         {
                             tv_error.setVisibility(View.INVISIBLE);
 
                             //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
                             Church church = new Church(email, password, name, denomination, statement, address, city, number);
-                            churchesDb.createChurch(church);
-                            Session.login(church); //LOGIN
-                            Log.v("CREATED", "Created account - Moving to ChurchHome");
+                            churchesDb.createChurch(church); //Create the church in database
+                            Session.login(church); //Log the church in
+                            Log.v("CREATED CHURCH", "Created Church Account - Moving to ChurchHome");
                             startActivity(churchHomeIntent);
                         }
                         else
                         {
                             tv_error.setText("*Passwords do not match*");
-                            tv_error.setVisibility(View.VISIBLE);
+                            tv_error.setVisibility(View.VISIBLE); //Tell them
                         }
                     }
                     else //If it's not unique
@@ -168,7 +167,6 @@ public class CreateChurch extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
-                //Log.v("SPINNER ITEM SELECTED", "Selected spinner item");
                 String text = parent.getItemAtPosition(i).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
             }
@@ -185,7 +183,7 @@ public class CreateChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS", "Back Button Press (From CreateChurch)");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to MainActivity");
                 startActivity(mainActivityIntent);
             }
         });

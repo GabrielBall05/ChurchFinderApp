@@ -24,7 +24,7 @@ public class MemberDetails extends AppCompatActivity
     //INTENTS
     Intent viewMembersIntent;
 
-    //OTHER
+    //EXTRA
     User user;
 
     @Override
@@ -45,7 +45,7 @@ public class MemberDetails extends AppCompatActivity
 
         //GET EXTRA STUFF
         Intent cameFrom = getIntent();
-        user = (User) cameFrom.getSerializableExtra("myMember");
+        user = (User) cameFrom.getSerializableExtra("myMember"); //Get the member (user) passed
 
         //FUNCTIONS
         fillTextViews();
@@ -69,7 +69,7 @@ public class MemberDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Back Button Click (from MemberDetails) - Moving to ViewMembers");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to ViewMembers");
                 startActivity(viewMembersIntent);
             }
         });

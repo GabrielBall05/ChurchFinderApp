@@ -45,7 +45,7 @@ public class UserWithChurchHome extends AppCompatActivity
     Intent myChurchEventsIntent;
     Intent eventDetailsIntent;
 
-    //ARRAYLIST
+    //ARRAYLISTS
     ArrayList<Event> listOfEvents;
     ArrayList<Integer> listOfEventIds;
 
@@ -119,9 +119,9 @@ public class UserWithChurchHome extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Item Select", "List View item selected - Moving to EventDetails");
-                eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i));
-                eventDetailsIntent.putExtra("cameFrom", "userWithChurchHomeIntent");
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to EventDetails");
+                eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i)); //Put extra the clicked event
+                eventDetailsIntent.putExtra("cameFrom", "userWithChurchHomeIntent"); //Put extra the name of this intent
                 startActivity(eventDetailsIntent);
             }
         });
@@ -135,7 +135,7 @@ public class UserWithChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "My Church Events Button Press - Moving to MyChurchEvents");
+                Log.v("BUTTON CLICK", "My Church Events Button Clicked - Moving to MyChurchEvents");
                 startActivity(myChurchEventsIntent);
             }
         });
@@ -149,7 +149,7 @@ public class UserWithChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "My Church Button Press - Moving to MyChurch");
+                Log.v("BUTTON CLICK", "My Church Button Clicked - Moving to MyChurch");
                 startActivity(myChurchIntent);
             }
         });
@@ -163,7 +163,7 @@ public class UserWithChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Edit Profile (User) Button Press - Moving to EditUserProfile2");
+                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile2");
                 startActivity(editUserProfile2Intent);
             }
         });
@@ -174,7 +174,7 @@ public class UserWithChurchHome extends AppCompatActivity
     {
         if (listOfEvents.size() == 0)
         {
-            tv_noResults.setVisibility(View.VISIBLE);
+            tv_noResults.setVisibility(View.VISIBLE); //Show "no results"
         }
         else
         {

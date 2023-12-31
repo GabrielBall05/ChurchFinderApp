@@ -65,7 +65,7 @@ public class CreateEvent extends AppCompatActivity
         editProfileButtonClick();
     }
 
-    /**========================================CREATE EVENT BUTTON PRESS========================================*/
+    /**========================================CREATE EVENT BUTTON CLICK========================================*/
     private void createButtonClick()
     {
         btn_create.setOnClickListener(new View.OnClickListener()
@@ -73,7 +73,7 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Create Event Button Click");
+                Log.v("BUTTON CLICK", "Create Event Button Clicked");
 
                 String eventName = et_name.getText().toString();
                 String address = et_address.getText().toString();
@@ -81,9 +81,10 @@ public class CreateEvent extends AppCompatActivity
                 String time = et_time.getText().toString();
                 String description = et_desc.getText().toString();
 
+                //A field is empty
                 if (eventName.equals("") || address.equals("") || date.equals("") || time.equals("") || description.equals(""))
                 {
-                    tv_fieldsError.setVisibility(View.VISIBLE);
+                    tv_fieldsError.setVisibility(View.VISIBLE); //Tell them
                 }
                 else
                 {
@@ -91,15 +92,15 @@ public class CreateEvent extends AppCompatActivity
 
                     //Order: churchHostingEmail, churchName, eventName, address, date, time, description
                     Event e = new Event(Session.getChurch().getEmail(), Session.getChurch().getName(), eventName, address, date, time, description);
-                    eventsDb.createEvent(e);
-                    Log.v("CREATED", "Event Created - Moving to ChurchHome");
+                    eventsDb.createEvent(e); //Create the event in the database
+                    Log.v("CREATED EVENT", "Event Created - Moving to ChurchHome");
                     startActivity(churchHomeIntent);
                 }
             }
         });
     }
 
-    /**========================================CHURCH HOME BUTTON PRESS========================================*/
+    /**========================================CHURCH HOME BUTTON CLICK========================================*/
     private void homeButtonClick()
     {
         btn_churchHome.setOnClickListener(new View.OnClickListener()
@@ -107,13 +108,13 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Home Button Click - Moving to ChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to ChurchHome");
                 startActivity(churchHomeIntent);
             }
         });
     }
 
-    /**========================================EDIT PROFILE BUTTON PRESS========================================*/
+    /**========================================EDIT PROFILE BUTTON CLICK========================================*/
     private void editProfileButtonClick()
     {
         btn_editProfile.setOnClickListener(new View.OnClickListener()
@@ -121,7 +122,7 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Edit Profile Button Click - Moving to EditChurchProfile");
+                Log.v("BUTTON CLICK", "Edit Profile Button Clicked - Moving to EditChurchProfile");
                 startActivity(editProfileIntent);
             }
         });

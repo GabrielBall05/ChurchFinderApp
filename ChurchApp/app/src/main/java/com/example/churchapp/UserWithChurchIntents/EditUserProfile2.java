@@ -117,7 +117,7 @@ public class EditUserProfile2 extends AppCompatActivity
         });
     }
 
-    /**========================================UPDATE BUTTON PRESS========================================*/
+    /**========================================UPDATE BUTTON CLICK========================================*/
     private void updateButtonClick()
     {
         btn_update.setOnClickListener(new View.OnClickListener()
@@ -125,7 +125,7 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Update Account Button Click");
+                Log.v("BUTTON CLICK", "Update Account Button Clicked");
 
                 String fname = et_fname.getText().toString();
                 String lname = et_lname.getText().toString();
@@ -145,13 +145,13 @@ public class EditUserProfile2 extends AppCompatActivity
                     usersDb.updateUser(user);
                     Session.login(user);
                     startActivity(userWithChurchHomeIntent);
-                    Log.v("UPDATED", "Updated Profile - Moving to UserNoChurchHome");
+                    Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to UserNoChurchHome");
                 }
             }
         });
     }
 
-    /**========================================DELETE BUTTON PRESS========================================*/
+    /**========================================DELETE BUTTON CLICK========================================*/
     private void deleteButtonClick()
     {
         btn_delete.setOnClickListener(new View.OnClickListener()
@@ -159,14 +159,14 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Delete User Account Button Click - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent");
+                Log.v("BUTTON CLICK", "Delete (User) Account Button Clicked - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 startActivity(masterConfirmationIntent);
             }
         });
     }
 
-    /**========================================MY CHURCH BUTTON PRESS========================================*/
+    /**========================================MY CHURCH BUTTON CLICK========================================*/
     private void myChurchButtonClick()
     {
         btn_myChurch.setOnClickListener(new View.OnClickListener()
@@ -174,13 +174,13 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Bookmarks Button Click - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to BookmarkedChurches");
                 startActivity(myChurchIntent);
             }
         });
     }
 
-    /**========================================HOME BUTTON PRESS========================================*/
+    /**========================================HOME BUTTON CLICK========================================*/
     private void homeButtonClick()
     {
         btn_home.setOnClickListener(new View.OnClickListener()
@@ -188,13 +188,13 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Home Button Click - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });
     }
 
-    /**========================================SIGN OUT BUTTON PRESS========================================*/
+    /**========================================SIGN OUT BUTTON CLICK========================================*/
     private void signOutButtonClick()
     {
         btn_signOut.setOnClickListener(new View.OnClickListener()
@@ -202,7 +202,7 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON PRESS - SIGNING OUT", "Signing out - Moving to MainActivity");
+                Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
                 startActivity(mainActivityIntent);
             }
         });

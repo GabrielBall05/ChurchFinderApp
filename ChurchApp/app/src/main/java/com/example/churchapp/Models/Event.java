@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Event implements Serializable
 {
     private int eventId;
-    private String churchHostingEmail;
-    private String churchName;
+    private String churchHostingEmail; //References churches.email
+    private String churchName; //References churches.name
     private String eventName;
     private String address;
     private String date;
@@ -76,10 +76,5 @@ public class Event implements Serializable
     public String getDescription()
     {
         return description;
-    }
-
-    public void setEventId(int id)
-    {
-        eventId = id;
     }
 }

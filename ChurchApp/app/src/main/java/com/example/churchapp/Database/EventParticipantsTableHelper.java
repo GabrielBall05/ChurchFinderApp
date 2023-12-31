@@ -20,14 +20,16 @@ public class EventParticipantsTableHelper
         ctx = new Database(c);
     }
 
+    /**========================================CREATE TABLE========================================*/
     public static void create(SQLiteDatabase _db)
     {
         //ORDER: eventId (foreign key) referencing events.eventId, emailOfParticipant (foreign key) referencing users.email
         final String query = "CREATE TABLE " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + " (eventId INTEGER, emailOfParticipant TEXT NOT NULL, FOREIGN KEY (eventId) REFERENCES " + DatabaseVariables.EVENTS_TABLE + " (eventId) ON DELETE CASCADE, FOREIGN KEY (emailOfParticipant) REFERENCES " + DatabaseVariables.USERS_TABLE + " (email) ON DELETE CASCADE);";
         _db.execSQL(query);
-        Log.d("DATABASE", "Created event participants table");
+        Log.d("DATABASE", "Created Event Participants Table");
     }
 
+    /**========================================DROP TABLE========================================*/
     public static void clean(SQLiteDatabase _db)
     {
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.EVENT_PARTICIPANTS_TABLE + ";");

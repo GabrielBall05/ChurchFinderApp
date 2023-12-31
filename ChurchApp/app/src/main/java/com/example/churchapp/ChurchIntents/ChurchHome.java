@@ -44,7 +44,7 @@ public class ChurchHome extends AppCompatActivity
     //ADAPTER
     MyEventsAdapter adapter;
 
-    //MY EVENTS ARRAY
+    //ARRAYLIST
     ArrayList<Event> listOfMyEvents;
 
     @Override
@@ -75,8 +75,9 @@ public class ChurchHome extends AppCompatActivity
         listOfMyEvents = new ArrayList<Event>();
         if (eventsDb.doesChurchHaveEvents(Session.getChurch().getEmail()))
         {
+            //Get all the church's events
             listOfMyEvents = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
-            fillListView();
+            fillListView(); //Update list
         }
         else
         {
@@ -108,8 +109,8 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Click", "List view item click in ChurchHome (lv_myEvents) - Moving to EditEvent");
-                editEventIntent.putExtra("myEvent", listOfMyEvents.get(i));
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Click - Moving to EditEvent");
+                editEventIntent.putExtra("myEvent", listOfMyEvents.get(i)); //Put extra the clicked event
                 startActivity(editEventIntent);
             }
         });
@@ -123,16 +124,16 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Long Click", "List view long click in ChurchHome (lv_myEvents) - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "churchHomeIntent");
-                masterConfirmationIntent.putExtra("eventToDelete", listOfMyEvents.get(i));
+                Log.v("LIST VIEW ITEM LONG CLICK", "List View Item Long Click - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "churchHomeIntent"); //Put extra the name of this intent
+                masterConfirmationIntent.putExtra("eventToDelete", listOfMyEvents.get(i)); //Put extra the event
                 startActivity(masterConfirmationIntent);
                 return false;
             }
         });
     }
 
-    /**========================================VIEW MEMBERS BUTTON PRESS========================================*/
+    /**========================================VIEW MEMBERS BUTTON CLICK========================================*/
     private void viewMembersButtonClick()
     {
         btn_viewMembers.setOnClickListener(new View.OnClickListener()
@@ -140,13 +141,13 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "View Members Button Click - Moving to ViewMembers");
+                Log.v("BUTTON CLICK", "View Members Button Clicked - Moving to ViewMembers");
                 startActivity(viewMembersIntent);
             }
         });
     }
 
-    /**========================================CREATE EVENT BUTTON PRESS========================================*/
+    /**========================================CREATE EVENT BUTTON CLICK========================================*/
     private void createEventButtonClick()
     {
         btn_createEvent.setOnClickListener(new View.OnClickListener()
@@ -154,13 +155,13 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Create Event Button Click - Moving to CreateEvent");
+                Log.v("BUTTON CLICK", "Create Event Button Clicked - Moving to CreateEvent");
                 startActivity(createEventIntent);
             }
         });
     }
 
-    /**========================================EDIT PROFILE BUTTON PRESS========================================*/
+    /**========================================EDIT PROFILE BUTTON CLICK========================================*/
     private void editProfileButtonClick()
     {
         btn_editProfile.setOnClickListener(new View.OnClickListener()
@@ -168,7 +169,7 @@ public class ChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Edit Church Profile Button Click - Moving to EditChurchProfile");
+                Log.v("BUTTON CLICK", "Edit Church Profile Button Clicked - Moving to EditChurchProfile");
                 startActivity(editProfileIntent);
             }
         });

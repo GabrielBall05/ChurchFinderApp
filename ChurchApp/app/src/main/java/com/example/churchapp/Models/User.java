@@ -13,7 +13,6 @@ public class User implements Serializable
     private String denomination;
     private String city;
 
-    //Constructor with email of church attending
     public User(String e, String p, String f, String l, String eoc, String d, String c)
     {
         //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
@@ -59,11 +58,6 @@ public class User implements Serializable
     public String getCity()
     {
         return city;
-    }
-
-    public void setEmailOfChurchAttending(String e)
-    {
-        emailOfChurchAttending = e;
     }
 
     public boolean isValidLogin(String enteredPassword)

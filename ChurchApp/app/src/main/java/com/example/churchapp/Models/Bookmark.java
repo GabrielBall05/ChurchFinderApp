@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Bookmark implements Serializable
 {
-    private String emailOfUser;
-    private String emailOfChurch;
+    private String emailOfUser; //References usersf.email
+    private String emailOfChurch; //References churches.email
 
     public Bookmark(String u, String c)
     {

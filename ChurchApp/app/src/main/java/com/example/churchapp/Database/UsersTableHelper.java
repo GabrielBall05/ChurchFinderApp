@@ -19,14 +19,16 @@ public class UsersTableHelper
         ctx = new Database(c);
     }
 
+    /**========================================CREATE TABLE========================================*/
     public static void create(SQLiteDatabase _db)
     {
         //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
         final String query = "CREATE TABLE " + DatabaseVariables.USERS_TABLE + " (email TEXT PRIMARY KEY NOT NULL, password TEXT NOT NULL, firstname TEXT NOT NULL, lastname TEXT NOT NULL, emailOfChurchAttending TEXT, denomination TEXT NOT NULL, city TEXT NOT NULL, FOREIGN KEY (emailOfChurchAttending) REFERENCES " + DatabaseVariables.CHURCHES_TABLE + " (email));";
         _db.execSQL(query);
-        Log.d("DATABASE", "Created users table");
+        Log.d("DATABASE", "Created Users Table");
     }
 
+    /**========================================DROP TABLE========================================*/
     public static void clean(SQLiteDatabase _db)
     {
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.USERS_TABLE + ";");
@@ -64,9 +66,7 @@ public class UsersTableHelper
     public User getUserByEmail(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())
@@ -132,15 +132,13 @@ public class UsersTableHelper
     public boolean doesUserHaveChurch(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if(cursor.moveToFirst())
         {
             String emailOfChurchAttending = cursor.getString(cursor.getColumnIndex("emailOfChurchAttending"));
-            if (!emailOfChurchAttending.equals("")) //If it doesn't work, try using .isEmpty()
+            if (!emailOfChurchAttending.equals(""))
             {
                 return true;
             }
@@ -152,11 +150,8 @@ public class UsersTableHelper
     public ArrayList<User> getAllUsers()
     {
         ArrayList<User> listOfUsers = new ArrayList<User>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.USERS_TABLE + ";";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())
@@ -185,12 +180,10 @@ public class UsersTableHelper
     public boolean doesEmailExist(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT email FROM " + DatabaseVariables.USERS_TABLE + " WHERE email = '" + e + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.getCount() == 0)
+        if (cursor.getCount() == 0) //Email doesn't exist
         {
             return false;
         }
@@ -287,7 +280,7 @@ public class UsersTableHelper
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('tyfuller@gmail.com', 'password', 'Ty', 'Fuller', 'pentecostlife@gmail.com', 'Anglican', 'Monroe');");
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('oakleyfrye@gmail.com', 'password', 'Oakley', 'Frye', 'revolutionofconnection@gmail.com', 'Pentecostal', 'Kansas City');");
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('francoroy@gmail.com', 'password', 'Franco', 'Roy', 'resonatebaptist@gmail.com', 'Baptist', 'Toledo');");
-            //====================================================================CUTOFF FOR USERS WHO DON'T HAVE A CHURCH YET (20 USERS CHURCH-LESS)============================================================
+            //====================================================================CUTOFF FOR USERS WHO DON'T HAVE A CHURCH YET (20 USERS WITH NO CHURCH)============================================================
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('savannacochran@gmail.com', 'password', 'Savanna', 'Cochran', '', 'Non Denominational', 'Toledo');");
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('dannydonnell@gmail.com', 'password', 'Danny', 'Donnell', '', 'Lutheran', 'Sandusky');");
             db.execSQL("INSERT INTO " + DatabaseVariables.USERS_TABLE + " VALUES('bellamyespinosa@gmail.com', 'password', 'Bellamy', 'Espinosa', '', 'Catholic', 'Denver');");

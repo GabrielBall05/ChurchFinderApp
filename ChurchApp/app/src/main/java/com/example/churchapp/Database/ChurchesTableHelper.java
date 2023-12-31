@@ -20,14 +20,16 @@ public class ChurchesTableHelper
         ctx = new Database(c);
     }
 
+    /**========================================CREATE TABLE========================================*/
     public static void create(SQLiteDatabase _db)
     {
         //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
         final String query = "CREATE TABLE " + DatabaseVariables.CHURCHES_TABLE + " (email TEXT PRIMARY KEY NOT NULL, password TEXT NOT NULL, name TEXT NOT NULL, denomination TEXT NOT NULL, statementOfFaith TEXT NOT NULL, streetAddress TEXT NOT NULL, city TEXT NOT NULL, number TEXT NOT NULL);";
         _db.execSQL(query);
-        Log.d("DATABASE", "Created churches table");
+        Log.d("DATABASE", "Created Churches Table");
     }
 
+    /**========================================DROP TABLE========================================*/
     public static void clean(SQLiteDatabase _db)
     {
         _db.execSQL("DROP TABLE IF EXISTS " + DatabaseVariables.CHURCHES_TABLE + ";");
@@ -66,9 +68,7 @@ public class ChurchesTableHelper
     public Church getChurchByEmail(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " +  DatabaseVariables.CHURCHES_TABLE + " WHERE email = '" + e + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst())
@@ -93,12 +93,10 @@ public class ChurchesTableHelper
 
     /**========================================GET CHURCHES BY DENOMINATION (ALPHABETICAL)========================================*/
     @SuppressLint("Range")
-    public ArrayList<Church> getChurchesByDenominationAlphabetical(String d)
+    public ArrayList<Church> getChurchesByDenominationAlphabeticalByName(String d)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE denomination = '" + d + "' ORDER BY name ASC;";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -130,9 +128,7 @@ public class ChurchesTableHelper
     public ArrayList<Church> getChurchesByNameAlphabetical(String n)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE name LIKE '%" + n + "%' ORDER BY name ASC;";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -164,9 +160,7 @@ public class ChurchesTableHelper
     public ArrayList<Church> getChurchesByCityAlphabetical(String c)
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE city LIKE '%" + c + "%' ORDER BY name ASC;";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -230,9 +224,7 @@ public class ChurchesTableHelper
     public ArrayList<Church> getAllChurches()
     {
         ArrayList<Church> listOfChurches = new ArrayList<Church>();
-
         String selectQuery = "SELECT * FROM " + DatabaseVariables.CHURCHES_TABLE + ";";
-
         SQLiteDatabase db = ctx.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -263,12 +255,10 @@ public class ChurchesTableHelper
     public boolean doesEmailExist(String e)
     {
         SQLiteDatabase db = ctx.getReadableDatabase();
-
         String selectQuery = "SELECT email FROM " + DatabaseVariables.CHURCHES_TABLE + " WHERE email = '" + e + "';";
-
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.getCount() == 0)
+        if (cursor.getCount() == 0) //Email doesn't exist
         {
             return false;
         }

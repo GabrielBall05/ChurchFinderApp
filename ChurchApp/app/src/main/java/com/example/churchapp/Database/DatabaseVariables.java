@@ -2,6 +2,7 @@ package com.example.churchapp.Database;
 
 public class DatabaseVariables
 {
+    //Variables for the database - static so they're accessible anywhere
     public static String DB_NAME = "church_app_database";
     public static int DB_VERSION = 5;
     public static String USERS_TABLE = "users";

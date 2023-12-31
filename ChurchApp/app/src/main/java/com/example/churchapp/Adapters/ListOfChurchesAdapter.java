@@ -52,9 +52,13 @@ public class ListOfChurchesAdapter extends BaseAdapter
             view = mInflater.inflate(R.layout.filtered_churches_custom_cell, null);
         }
 
+        //GUI
         TextView tv_name = view.findViewById(R.id.tv_filteredChurchesCC_name);
         TextView tv_denomination = view.findViewById(R.id.tv_filteredChurchesCC_denomination);
+
+        //Get the church
         Church church = listOfChurches.get(i);
+        //Set the text views to the name and denomination
         tv_name.setText(church.getName());
         tv_denomination.setText(church.getDenomination());
 

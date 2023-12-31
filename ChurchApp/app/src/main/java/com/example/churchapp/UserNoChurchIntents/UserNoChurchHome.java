@@ -120,21 +120,21 @@ public class UserNoChurchHome extends AppCompatActivity
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
+            public void onTextChanged(CharSequence s, int start, int before, int count) //Whenever the search bar's text gets changed by the user
             {
                 String text = s.toString();
                 listOfChurches = new ArrayList<Church>();
 
-                if (searchingByName)
+                if (searchingByName) //If user is searching by name of church
                 {
-                    listOfChurches = churchesDb.getChurchesByNameAlphabetical(text);
+                    listOfChurches = churchesDb.getChurchesByNameAlphabetical(text); //Get by name
                 }
-                else if (searchingByCity)
+                else if (searchingByCity) //If user is searching by church's city
                 {
-                    listOfChurches = churchesDb.getChurchesByCityAlphabetical(text);
+                    listOfChurches = churchesDb.getChurchesByCityAlphabetical(text); //Get by city
                 }
 
-                fillListView();
+                fillListView(); //Update list
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -149,8 +149,8 @@ public class UserNoChurchHome extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
-                Log.v("List View Item Select", "List View item selected - Moving to ChurchDetails");
-                churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i));
+                Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
+                churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
                 startActivity(churchDetailsIntent);
             }
         });
@@ -169,65 +169,74 @@ public class UserNoChurchHome extends AppCompatActivity
 
                 if (text.equals(searchByDenomination)) //IF THE USER WANTS TO SEARCH BY DENOMINATION
                 {
+                    //Show denomination drop down, hide search, reset search text
                     sp_denominations.setVisibility(View.VISIBLE);
                     et_search.setVisibility(View.INVISIBLE);
                     et_search.setText("");
 
+                    //Set booleans
                     searchingByName = false;
                     searchingByDenomination = true;
                     searchingByCity = false;
-                    Log.v("SEARCHING BY: ", "Searching by denomination");
 
+                    //Start by showing the churches of the user's denomination
                     sp_denominations.setSelection(denominationsAdapter.getPosition(Session.getUser().getDenomination()));
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getChurchesByDenominationAlphabetical(sp_denominations.getSelectedItem().toString());
-                    fillListView();
+                    listOfChurches = churchesDb.getChurchesByDenominationAlphabeticalByName(sp_denominations.getSelectedItem().toString());
+                    fillListView(); //Update list
                 }
                 else if (text.equals(searchByName)) //IF THE USER WANTS TO SEARCH BY NAME
                 {
+                    //Hide denomination drop down, show search, reset search text, set search hint
                     sp_denominations.setVisibility(View.INVISIBLE);
                     et_search.setVisibility(View.VISIBLE);
                     et_search.setHint("Search by name");
                     et_search.setText("");
 
+                    //Set booleans
                     searchingByName = true;
                     searchingByDenomination = false;
                     searchingByCity = false;
-                    Log.v("SEARCHING BY: ", "Searching by name");
 
+                    //Just show all churches, when the user starts typing, it'll update
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getAllChurchesAlphabetical(); //Keep them all there for now, changing the text in the search bar updates it
-                    fillListView();
+                    listOfChurches = churchesDb.getAllChurchesAlphabetical();
+                    fillListView(); //Update list
                 }
                 else if (text.equals(searchByCity)) //IF THE USER WANTS TO SEARCH BY CITY
                 {
+                    //Hide denomination drop down, show search, set search text to user's current city, set search hint
                     sp_denominations.setVisibility(View.INVISIBLE);
                     et_search.setVisibility(View.VISIBLE);
                     et_search.setHint("Search by city");
                     et_search.setText(Session.getUser().getCity());
 
+                    //Set booleans
                     searchingByName = false;
                     searchingByDenomination = false;
                     searchingByCity = true;
-                    Log.v("SEARCHING BY: ", "Searching by city");
 
+                    //Just show all churches in the user's city
                     listOfChurches = new ArrayList<Church>();
                     listOfChurches = churchesDb.getChurchesByCityAlphabetical(Session.getUser().getCity());
-                    fillListView();
+                    fillListView(); //Update list
                 }
                 else if (text.equals(allChurches)) //IF THE USER WANTS TO SEE ALL CHURCHES
                 {
+                    //Hide denomination drop down, hide search, reset search text
                     sp_denominations.setVisibility(View.INVISIBLE);
                     et_search.setVisibility(View.INVISIBLE);
                     et_search.setText("");
 
+                    //Set booleans
                     searchingByName = false;
                     searchingByDenomination = false;
                     searchingByCity = false;
 
+                    //Get all churches to show
                     listOfChurches = new ArrayList<Church>();
                     listOfChurches = churchesDb.getAllChurchesAlphabetical();
-                    fillListView();
+                    fillListView(); //Update list
                 }
             }
             @Override
@@ -246,11 +255,12 @@ public class UserNoChurchHome extends AppCompatActivity
                 String text = parent.getItemAtPosition(i).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
-                if (searchingByDenomination)
+                if (searchingByDenomination) //If the user is searching by denomination
                 {
+                    //Get the churches given the selected denomination
                     listOfChurches = new ArrayList<Church>();
-                    listOfChurches = churchesDb.getChurchesByDenominationAlphabetical(text);
-                    fillListView();
+                    listOfChurches = churchesDb.getChurchesByDenominationAlphabeticalByName(text);
+                    fillListView(); //Update list
                 }
             }
             @Override
@@ -267,7 +277,7 @@ public class UserNoChurchHome extends AppCompatActivity
         ifNoResultsShow();
     }
 
-    /**========================================BOOKMARKS BUTTON PRESS========================================*/
+    /**========================================BOOKMARKS BUTTON CLICK========================================*/
     private void bookmarksButtonClick()
     {
         btn_bookmarks.setOnClickListener(new View.OnClickListener()
@@ -275,13 +285,13 @@ public class UserNoChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Bookmarked Churches Button Press - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Bookmarked Churches Button Clicked - Moving to BookmarkedChurches");
                 startActivity(bookmarksIntent);
             }
         });
     }
 
-    /**========================================EDIT PROFILE BUTTON PRESS========================================*/
+    /**========================================EDIT PROFILE BUTTON CLICK========================================*/
     private void editProfileButtonClick()
     {
         btn_editProfile.setOnClickListener(new View.OnClickListener()
@@ -289,7 +299,7 @@ public class UserNoChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("Button Press", "Edit Profile (User) Button Press - Moving to EditUserProfile");
+                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
                 startActivity(editUserProfileIntent);
             }
         });
