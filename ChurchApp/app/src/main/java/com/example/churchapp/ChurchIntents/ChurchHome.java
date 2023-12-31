@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.churchapp.Adapters.MyEventsAdapter;
-import com.example.churchapp.Confirmations.MasterConfirmation;
+import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Event;

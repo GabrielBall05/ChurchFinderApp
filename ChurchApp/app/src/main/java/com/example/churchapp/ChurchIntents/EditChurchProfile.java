@@ -14,9 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.churchapp.Confirmations.MasterConfirmation;
+import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.ChurchesTableHelper;
-import com.example.churchapp.MainActivity;
+import com.example.churchapp.Other.MainActivity;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;

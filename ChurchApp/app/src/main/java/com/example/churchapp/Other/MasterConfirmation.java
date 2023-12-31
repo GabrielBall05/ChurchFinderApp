@@ -1,4 +1,4 @@
-package com.example.churchapp.Confirmations;
+package com.example.churchapp.Other;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,11 +16,9 @@ import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
-import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.User;
-import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 import com.example.churchapp.UserNoChurchIntents.ChurchDetails;
 import com.example.churchapp.UserNoChurchIntents.EditUserProfile;

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
-import com.example.churchapp.MainActivity;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
 import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;

@@ -1,4 +1,4 @@
-package com.example.churchapp;
+package com.example.churchapp.Other;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,9 +18,7 @@ import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.User;
-import com.example.churchapp.Other.CreateAccount;
-import com.example.churchapp.Other.CreateChurch;
-import com.example.churchapp.Other.Session;
+import com.example.churchapp.R;
 import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
 import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
 
@@ -224,7 +222,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    /**========================================LOGGIN ALL USERS AND CHURCHES FOR TESTING (EMAILS & PASSWORDS)========================================*/
+    /**========================================LOG ALL USERS AND CHURCHES FOR TESTING (EMAILS & PASSWORDS)========================================*/
     private void logAllUsersAndChurches()
     {
         Log.i("USERS", "==========ALL USERS==========");

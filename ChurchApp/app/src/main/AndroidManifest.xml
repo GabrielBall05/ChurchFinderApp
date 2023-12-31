@@ -39,7 +39,7 @@
             android:name=".ChurchIntents.MemberDetails"
             android:exported="false" />
         <activity
-            android:name=".Confirmations.MasterConfirmation"
+            android:name=".Other.MasterConfirmation"
             android:exported="false" />
         <activity
             android:name=".ChurchIntents.ViewMembers"
@@ -72,7 +72,7 @@
             android:name=".UserNoChurchIntents.UserNoChurchHome"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Other.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

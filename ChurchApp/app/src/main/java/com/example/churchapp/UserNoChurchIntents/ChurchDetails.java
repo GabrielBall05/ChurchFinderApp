@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.churchapp.Confirmations.MasterConfirmation;
+import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.BookmarksTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Bookmark;

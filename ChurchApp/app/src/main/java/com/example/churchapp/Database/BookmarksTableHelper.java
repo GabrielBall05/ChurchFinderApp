@@ -164,5 +164,4 @@ public class BookmarksTableHelper
         db.execSQL(query);
         db.close();
     }
-
 }
