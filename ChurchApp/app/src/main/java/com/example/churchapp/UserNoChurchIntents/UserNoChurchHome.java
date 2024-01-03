@@ -100,7 +100,6 @@ public class UserNoChurchHome extends AppCompatActivity
         listOfChurches = churchesDb.getAllChurchesAlphabetical();
 
         //FUNCTIONS
-
         fillListView();
         searchBarChange();
         listViewItemSelect();
@@ -122,7 +121,6 @@ public class UserNoChurchHome extends AppCompatActivity
         else if (SearchParams.getSearchingBy().equals("city"))
         {
             sp_filter.setSelection(filterAdapter.getPosition(searchByCity));
-            Log.d("city:", SearchParams.getCity());
             searchByCity(SearchParams.getCity());
         }
         else if (SearchParams.getSearchingBy().equals("denomination"))
@@ -178,6 +176,7 @@ public class UserNoChurchHome extends AppCompatActivity
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
+                churchDetailsIntent.putExtra("cameFrom", "userNoChurchHomeIntent");
                 startActivity(churchDetailsIntent);
             }
         });
@@ -196,15 +195,36 @@ public class UserNoChurchHome extends AppCompatActivity
 
                 if (text.equals(searchByDenomination)) //IF THE USER WANTS TO SEARCH BY DENOMINATION
                 {
-                    searchByDenomination(Session.getUser().getDenomination());
+                    if(SearchParams.getSearchingBy().equals("denomination"))
+                    {
+                        searchByDenomination(SearchParams.getDenomination());
+                    }
+                    else
+                    {
+                        searchByDenomination(Session.getUser().getDenomination());
+                    }
                 }
                 else if (text.equals(searchByName)) //IF THE USER WANTS TO SEARCH BY NAME
                 {
-                    searchByName("");
+                    if (SearchParams.getSearchingBy().equals("name"))
+                    {
+                        searchByName(SearchParams.getName());
+                    }
+                    else
+                    {
+                        searchByName("");
+                    }
                 }
                 else if (text.equals(searchByCity)) //IF THE USER WANTS TO SEARCH BY CITY
                 {
-                    searchByCity(Session.getUser().getCity());
+                    if (SearchParams.getSearchingBy().equals("city"))
+                    {
+                        searchByCity(SearchParams.getCity());
+                    }
+                    else
+                    {
+                        searchByCity(Session.getUser().getCity());
+                    }
                 }
                 else if (text.equals(searchByAll)) //IF THE USER WANTS TO SEE ALL CHURCHES
                 {
@@ -248,7 +268,7 @@ public class UserNoChurchHome extends AppCompatActivity
 
         //Just show all churches, when the user starts typing, it'll update
         listOfChurches = new ArrayList<Church>();
-        listOfChurches = churchesDb.getAllChurchesAlphabetical();
+        listOfChurches = churchesDb.getChurchesByNameAlphabetical(n);
         fillListView(); //Update list
     }
 
@@ -264,7 +284,6 @@ public class UserNoChurchHome extends AppCompatActivity
         //Set searchingBy in SearchParams
         SearchParams.setSearchingBy("city");
 
-        //Just show all churches in the user's city
         listOfChurches = new ArrayList<Church>();
         listOfChurches = churchesDb.getChurchesByCityAlphabetical(c);
         fillListView(); //Update list

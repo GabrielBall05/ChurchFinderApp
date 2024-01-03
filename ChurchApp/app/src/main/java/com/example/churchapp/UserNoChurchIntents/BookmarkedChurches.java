@@ -142,6 +142,7 @@ public class BookmarkedChurches extends AppCompatActivity
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
+                churchDetailsIntent.putExtra("cameFrom", "bookmarkedChurchesIntent");
                 startActivity(churchDetailsIntent);
             }
         });

@@ -23,14 +23,13 @@ public class ChurchDetails extends AppCompatActivity
     TextView tv_name;
     TextView tv_denomination;
     TextView tv_email;
+    TextView tv_number;
     TextView tv_address;
     TextView tv_city;
     TextView tv_statement;
     Button btn_becomeMember;
     Button btn_bookmark;
-    Button btn_showBookmarks;
-    Button btn_home;
-    Button btn_editProfile;
+    Button btn_back;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -40,10 +39,10 @@ public class ChurchDetails extends AppCompatActivity
     Intent masterConfirmationIntent;
     Intent userNoChurchHomeIntent;
     Intent bookmarkedChurchesIntent;
-    Intent editProfileIntent;
 
     //EXTRA
     Church church;
+    String cameFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,14 +54,13 @@ public class ChurchDetails extends AppCompatActivity
         tv_name = findViewById(R.id.tv_churchDetails_name);
         tv_denomination = findViewById(R.id.tv_churchDetails_denomination);
         tv_email = findViewById(R.id.tv_churchDetails_email);
+        tv_number = findViewById(R.id.tv_churchDetails_number);
         tv_address = findViewById(R.id.tv_churchDetails_address);
         tv_city = findViewById(R.id.tv_churchDetails_city);
         tv_statement = findViewById(R.id.tv_churchDetails_statement);
         btn_becomeMember = findViewById(R.id.btn_churchDetails_becomeMember);
         btn_bookmark = findViewById(R.id.btn_churchDetails_bookmark);
-        btn_showBookmarks = findViewById(R.id.btn_churchDetails_bookmarks);
-        btn_home = findViewById(R.id.btn_churchDetails_home);
-        btn_editProfile = findViewById(R.id.btn_churchDetails_editProfile);
+        btn_back = findViewById(R.id.btn_churchDetails_back);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
@@ -72,19 +70,17 @@ public class ChurchDetails extends AppCompatActivity
         masterConfirmationIntent = new Intent(ChurchDetails.this, MasterConfirmation.class);
         userNoChurchHomeIntent = new Intent(ChurchDetails.this, UserNoChurchHome.class);
         bookmarkedChurchesIntent = new Intent(ChurchDetails.this, BookmarkedChurches.class);
-        editProfileIntent = new Intent(ChurchDetails.this, EditUserProfile.class);
 
         //EXTRA
         Intent origin = getIntent();
         church = (Church) origin.getSerializableExtra("thisChurch"); //Get the church passed to me
+        cameFrom = origin.getStringExtra("cameFrom");
 
         //FUNCTIONS
         fillTextBoxes();
         becomeMemberButtonClick();
         bookmarkButtonClick();
-        showBookmarksButtonClick();
-        homeButtonClick();
-        editProfileButtonClick();
+        backButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -93,6 +89,7 @@ public class ChurchDetails extends AppCompatActivity
         tv_name.setText("Name: " + church.getName());
         tv_denomination.setText("Denomination: " + church.getDenomination());
         tv_email.setText("Email: " + church.getEmail());
+        tv_number.setText("Number: " + church.getNumber());
         tv_address.setText("Address: " + church.getStreetAddress());
         tv_city.setText("City: " + church.getCity());
         tv_statement.setText("Statement of Faith: " + church.getStatementOfFaith());
@@ -158,44 +155,24 @@ public class ChurchDetails extends AppCompatActivity
         });
     }
 
-    /**========================================SHOW BOOKMARKS BUTTON CLICK========================================*/
-    private void showBookmarksButtonClick()
+    /**========================================BACK BUTTON CLICK========================================*/
+    private void backButtonClick()
     {
-        btn_showBookmarks.setOnClickListener(new View.OnClickListener()
+        btn_back.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Show Bookmarks Button Clicked - Moving to BookmarkedChurches");
-                startActivity(bookmarkedChurchesIntent);
-            }
-        });
-    }
-
-    /**========================================HOME BUTTON CLICK========================================*/
-    private void homeButtonClick()
-    {
-        btn_home.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
-                startActivity(userNoChurchHomeIntent);
-            }
-        });
-    }
-
-    /**========================================EDIT PROFILE (USER) BUTTON CLICK========================================*/
-    private void editProfileButtonClick()
-    {
-        btn_editProfile.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
-                startActivity(editProfileIntent);
+                if (cameFrom.equals("userNoChurchHomeIntent"))
+                {
+                    Log.d("BUTTON CLICK", "Back Button Click - Moving to UserNoChurchHome");
+                    startActivity(userNoChurchHomeIntent);
+                }
+                else if (cameFrom.equals("bookmarkedChurchesIntent"))
+                {
+                    Log.d("BUTTON CLICK", "Back Button Click - Moving to BookmarkedChurches");
+                    startActivity(bookmarkedChurchesIntent);
+                }
             }
         });
     }
