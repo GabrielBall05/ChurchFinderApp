@@ -19,8 +19,8 @@ import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserIntents.UserNoChurchHome;
-import com.example.churchapp.UserIntents.UserWithChurchHome;
+import com.example.churchapp.UserIntents.ChurchFinder;
+import com.example.churchapp.UserIntents.UserHome;
 
 import java.util.ArrayList;
 
@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity
     EventParticipantsTableHelper participantsDb;
 
     //INTENTS
-    Intent userNoChurchHomeIntent;
-    Intent userWithChurchHomeIntent;
+    Intent userHomeIntent;
     Intent churchHomeIntent;
     Intent createAccountIntent;
     Intent createChurchIntent;
@@ -74,8 +73,7 @@ public class MainActivity extends AppCompatActivity
         participantsDb = new EventParticipantsTableHelper(this);
 
         //INTENTS
-        userNoChurchHomeIntent = new Intent(MainActivity.this, UserNoChurchHome.class);
-        userWithChurchHomeIntent = new Intent(MainActivity.this, UserWithChurchHome.class);
+        userHomeIntent = new Intent(MainActivity.this, UserHome.class);
         churchHomeIntent = new Intent(MainActivity.this, ChurchHome.class);
         createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
         createChurchIntent = new Intent(MainActivity.this, CreateChurch.class);
@@ -139,17 +137,8 @@ public class MainActivity extends AppCompatActivity
                         if (user.isValidLogin(password)) //Check login validity
                         {
                             Session.login(user); //Log the user in
-                            //Determine if user is a member of a church or not
-                            if (usersDb.doesUserHaveChurch(user.getEmail())) //Has church
-                            {
-                                Log.v("LOGGING IN", "Logged in User - Moving to UserWithChurchHome");
-                                startActivity(userWithChurchHomeIntent);
-                            }
-                            else //Doesn't have church
-                            {
-                                Log.v("LOGGING IN", "Logged in User - Moving to UserNoChurchHome");
-                                startActivity(userNoChurchHomeIntent);
-                            }
+                            Log.v("LOGGING IN", "Logged in User - Moving to UserHome");
+                            startActivity(userHomeIntent);
                         }
                         else
                         {

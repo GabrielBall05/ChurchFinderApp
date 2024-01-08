@@ -58,7 +58,7 @@ public class MyChurch extends AppCompatActivity
 
         //INTENTS
         editUserProfileIntent = new Intent(MyChurch.this, EditUserProfile.class);
-        userWithChurchHomeIntent = new Intent(MyChurch.this, UserWithChurchHome.class);
+        userWithChurchHomeIntent = new Intent(MyChurch.this, UserHome.class);
         masterConfirmationIntent = new Intent(MyChurch.this, MasterConfirmation.class);
 
         //FUNCTIONS
@@ -107,7 +107,7 @@ public class MyChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });

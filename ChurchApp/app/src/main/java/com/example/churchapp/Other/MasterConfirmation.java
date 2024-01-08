@@ -22,9 +22,9 @@ import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
 import com.example.churchapp.UserIntents.ChurchDetails;
 import com.example.churchapp.UserIntents.EditUserProfile;
-import com.example.churchapp.UserIntents.UserNoChurchHome;
+import com.example.churchapp.UserIntents.ChurchFinder;
 import com.example.churchapp.UserIntents.MyChurch;
-import com.example.churchapp.UserIntents.UserWithChurchHome;
+import com.example.churchapp.UserIntents.UserHome;
 
 public class MasterConfirmation extends AppCompatActivity
 {
@@ -79,8 +79,8 @@ public class MasterConfirmation extends AppCompatActivity
         editChurchProfileIntent = new Intent(MasterConfirmation.this, EditChurchProfile.class);
         editUserProfileIntent = new Intent(MasterConfirmation.this, EditUserProfile.class);
         churchDetailsIntent = new Intent(MasterConfirmation.this, ChurchDetails.class);
-        userWithChurchHomeIntent = new Intent(MasterConfirmation.this, UserWithChurchHome.class);
-        userNoChurchHomeIntent = new Intent(MasterConfirmation.this, UserNoChurchHome.class);
+        userWithChurchHomeIntent = new Intent(MasterConfirmation.this, UserHome.class);
+        userNoChurchHomeIntent = new Intent(MasterConfirmation.this, ChurchFinder.class);
         myChurchIntent = new Intent(MasterConfirmation.this, MyChurch.class);
 
         Intent origin = getIntent();
@@ -161,7 +161,7 @@ public class MasterConfirmation extends AppCompatActivity
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
                 {
-                    Log.v("BECOMING MEMBER", "Becoming Member of " + church.getName() + " - Moving to UserWithChurchHome");
+                    Log.v("BECOMING MEMBER", "Becoming Member of " + church.getName() + " - Moving to UserHome");
                     usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), church.getEmail()); //Become member of church (update emailOfChurchAttending column)
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
@@ -170,7 +170,7 @@ public class MasterConfirmation extends AppCompatActivity
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
-                    Log.v("LEAVING CHURCH", "Leaving " + church.getName() + " & removing user from events - Moving to UserNoChurchHome");
+                    Log.v("LEAVING CHURCH", "Leaving " + church.getName() + " & removing user from events - Moving to ChurchFinder");
                     usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), ""); //Leave the church (pass "")
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());

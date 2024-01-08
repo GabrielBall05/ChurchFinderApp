@@ -68,8 +68,8 @@ public class EditUserProfile extends AppCompatActivity
         usersDb = new UsersTableHelper(this);
 
         //INTENTS
-        userNoChurchHomeIntent = new Intent(EditUserProfile.this, UserNoChurchHome.class);
-        bookmarksIntent = new Intent(EditUserProfile.this, BookmarkedChurches.class);
+        userNoChurchHomeIntent = new Intent(EditUserProfile.this, ChurchFinder.class);
+        bookmarksIntent = new Intent(EditUserProfile.this, MyBookmarks.class);
         masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditUserProfile.this, MainActivity.class);
 
@@ -145,7 +145,7 @@ public class EditUserProfile extends AppCompatActivity
                     usersDb.updateUser(user); //Update user in database
                     Session.login(user); //Log the user in so Session... works properly
                     startActivity(userNoChurchHomeIntent);
-                    Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to UserNoChurchHome");
+                    Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to ChurchFinder");
                 }
             }
         });
@@ -174,7 +174,7 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to MyBookmarks");
                 startActivity(bookmarksIntent);
             }
         });
@@ -188,7 +188,7 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to ChurchFinder");
                 startActivity(userNoChurchHomeIntent);
             }
         });

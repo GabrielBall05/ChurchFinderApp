@@ -60,7 +60,7 @@ public class EventDetails extends AppCompatActivity
         participantsDb = new  EventParticipantsTableHelper(this);
 
         //INTENTS
-        userWithChurchHomeIntent = new Intent(EventDetails.this, UserWithChurchHome.class);
+        userWithChurchHomeIntent = new Intent(EventDetails.this, UserHome.class);
         myChurchEventsIntent = new Intent(EventDetails.this, MyChurchEvents.class);
 
         //EXTRA
@@ -139,7 +139,7 @@ public class EventDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });
@@ -158,9 +158,9 @@ public class EventDetails extends AppCompatActivity
                     Log.v("BUTTON CLICK", "Back Button Clicked - Moving to MyChurchEvents");
                     startActivity(myChurchEventsIntent);
                 }
-                else if (cameFrom.equals("userWithChurchHomeIntent")) //If came from UserWithChurchHome, go back there
+                else if (cameFrom.equals("userWithChurchHomeIntent")) //If came from UserHome, go back there
                 {
-                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserWithChurchHome");
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
                     startActivity(userWithChurchHomeIntent);
                 }
 

@@ -18,7 +18,7 @@ import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserIntents.UserNoChurchHome;
+import com.example.churchapp.UserIntents.ChurchFinder;
 
 public class CreateAccount extends AppCompatActivity
 {
@@ -73,7 +73,7 @@ public class CreateAccount extends AppCompatActivity
 
         //INTENTS
         mainActivityIntent = new Intent(CreateAccount.this, MainActivity.class);
-        userNoChurchHome = new Intent(CreateAccount.this, UserNoChurchHome.class);
+        userNoChurchHome = new Intent(CreateAccount.this, ChurchFinder.class);
 
         //FUNCTIONS
         registerButtonClick();
@@ -140,7 +140,7 @@ public class CreateAccount extends AppCompatActivity
                             usersDb.createUser(user); //Create the user in the database
                             Session.login(user); //Log the User in
                             startActivity(userNoChurchHome);
-                            Log.v("CREATED USER", "Created User Account - Moving to UserNoChurchHome");
+                            Log.v("CREATED USER", "Created User Account - Moving to ChurchFinder");
                         }
                     }
                 }

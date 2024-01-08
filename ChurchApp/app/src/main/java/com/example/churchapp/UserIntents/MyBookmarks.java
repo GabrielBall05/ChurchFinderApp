@@ -24,7 +24,7 @@ import com.example.churchapp.R;
 
 import java.util.ArrayList;
 
-public class BookmarkedChurches extends AppCompatActivity
+public class MyBookmarks extends AppCompatActivity
 {
     //GUI
     EditText et_search;
@@ -53,7 +53,7 @@ public class BookmarkedChurches extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bookmarked_churches);
+        setContentView(R.layout.activity_my_bookmarks);
 
         //GUI
         et_search = findViewById(R.id.et_bookmarkedChurches_search);
@@ -67,9 +67,9 @@ public class BookmarkedChurches extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        churchDetailsIntent = new Intent(BookmarkedChurches.this, ChurchDetails.class);
-        editProfileIntent = new Intent(BookmarkedChurches.this, EditUserProfile.class);
-        userNoChurchHomeIntent = new Intent(BookmarkedChurches.this, UserNoChurchHome.class);
+        churchDetailsIntent = new Intent(MyBookmarks.this, ChurchDetails.class);
+        editProfileIntent = new Intent(MyBookmarks.this, EditUserProfile.class);
+        userNoChurchHomeIntent = new Intent(MyBookmarks.this, ChurchFinder.class);
 
         //ARRAYLISTS
         listOfBookmarks = new ArrayList<Bookmark>();
@@ -154,7 +154,7 @@ public class BookmarkedChurches extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to ChurchFinder");
                 startActivity(userNoChurchHomeIntent);
             }
         });

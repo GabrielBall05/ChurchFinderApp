@@ -68,8 +68,8 @@ public class ChurchDetails extends AppCompatActivity
 
         //INTENTS
         masterConfirmationIntent = new Intent(ChurchDetails.this, MasterConfirmation.class);
-        userNoChurchHomeIntent = new Intent(ChurchDetails.this, UserNoChurchHome.class);
-        bookmarkedChurchesIntent = new Intent(ChurchDetails.this, BookmarkedChurches.class);
+        userNoChurchHomeIntent = new Intent(ChurchDetails.this, ChurchFinder.class);
+        bookmarkedChurchesIntent = new Intent(ChurchDetails.this, MyBookmarks.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -165,12 +165,12 @@ public class ChurchDetails extends AppCompatActivity
             {
                 if (cameFrom.equals("userNoChurchHomeIntent"))
                 {
-                    Log.d("BUTTON CLICK", "Back Button Click - Moving to UserNoChurchHome");
+                    Log.d("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
                     startActivity(userNoChurchHomeIntent);
                 }
                 else if (cameFrom.equals("bookmarkedChurchesIntent"))
                 {
-                    Log.d("BUTTON CLICK", "Back Button Click - Moving to BookmarkedChurches");
+                    Log.d("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
                     startActivity(bookmarkedChurchesIntent);
                 }
             }

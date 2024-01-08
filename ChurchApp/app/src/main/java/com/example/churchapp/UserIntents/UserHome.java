@@ -22,7 +22,7 @@ import com.example.churchapp.R;
 
 import java.util.ArrayList;
 
-public class UserWithChurchHome extends AppCompatActivity
+public class UserHome extends AppCompatActivity
 {
     //GUI
     ListView lv_events;
@@ -53,7 +53,7 @@ public class UserWithChurchHome extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_with_church_home);
+        setContentView(R.layout.activity_user_home);
 
         //GUI
         lv_events = findViewById(R.id.lv_userHome_events);
@@ -68,10 +68,10 @@ public class UserWithChurchHome extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        myChurchIntent = new Intent(UserWithChurchHome.this, MyChurch.class);
-        editUserProfileIntent = new Intent(UserWithChurchHome.this, EditUserProfile.class);
-        myChurchEventsIntent = new Intent(UserWithChurchHome.this, MyChurchEvents.class);
-        eventDetailsIntent = new Intent(UserWithChurchHome.this, EventDetails.class);
+        myChurchIntent = new Intent(UserHome.this, MyChurch.class);
+        editUserProfileIntent = new Intent(UserHome.this, EditUserProfile.class);
+        myChurchEventsIntent = new Intent(UserHome.this, MyChurchEvents.class);
+        eventDetailsIntent = new Intent(UserHome.this, EventDetails.class);
 
         //ARRAYLIST
         listOfEventIds = new ArrayList<Integer>();

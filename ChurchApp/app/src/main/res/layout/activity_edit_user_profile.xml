@@ -10,242 +10,175 @@
         android:id="@+id/btn_editUserProfile_signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="8dp"
         android:text="Sign Out"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_editUserProfile_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="574dp" />
 
     <Button
         android:id="@+id/btn_editUserProfile_bookmarks"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="1dp"
         android:text="Book-\nmarks"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/btn_editUserProfile_home"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="1dp"
         android:text="Home Page"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintStart_toEndOf="@+id/btn_editUserProfile_bookmarks" />
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="1dp"
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="129dp"
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="28dp" />
 
     <EditText
         android:id="@+id/et_editUserProfile_fname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="text"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="105dp" />
 
     <EditText
         android:id="@+id/et_editUserProfile_city"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="City"
         android:inputType="text"
         android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@+id/textView38"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="240dp" />
 
     <TextView
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="306dp"
         android:text="Password:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_editUserProfile_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_city" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="286dp" />
 
     <EditText
         android:id="@+id/et_editUserProfile_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="text"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="308dp" />
 
     <Button
         android:id="@+id/btn_editUserProfile_delete"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="93dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="93dp"
         android:text="Delete Account"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_editUserProfile_update" />
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="518dp" />
 
     <TextView
         android:id="@+id/tv_editUserProfile_fieldsError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginEnd="105dp"
         android:text="*Please keep all fields filled out*"
         android:textAlignment="center"
         android:textColor="#FF0000"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_editUserProfile_denomination" />
+        tools:layout_editor_absoluteX="104dp"
+        tools:layout_editor_absoluteY="425dp" />
 
     <Spinner
         android:id="@+id/sp_editUserProfile_denomination"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="375dp" />
 
     <Button
         android:id="@+id/btn_editUserProfile_update"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="68dp"
         android:text="Update Account Info"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_editUserProfile_fieldsError" />
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="453dp" />
 
     <TextView
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="278dp"
         android:text="Denomination:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/sp_editUserProfile_denomination"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_password" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="353dp" />
 
     <EditText
         android:id="@+id/et_editUserProfile_lname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="text"
         android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="171dp" />
 
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="350dp"
-        android:layout_marginBottom="1dp"
         android:text="City:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_editUserProfile_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_lname" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="218dp" />
 
     <TextView
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="83dp"
-        android:layout_marginEnd="299dp"
         android:text="First Name:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_editUserProfile_fname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="83dp" />
 
     <TextView
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="299dp"
         android:text="Last Name:"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_editUserProfile_lname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_fname" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="150dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,118 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserIntents.UserNoChurchHome">
+    tools:context=".UserIntents.ChurchFinder">
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="106dp"
         android:text="Find A Church"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="30dp" />
 
     <EditText
         android:id="@+id/et_userNCHome_search"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="Search by name"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_userNCHome_filter" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="135dp" />
 
     <Spinner
         android:id="@+id/sp_userNCHome_filter"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="73dp" />
 
     <Spinner
         android:id="@+id/sp_userNCHome_denominations"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="56dp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_userNCHome_filter" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="135dp" />
 
     <Button
         android:id="@+id/btn_userNCHome_bookmarks"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="1dp"
         android:text="Book-\nmarks"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="1dp"
         android:text="Home Page"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_userNCHome_editProfile"
-        app:layout_constraintStart_toEndOf="@+id/btn_userNCHome_bookmarks" />
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/btn_userNCHome_editProfile"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="1dp"
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <TextView
         android:id="@+id/tv_userNCHome_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="410dp"
         android:text="No Results"
         android:textAlignment="center"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
         android:textStyle="italic"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lv_userNCHome_churches"
-        app:layout_constraintTop_toBottomOf="@+id/sp_userNCHome_denominations" />
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="197dp" />
 
     <ListView
         android:id="@+id/lv_userNCHome_churches"
         android:layout_width="408dp"
         android:layout_height="430dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/sp_userNCHome_denominations"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="197dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

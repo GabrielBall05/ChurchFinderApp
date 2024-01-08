@@ -4,95 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserIntents.BookmarkedChurches">
+    tools:context=".UserIntents.MyBookmarks">
 
     <Button
         android:id="@+id/button4"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
         android:text="Book-\nmarks"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/btn_bookmarkedChurches_home"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="1dp"
         android:text="Home Page"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_bookmarkedChurches_editProfile"
-        app:layout_constraintStart_toEndOf="@+id/button4" />
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <Button
         android:id="@+id/btn_bookmarkedChurches_editProfile"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="280dp"
+        tools:layout_editor_absoluteY="630dp" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="79dp"
         android:text="Your Bookmarked\nChurches"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <EditText
         android:id="@+id/et_bookmarkedChurches_search"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="43dp"
         android:ems="10"
         android:hint="Search for a church in your bookmarks"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="112dp" />
 
     <TextView
         android:id="@+id/tv_bookmarkedChurches_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="410dp"
         android:text="No Results"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
         android:textStyle="italic"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lv_bookmarkedChurches_churches"
-        app:layout_constraintTop_toBottomOf="@+id/et_bookmarkedChurches_search" />
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="167dp" />
 
     <ListView
         android:id="@+id/lv_bookmarkedChurches_churches"
         android:layout_width="410dp"
         android:layout_height="462dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_bookmarkedChurches_search"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="165dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

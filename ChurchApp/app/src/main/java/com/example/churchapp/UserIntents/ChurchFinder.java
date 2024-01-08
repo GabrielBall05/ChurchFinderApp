@@ -26,7 +26,7 @@ import com.example.churchapp.R;
 
 import java.util.ArrayList;
 
-public class UserNoChurchHome extends AppCompatActivity
+public class ChurchFinder extends AppCompatActivity
 {
     //GUI
     EditText et_search;
@@ -64,7 +64,7 @@ public class UserNoChurchHome extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_no_church_home);
+        setContentView(R.layout.activity_church_finder);
 
         //GUI
         et_search = findViewById(R.id.et_userNCHome_search);
@@ -79,9 +79,9 @@ public class UserNoChurchHome extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        churchDetailsIntent = new Intent(UserNoChurchHome.this, ChurchDetails.class);
-        bookmarksIntent = new Intent(UserNoChurchHome.this, BookmarkedChurches.class);
-        editUserProfileIntent = new Intent(UserNoChurchHome.this, EditUserProfile.class);
+        churchDetailsIntent = new Intent(ChurchFinder.this, ChurchDetails.class);
+        bookmarksIntent = new Intent(ChurchFinder.this, MyBookmarks.class);
+        editUserProfileIntent = new Intent(ChurchFinder.this, EditUserProfile.class);
 
         //FILTER SPINNER
         filterAdapter = ArrayAdapter.createFromResource(this, R.array.filter, android.R.layout.simple_spinner_item);
@@ -346,7 +346,7 @@ public class UserNoChurchHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Bookmarked Churches Button Clicked - Moving to BookmarkedChurches");
+                Log.v("BUTTON CLICK", "Bookmarked Churches Button Clicked - Moving to MyBookmarks");
                 startActivity(bookmarksIntent);
             }
         });

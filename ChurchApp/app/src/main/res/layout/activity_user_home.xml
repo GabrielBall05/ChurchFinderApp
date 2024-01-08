@@ -4,111 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserIntents.UserWithChurchHome">
+    tools:context=".UserIntents.UserHome">
 
     <Button
         android:id="@+id/button10"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="3dp"
         android:text="Home Page"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_userHome_editProfile"
-        app:layout_constraintStart_toEndOf="@+id/btn_userHome_myChurch" />
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="628dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="163dp"
         android:text="Home"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="48dp"
         android:text="Your upcoming events"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="70dp" />
 
     <Button
         android:id="@+id/btn_userHome_myChurch"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="3dp"
         android:text="My Church"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="628dp" />
 
     <Button
         android:id="@+id/btn_userHome_editProfile"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="3dp"
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="628dp" />
 
     <Button
         android:id="@+id/btn_userHome_allEvents"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="19dp"
         android:text="All 's Events"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="509dp" />
 
     <TextView
         android:id="@+id/tv_userHome_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="77dp"
         android:text="You are not signed up for any events\nClick the button below to sign up\nfor events from your church"
         android:textAlignment="center"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="119dp" />
 
     <ListView
         android:id="@+id/lv_userHome_events"
         android:layout_width="409dp"
         android:layout_height="380dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="118dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

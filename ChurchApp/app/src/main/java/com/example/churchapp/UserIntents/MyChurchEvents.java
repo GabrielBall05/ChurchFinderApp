@@ -60,7 +60,7 @@ public class MyChurchEvents extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        userWithChurchHomeIntent = new Intent(MyChurchEvents.this, UserWithChurchHome.class);
+        userWithChurchHomeIntent = new Intent(MyChurchEvents.this, UserHome.class);
         eventDetailsIntent = new Intent(MyChurchEvents.this, EventDetails.class);
 
         //ARRAYLIST
@@ -122,7 +122,7 @@ public class MyChurchEvents extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserWithChurchHome");
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
                 startActivity(userWithChurchHomeIntent);
             }
         });
