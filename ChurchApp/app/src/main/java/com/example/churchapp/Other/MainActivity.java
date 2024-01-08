@@ -19,8 +19,8 @@ import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserIntents.UserNoChurchHome;
-import com.example.churchapp.UserIntents.UserWithChurchHome;
+import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
+import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
 
 import java.util.ArrayList;
 

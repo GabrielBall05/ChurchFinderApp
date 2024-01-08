@@ -1,4 +1,4 @@
-package com.example.churchapp.UserIntents;
+package com.example.churchapp.UserWithChurchIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.churchapp.Database.EventParticipantsTableHelper;
+import com.example.churchapp.Models.Bookmark;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Other.Session;

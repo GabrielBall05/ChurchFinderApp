@@ -13,24 +13,27 @@
         android:theme="@style/Theme.ChurchApp"
         tools:targetApi="31">
         <activity
-            android:name=".UserIntents.EventDetails"
+            android:name=".UserWithChurchIntents.EventDetails"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.MyChurchEvents"
+            android:name=".UserWithChurchIntents.MyChurchEvents"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.MyChurch"
+            android:name=".UserWithChurchIntents.EditUserProfile2"
+            android:exported="false" />
+        <activity
+            android:name=".UserWithChurchIntents.MyChurch"
             android:exported="false"
             android:label="@string/title_activity_my_church"
             android:theme="@style/Theme.ChurchApp" />
         <activity
-            android:name=".UserIntents.EditUserProfile"
+            android:name=".UserNoChurchIntents.EditUserProfile"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.BookmarkedChurches"
+            android:name=".UserNoChurchIntents.BookmarkedChurches"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.ChurchDetails"
+            android:name=".UserNoChurchIntents.ChurchDetails"
             android:exported="false" />
         <activity
             android:name=".ChurchIntents.MemberDetails"
@@ -63,10 +66,10 @@
             android:name=".Other.CreateChurch"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.UserWithChurchHome"
+            android:name=".UserWithChurchIntents.UserWithChurchHome"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.UserNoChurchHome"
+            android:name=".UserNoChurchIntents.UserNoChurchHome"
             android:exported="false" />
         <activity
             android:name=".Other.MainActivity"
