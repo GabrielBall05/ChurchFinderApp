@@ -18,7 +18,7 @@ import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
+import com.example.churchapp.UserIntents.UserNoChurchHome;
 
 public class CreateAccount extends AppCompatActivity
 {

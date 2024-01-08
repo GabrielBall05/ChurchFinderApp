@@ -1,4 +1,4 @@
-package com.example.churchapp.UserNoChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 

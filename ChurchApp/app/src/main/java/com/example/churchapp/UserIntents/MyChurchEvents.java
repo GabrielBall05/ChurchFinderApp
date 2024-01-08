@@ -1,4 +1,4 @@
-package com.example.churchapp.UserWithChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.churchapp.Adapters.MyEventsAdapter;
-import com.example.churchapp.Adapters.SignedUpEventsAdapter;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Models.Church;
