@@ -1,4 +1,4 @@
-package com.example.churchapp.UserWithChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +21,7 @@ import com.example.churchapp.Models.User;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 
-public class EditUserProfile2 extends AppCompatActivity
+public class EditUserProfile extends AppCompatActivity
 {
     //GUI
     EditText et_fname;
@@ -32,7 +32,7 @@ public class EditUserProfile2 extends AppCompatActivity
     TextView tv_fieldsError;
     Button btn_update;
     Button btn_delete;
-    Button btn_myChurch;
+    Button btn_bookmarks;
     Button btn_home;
     Button btn_signOut;
 
@@ -40,8 +40,8 @@ public class EditUserProfile2 extends AppCompatActivity
     UsersTableHelper usersDb;
 
     //INTENTS
-    Intent myChurchIntent;
-    Intent userWithChurchHomeIntent;
+    Intent userNoChurchHomeIntent;
+    Intent bookmarksIntent;
     Intent masterConfirmationIntent;
     Intent mainActivityIntent;
 
@@ -49,31 +49,31 @@ public class EditUserProfile2 extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_user_profile2);
+        setContentView(R.layout.activity_edit_user_profile);
 
         //GUI
-        et_fname = findViewById(R.id.et_editUserProfile2_fname);
-        et_lname = findViewById(R.id.et_editUserProfile2_lname);
-        et_city = findViewById(R.id.et_editUserProfile2_city);
-        et_password = findViewById(R.id.et_editUserProfile2_password);
-        sp_denomination = findViewById(R.id.sp_editUserProfile2_denomination);
-        tv_fieldsError = findViewById(R.id.tv_editUserProfile2_fieldsError);
-        btn_update = findViewById(R.id.btn_editUserProfile2_update);
-        btn_delete = findViewById(R.id.btn_editUserProfile2_delete);
-        btn_myChurch = findViewById(R.id.btn_editUserProfile2_myChurch);
-        btn_home = findViewById(R.id.btn_editUserProfile2_home);
-        btn_signOut = findViewById(R.id.btn_editUserProfile2_signOut);
+        et_fname = findViewById(R.id.et_editUserProfile_fname);
+        et_lname = findViewById(R.id.et_editUserProfile_lname);
+        et_city = findViewById(R.id.et_editUserProfile_city);
+        et_password = findViewById(R.id.et_editUserProfile_password);
+        sp_denomination = findViewById(R.id.sp_editUserProfile_denomination);
+        tv_fieldsError = findViewById(R.id.tv_editUserProfile_fieldsError);
+        btn_update = findViewById(R.id.btn_editUserProfile_update);
+        btn_delete = findViewById(R.id.btn_editUserProfile_delete);
+        btn_bookmarks = findViewById(R.id.btn_editUserProfile_bookmarks);
+        btn_home = findViewById(R.id.btn_editUserProfile_home);
+        btn_signOut = findViewById(R.id.btn_editUserProfile_signOut);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
 
         //INTENTS
-        myChurchIntent = new Intent(EditUserProfile2.this, MyChurch.class);
-        userWithChurchHomeIntent = new Intent(EditUserProfile2.this, UserWithChurchHome.class);
-        masterConfirmationIntent = new Intent(EditUserProfile2.this, MasterConfirmation.class);
-        mainActivityIntent = new Intent(EditUserProfile2.this, MainActivity.class);
+        userNoChurchHomeIntent = new Intent(EditUserProfile.this, UserNoChurchHome.class);
+        bookmarksIntent = new Intent(EditUserProfile.this, BookmarkedChurches.class);
+        masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
+        mainActivityIntent = new Intent(EditUserProfile.this, MainActivity.class);
 
-        //FILL TEXT BOXES WITH CURRENT INFO
+        //Fill text boxes with current info
         fillInTextBoxes();
 
         //SPINNER
@@ -86,7 +86,7 @@ public class EditUserProfile2 extends AppCompatActivity
         //FUNCTIONS
         updateButtonClick();
         deleteButtonClick();
-        myChurchButtonClick();
+        bookmarksButtonClick();
         homeButtonClick();
         denominationSelect();
         signOutButtonClick();
@@ -142,9 +142,9 @@ public class EditUserProfile2 extends AppCompatActivity
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), password, fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
-                    usersDb.updateUser(user);
-                    Session.login(user);
-                    startActivity(userWithChurchHomeIntent);
+                    usersDb.updateUser(user); //Update user in database
+                    Session.login(user); //Log the user in so Session... works properly
+                    startActivity(userNoChurchHomeIntent);
                     Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to UserNoChurchHome");
                 }
             }
@@ -159,23 +159,23 @@ public class EditUserProfile2 extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Delete (User) Account Button Clicked - Moving to MasterConfirmation");
+                Log.v("BUTTON CLICK", "Delete User Account Button Clicked - Moving to MasterConfirmation");
                 masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 startActivity(masterConfirmationIntent);
             }
         });
     }
 
-    /**========================================MY CHURCH BUTTON CLICK========================================*/
-    private void myChurchButtonClick()
+    /**========================================BOOKMARKS BUTTON CLICK========================================*/
+    private void bookmarksButtonClick()
     {
-        btn_myChurch.setOnClickListener(new View.OnClickListener()
+        btn_bookmarks.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to BookmarkedChurches");
-                startActivity(myChurchIntent);
+                startActivity(bookmarksIntent);
             }
         });
     }
@@ -189,12 +189,12 @@ public class EditUserProfile2 extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserNoChurchHome");
-                startActivity(userWithChurchHomeIntent);
+                startActivity(userNoChurchHomeIntent);
             }
         });
     }
 
-    /**========================================SIGN OUT BUTTON CLICK========================================*/
+    /**========================================SIGN OUT BUTTON CLICk========================================*/
     private void signOutButtonClick()
     {
         btn_signOut.setOnClickListener(new View.OnClickListener()

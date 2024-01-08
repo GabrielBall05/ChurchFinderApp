@@ -1,4 +1,4 @@
-package com.example.churchapp.UserNoChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.churchapp.Adapters.ListOfBookmarksAdapter;
-import com.example.churchapp.Adapters.ListOfChurchesAdapter;
 import com.example.churchapp.Database.BookmarksTableHelper;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Models.Bookmark;

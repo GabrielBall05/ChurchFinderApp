@@ -20,11 +20,11 @@ import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
-import com.example.churchapp.UserNoChurchIntents.ChurchDetails;
-import com.example.churchapp.UserNoChurchIntents.EditUserProfile;
-import com.example.churchapp.UserNoChurchIntents.UserNoChurchHome;
-import com.example.churchapp.UserWithChurchIntents.MyChurch;
-import com.example.churchapp.UserWithChurchIntents.UserWithChurchHome;
+import com.example.churchapp.UserIntents.ChurchDetails;
+import com.example.churchapp.UserIntents.EditUserProfile;
+import com.example.churchapp.UserIntents.UserNoChurchHome;
+import com.example.churchapp.UserIntents.MyChurch;
+import com.example.churchapp.UserIntents.UserWithChurchHome;
 
 public class MasterConfirmation extends AppCompatActivity
 {

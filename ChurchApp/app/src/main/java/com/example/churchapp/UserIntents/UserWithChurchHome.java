@@ -1,4 +1,4 @@
-package com.example.churchapp.UserWithChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,15 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.churchapp.Adapters.ListOfChurchesAdapter;
 import com.example.churchapp.Adapters.SignedUpEventsAdapter;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
-import com.example.churchapp.Models.EventParticipant;
-import com.example.churchapp.Models.User;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;
 
@@ -41,7 +38,7 @@ public class UserWithChurchHome extends AppCompatActivity
 
     //INTENTS
     Intent myChurchIntent;
-    Intent editUserProfile2Intent;
+    Intent editUserProfileIntent;
     Intent myChurchEventsIntent;
     Intent eventDetailsIntent;
 
@@ -72,7 +69,7 @@ public class UserWithChurchHome extends AppCompatActivity
 
         //INTENTS
         myChurchIntent = new Intent(UserWithChurchHome.this, MyChurch.class);
-        editUserProfile2Intent = new Intent(UserWithChurchHome.this, EditUserProfile2.class);
+        editUserProfileIntent = new Intent(UserWithChurchHome.this, EditUserProfile.class);
         myChurchEventsIntent = new Intent(UserWithChurchHome.this, MyChurchEvents.class);
         eventDetailsIntent = new Intent(UserWithChurchHome.this, EventDetails.class);
 
@@ -164,7 +161,7 @@ public class UserWithChurchHome extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile2");
-                startActivity(editUserProfile2Intent);
+                startActivity(editUserProfileIntent);
             }
         });
     }

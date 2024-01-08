@@ -1,4 +1,4 @@
-package com.example.churchapp.UserNoChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,10 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.churchapp.Adapters.ListOfChurchesAdapter;
-import com.example.churchapp.Adapters.MyEventsAdapter;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Models.Church;
-import com.example.churchapp.Models.Event;
 import com.example.churchapp.Other.SearchParams;
 import com.example.churchapp.Other.Session;
 import com.example.churchapp.R;

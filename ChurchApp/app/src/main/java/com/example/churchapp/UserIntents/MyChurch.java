@@ -1,4 +1,4 @@
-package com.example.churchapp.UserWithChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,7 +32,7 @@ public class MyChurch extends AppCompatActivity
     ChurchesTableHelper churchesDb;
 
     //INTENTS
-    Intent editUserProfile2Intent;
+    Intent editUserProfileIntent;
     Intent userWithChurchHomeIntent;
     Intent masterConfirmationIntent;
 
@@ -57,7 +57,7 @@ public class MyChurch extends AppCompatActivity
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        editUserProfile2Intent = new Intent(MyChurch.this, EditUserProfile2.class);
+        editUserProfileIntent = new Intent(MyChurch.this, EditUserProfile.class);
         userWithChurchHomeIntent = new Intent(MyChurch.this, UserWithChurchHome.class);
         masterConfirmationIntent = new Intent(MyChurch.this, MasterConfirmation.class);
 
@@ -122,7 +122,7 @@ public class MyChurch extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Edit Profile Button Clicked - Moving to EditUserProfile2");
-                startActivity(editUserProfile2Intent);
+                startActivity(editUserProfileIntent);
             }
         });
     }
