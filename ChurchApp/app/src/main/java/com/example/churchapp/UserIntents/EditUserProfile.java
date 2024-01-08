@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,16 +33,20 @@ public class EditUserProfile extends AppCompatActivity
     TextView tv_fieldsError;
     Button btn_update;
     Button btn_delete;
-    Button btn_bookmarks;
-    Button btn_home;
     Button btn_signOut;
+    ImageView btn_bookmarks;
+    ImageView btn_churchFinder;
+    ImageView btn_userHome;
+    ImageView btn_myChurch;
 
     //DATABASE
     UsersTableHelper usersDb;
 
     //INTENTS
-    Intent userNoChurchHomeIntent;
+    Intent churchFinderIntent;
     Intent bookmarksIntent;
+    Intent userHomeIntent;
+    Intent myChurchIntent;
     Intent masterConfirmationIntent;
     Intent mainActivityIntent;
 
@@ -61,14 +66,19 @@ public class EditUserProfile extends AppCompatActivity
         btn_update = findViewById(R.id.btn_editUserProfile_update);
         btn_delete = findViewById(R.id.btn_editUserProfile_delete);
         btn_bookmarks = findViewById(R.id.btn_editUserProfile_bookmarks);
-        btn_home = findViewById(R.id.btn_editUserProfile_home);
         btn_signOut = findViewById(R.id.btn_editUserProfile_signOut);
+        btn_bookmarks = findViewById(R.id.btn_editUserProfile_bookmarks);
+        btn_churchFinder = findViewById(R.id.btn_editUserProfile_churchFinder);
+        btn_userHome = findViewById(R.id.btn_editUserProfile_userHome);
+        btn_myChurch = findViewById(R.id.btn_editUserProfile_myChurch);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
 
         //INTENTS
-        userNoChurchHomeIntent = new Intent(EditUserProfile.this, ChurchFinder.class);
+        churchFinderIntent = new Intent(EditUserProfile.this, ChurchFinder.class);
+        userHomeIntent = new Intent(EditUserProfile.this, UserHome.class);
+        myChurchIntent = new Intent(EditUserProfile.this, MyChurch.class);
         bookmarksIntent = new Intent(EditUserProfile.this, MyBookmarks.class);
         masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditUserProfile.this, MainActivity.class);
@@ -87,7 +97,9 @@ public class EditUserProfile extends AppCompatActivity
         updateButtonClick();
         deleteButtonClick();
         bookmarksButtonClick();
-        homeButtonClick();
+        churchFinderButtonClick();
+        myChurchButtonClick();
+        userHomeButtonClick();
         denominationSelect();
         signOutButtonClick();
     }
@@ -144,7 +156,7 @@ public class EditUserProfile extends AppCompatActivity
                     User user = new User(Session.getUser().getEmail(), password, fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
                     usersDb.updateUser(user); //Update user in database
                     Session.login(user); //Log the user in so Session... works properly
-                    startActivity(userNoChurchHomeIntent);
+                    startActivity(userHomeIntent);
                     Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to ChurchFinder");
                 }
             }
@@ -166,6 +178,20 @@ public class EditUserProfile extends AppCompatActivity
         });
     }
 
+    /**========================================SIGN OUT BUTTON CLICk========================================*/
+    private void signOutButtonClick()
+    {
+        btn_signOut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
+                startActivity(mainActivityIntent);
+            }
+        });
+    }
+
     /**========================================BOOKMARKS BUTTON CLICK========================================*/
     private void bookmarksButtonClick()
     {
@@ -180,30 +206,44 @@ public class EditUserProfile extends AppCompatActivity
         });
     }
 
-    /**========================================HOME BUTTON CLICK========================================*/
-    private void homeButtonClick()
+    /**========================================CHURCH FINDER BUTTON CLICK========================================*/
+    private void churchFinderButtonClick()
     {
-        btn_home.setOnClickListener(new View.OnClickListener()
+        btn_churchFinder.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to ChurchFinder");
-                startActivity(userNoChurchHomeIntent);
+                Log.v("BUTTON CLICK", "Church Finder Button Clicked - Moving to ChurchFinder");
+                startActivity(churchFinderIntent);
             }
         });
     }
 
-    /**========================================SIGN OUT BUTTON CLICk========================================*/
-    private void signOutButtonClick()
+    /**========================================HOME BUTTON CLICK========================================*/
+    private void userHomeButtonClick()
     {
-        btn_signOut.setOnClickListener(new View.OnClickListener()
+        btn_userHome.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
-                startActivity(mainActivityIntent);
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserHome");
+                startActivity(userHomeIntent);
+            }
+        });
+    }
+
+    /**========================================MY CHURCH BUTTON CLICK========================================*/
+    private void myChurchButtonClick()
+    {
+        btn_myChurch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "My Church Button Clicked - Moving to MyChurch");
+                startActivity(myChurchIntent);
             }
         });
     }

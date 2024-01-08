@@ -6,89 +6,131 @@
     android:layout_height="match_parent"
     tools:context=".UserIntents.ChurchFinder">
 
+    <ImageView
+        android:id="@+id/btn_churchFinder_myBookmarks"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bookmark3" />
+
+    <ImageView
+        android:id="@+id/btn_churchFinder_churchFinder"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_userHome"
+        app:layout_constraintStart_toEndOf="@+id/btn_churchFinder_myBookmarks"
+        app:srcCompat="@drawable/search2" />
+
+    <ImageView
+        android:id="@+id/btn_churchFinder_userHome"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_myChurch"
+        app:srcCompat="@drawable/home" />
+
+    <ImageView
+        android:id="@+id/btn_churchFinder_myChurch"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_editProfile"
+        app:srcCompat="@drawable/church" />
+
+    <ImageView
+        android:id="@+id/btn_churchFinder_editProfile"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/profile" />
+
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="106dp"
         android:text="Find A Church"
         android:textAlignment="center"
         android:textSize="32sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_userNCHome_search"
+        android:id="@+id/et_churchFinder_search"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="Search by name"
         android:inputType="text"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="135dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_churchFinder_filter" />
 
     <Spinner
-        android:id="@+id/sp_userNCHome_filter"
+        android:id="@+id/sp_churchFinder_filter"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="73dp" />
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <Spinner
-        android:id="@+id/sp_userNCHome_denominations"
+        android:id="@+id/sp_churchFinder_denominations"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="56dp"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="135dp" />
-
-    <Button
-        android:id="@+id/btn_userNCHome_bookmarks"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:text="Book-\nmarks"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="630dp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:text="Home Page"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="630dp" />
-
-    <Button
-        android:id="@+id/btn_userNCHome_editProfile"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:text="Edit Profile"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="630dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_churchFinder_filter" />
 
     <TextView
-        android:id="@+id/tv_userNCHome_noResults"
+        android:id="@+id/tv_churchFinder_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="168dp"
         android:text="No Results"
         android:textAlignment="center"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
         android:textStyle="italic"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="197dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_churchFinder_denominations" />
 
     <ListView
-        android:id="@+id/lv_userNCHome_churches"
+        android:id="@+id/lv_churchFinder_churches"
         android:layout_width="408dp"
-        android:layout_height="430dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="197dp" />
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_churchFinder_churchFinder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_churchFinder_denominations" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

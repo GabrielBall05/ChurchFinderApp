@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,9 +33,11 @@ public class ChurchFinder extends AppCompatActivity
     Spinner sp_filter;
     Spinner sp_denominations;
     ListView lv_churches;
-    Button btn_bookmarks;
-    Button btn_editProfile;
     TextView tv_noResults;
+    ImageView btn_bookmarks;
+    ImageView btn_userHome;
+    ImageView btn_myChurch;
+    ImageView btn_editProfile;
 
     //DATABASE
     ChurchesTableHelper churchesDb;
@@ -43,6 +45,8 @@ public class ChurchFinder extends AppCompatActivity
     //INTENTS
     Intent churchDetailsIntent;
     Intent bookmarksIntent;
+    Intent userHomeIntent;
+    Intent myChurchIntent;
     Intent editUserProfileIntent;
 
     //STRINGS
@@ -67,13 +71,15 @@ public class ChurchFinder extends AppCompatActivity
         setContentView(R.layout.activity_church_finder);
 
         //GUI
-        et_search = findViewById(R.id.et_userNCHome_search);
-        sp_filter = findViewById(R.id.sp_userNCHome_filter);
-        sp_denominations = findViewById(R.id.sp_userNCHome_denominations);
-        lv_churches = findViewById(R.id.lv_userNCHome_churches);
-        btn_bookmarks = findViewById(R.id.btn_userNCHome_bookmarks);
-        btn_editProfile = findViewById(R.id.btn_userNCHome_editProfile);
-        tv_noResults = findViewById(R.id.tv_userNCHome_noResults);
+        et_search = findViewById(R.id.et_churchFinder_search);
+        sp_filter = findViewById(R.id.sp_churchFinder_filter);
+        sp_denominations = findViewById(R.id.sp_churchFinder_denominations);
+        lv_churches = findViewById(R.id.lv_churchFinder_churches);
+        btn_bookmarks = findViewById(R.id.btn_churchFinder_myBookmarks);
+        btn_userHome = findViewById(R.id.btn_churchFinder_userHome);
+        btn_myChurch = findViewById(R.id.btn_churchFinder_myChurch);
+        btn_editProfile = findViewById(R.id.btn_churchFinder_editProfile);
+        tv_noResults = findViewById(R.id.tv_churchFinder_noResults);
 
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
@@ -82,6 +88,8 @@ public class ChurchFinder extends AppCompatActivity
         churchDetailsIntent = new Intent(ChurchFinder.this, ChurchDetails.class);
         bookmarksIntent = new Intent(ChurchFinder.this, MyBookmarks.class);
         editUserProfileIntent = new Intent(ChurchFinder.this, EditUserProfile.class);
+        userHomeIntent = new Intent(ChurchFinder.this, UserHome.class);
+        myChurchIntent = new Intent(ChurchFinder.this, MyChurch.class);
 
         //FILTER SPINNER
         filterAdapter = ArrayAdapter.createFromResource(this, R.array.filter, android.R.layout.simple_spinner_item);
@@ -104,6 +112,8 @@ public class ChurchFinder extends AppCompatActivity
         filterSelect();
         denominationSelect();
         bookmarksButtonClick();
+        userHomeClick();
+        myChurchClick();
         editProfileButtonClick();
         getSearchParamsAndFill();
     }
@@ -338,6 +348,19 @@ public class ChurchFinder extends AppCompatActivity
         ifNoResultsShow();
     }
 
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+        if (listOfChurches.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
+    }
+
     /**========================================BOOKMARKS BUTTON CLICK========================================*/
     private void bookmarksButtonClick()
     {
@@ -348,6 +371,34 @@ public class ChurchFinder extends AppCompatActivity
             {
                 Log.v("BUTTON CLICK", "Bookmarked Churches Button Clicked - Moving to MyBookmarks");
                 startActivity(bookmarksIntent);
+            }
+        });
+    }
+
+    /**========================================USER HOME BUTTON CLICK========================================*/
+    private void userHomeClick()
+    {
+        btn_userHome.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "User Home Button Clicked - Moving to UserHome");
+                startActivity(userHomeIntent);
+            }
+        });
+    }
+
+    /**========================================MY CHURCH BUTTON CLICK========================================*/
+    private void myChurchClick()
+    {
+        btn_myChurch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "My Church Button Clicked - Moving to MyChurch");
+                startActivity(myChurchIntent);
             }
         });
     }
@@ -364,18 +415,5 @@ public class ChurchFinder extends AppCompatActivity
                 startActivity(editUserProfileIntent);
             }
         });
-    }
-
-    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
-    private void ifNoResultsShow()
-    {
-        if (listOfChurches.size() == 0)
-        {
-            tv_noResults.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            tv_noResults.setVisibility(View.INVISIBLE);
-        }
     }
 }

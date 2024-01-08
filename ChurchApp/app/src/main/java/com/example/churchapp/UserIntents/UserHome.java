@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.example.churchapp.Adapters.SignedUpEventsAdapter;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
+import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Other.Session;
@@ -28,19 +30,24 @@ public class UserHome extends AppCompatActivity
     ListView lv_events;
     TextView tv_noResults;
     Button btn_myChurchEvents;
-    Button btn_myChurch;
-    Button btn_editProfile;
+    ImageView btn_bookmarks;
+    ImageView btn_churchFinder;
+    ImageView btn_myChurch;
+    ImageView btn_editProfile;
 
     //DATABASE
     EventsTableHelper eventsDb;
     EventParticipantsTableHelper participantsDb;
     ChurchesTableHelper churchesDb;
+    UsersTableHelper usersDb;
 
     //INTENTS
     Intent myChurchIntent;
     Intent editUserProfileIntent;
     Intent myChurchEventsIntent;
     Intent eventDetailsIntent;
+    Intent myBookmarksIntent;
+    Intent churchFinderIntent;
 
     //ARRAYLISTS
     ArrayList<Event> listOfEvents;
@@ -59,6 +66,8 @@ public class UserHome extends AppCompatActivity
         lv_events = findViewById(R.id.lv_userHome_events);
         tv_noResults = findViewById(R.id.tv_userHome_noResults);
         btn_myChurchEvents = findViewById(R.id.btn_userHome_allEvents);
+        btn_bookmarks = findViewById(R.id.btn_userHome_myBookmarks);
+        btn_churchFinder = findViewById(R.id.btn_userHome_churchFinder);
         btn_myChurch = findViewById(R.id.btn_userHome_myChurch);
         btn_editProfile = findViewById(R.id.btn_userHome_editProfile);
 
@@ -66,8 +75,11 @@ public class UserHome extends AppCompatActivity
         eventsDb = new EventsTableHelper(this);
         participantsDb = new EventParticipantsTableHelper(this);
         churchesDb = new ChurchesTableHelper(this);
+        usersDb = new UsersTableHelper(this);
 
         //INTENTS
+        myBookmarksIntent = new Intent(UserHome.this, MyBookmarks.class);
+        churchFinderIntent = new Intent(UserHome.this, ChurchFinder.class);
         myChurchIntent = new Intent(UserHome.this, MyChurch.class);
         editUserProfileIntent = new Intent(UserHome.this, EditUserProfile.class);
         myChurchEventsIntent = new Intent(UserHome.this, MyChurchEvents.class);
@@ -88,6 +100,8 @@ public class UserHome extends AppCompatActivity
         fillListView();
         listViewClick();
         myChurchEventsClick();
+        bookmarksClick();
+        churchFinderClick();
         myChurchClick();
         editProfileClick();
     }
@@ -95,8 +109,15 @@ public class UserHome extends AppCompatActivity
     /**========================================FILL BUTTON TEXT========================================*/
     private void fillButtonText()
     {
-        Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
-        btn_myChurchEvents.setText("See all " + church.getName() + "'s Events");
+        if (usersDb.doesUserHaveChurch(Session.getUser().getEmail()))
+        {
+            Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
+            btn_myChurchEvents.setText("See all " + church.getName() + "'s Events");
+        }
+        else
+        {
+            btn_myChurchEvents.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**========================================FILL LIST VIEW========================================*/
@@ -124,6 +145,19 @@ public class UserHome extends AppCompatActivity
         });
     }
 
+    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
+    private void ifNoResultsShow()
+    {
+        if (listOfEvents.size() == 0)
+        {
+            tv_noResults.setVisibility(View.VISIBLE); //Show "no results"
+        }
+        else
+        {
+            tv_noResults.setVisibility(View.INVISIBLE);
+        }
+    }
+
     /**========================================MY CHURCH EVENTS CLICK========================================*/
     private void myChurchEventsClick()
     {
@@ -138,8 +172,36 @@ public class UserHome extends AppCompatActivity
         });
     }
 
+    /**========================================BOOKMARKS CLICK========================================*/
+    private void bookmarksClick()
+    {
+        btn_bookmarks.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Bookmarks Button Clicked - Moving to MyBookmarks");
+                startActivity(myBookmarksIntent);
+            }
+        });
+    }
+
+    /**========================================CHURCH FINDER CLICK========================================*/
+    private void churchFinderClick()
+    {
+        btn_churchFinder.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Church Finder Button Clicked - Moving to ChurchFinder");
+                startActivity(churchFinderIntent);
+            }
+        });
+    }
+
     /**========================================MY CHURCH CLICK========================================*/
-    public void myChurchClick()
+    private void myChurchClick()
     {
         btn_myChurch.setOnClickListener(new View.OnClickListener()
         {
@@ -164,18 +226,5 @@ public class UserHome extends AppCompatActivity
                 startActivity(editUserProfileIntent);
             }
         });
-    }
-
-    /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
-    private void ifNoResultsShow()
-    {
-        if (listOfEvents.size() == 0)
-        {
-            tv_noResults.setVisibility(View.VISIBLE); //Show "no results"
-        }
-        else
-        {
-            tv_noResults.setVisibility(View.INVISIBLE);
-        }
     }
 }

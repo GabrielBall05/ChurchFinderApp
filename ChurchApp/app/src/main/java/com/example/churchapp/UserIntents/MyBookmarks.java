@@ -9,8 +9,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,8 +30,10 @@ public class MyBookmarks extends AppCompatActivity
     EditText et_search;
     TextView tv_noResults;
     ListView lv_churches;
-    Button btn_home;
-    Button btn_editProfile;
+    ImageView btn_churchFinder;
+    ImageView btn_userHome;
+    ImageView btn_myChurch;
+    ImageView btn_editProfile;
 
     //DATABASE
     BookmarksTableHelper bookmarksDb;
@@ -39,8 +41,10 @@ public class MyBookmarks extends AppCompatActivity
 
     //INTENTS
     Intent churchDetailsIntent;
+    Intent churchFinderIntent;
+    Intent userHomeIntent;
+    Intent myChurchIntent;
     Intent editProfileIntent;
-    Intent userNoChurchHomeIntent;
 
     //ARRAYLISTS
     ArrayList<Bookmark> listOfBookmarks;
@@ -56,11 +60,13 @@ public class MyBookmarks extends AppCompatActivity
         setContentView(R.layout.activity_my_bookmarks);
 
         //GUI
-        et_search = findViewById(R.id.et_bookmarkedChurches_search);
-        tv_noResults = findViewById(R.id.tv_bookmarkedChurches_noResults);
-        lv_churches = findViewById(R.id.lv_bookmarkedChurches_churches);
-        btn_home = findViewById(R.id.btn_bookmarkedChurches_home);
-        btn_editProfile = findViewById(R.id.btn_bookmarkedChurches_editProfile);
+        et_search = findViewById(R.id.et_myBookmarks_search);
+        tv_noResults = findViewById(R.id.tv_myBookmarks_noResults);
+        lv_churches = findViewById(R.id.lv_myBookmarks_churches);
+        btn_churchFinder = findViewById(R.id.btn_myBookmarks_churchFinder);
+        btn_userHome = findViewById(R.id.btn_myBookmarks_userHome);
+        btn_myChurch = findViewById(R.id.btn_myBookmarks_myChurch);
+        btn_editProfile = findViewById(R.id.btn_myBookmarks_editProfile);
 
         //DATABASE
         bookmarksDb = new BookmarksTableHelper(this);
@@ -68,8 +74,10 @@ public class MyBookmarks extends AppCompatActivity
 
         //INTENTS
         churchDetailsIntent = new Intent(MyBookmarks.this, ChurchDetails.class);
+        churchFinderIntent = new Intent(MyBookmarks.this, ChurchFinder.class);
+        userHomeIntent = new Intent(MyBookmarks.this, UserHome.class);
+        myChurchIntent = new Intent(MyBookmarks.this, MyChurch.class);
         editProfileIntent = new Intent(MyBookmarks.this, EditUserProfile.class);
-        userNoChurchHomeIntent = new Intent(MyBookmarks.this, ChurchFinder.class);
 
         //ARRAYLISTS
         listOfBookmarks = new ArrayList<Bookmark>();
@@ -87,7 +95,9 @@ public class MyBookmarks extends AppCompatActivity
         fillListView();
         searchBarChange();
         listViewItemClick();
+        churchFinderButtonClick();
         homeButtonClick();
+        myChurchButtonClick();
         editProfileButtonClick();
     }
 
@@ -146,33 +156,6 @@ public class MyBookmarks extends AppCompatActivity
             }
         });
     }
-    /**========================================HOME BUTTON CLICK========================================*/
-    private void homeButtonClick()
-    {
-        btn_home.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to ChurchFinder");
-                startActivity(userNoChurchHomeIntent);
-            }
-        });
-    }
-
-    /**========================================EDIT PROFILE (USER) BUTTON CLICK========================================*/
-    private void editProfileButtonClick()
-    {
-        btn_editProfile.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
-                startActivity(editProfileIntent);
-            }
-        });
-    }
 
     /**========================================SHOW NO RESULTS IF THERE AREN'T ANY RESULTS========================================*/
     private void ifNoResultsShow()
@@ -185,5 +168,61 @@ public class MyBookmarks extends AppCompatActivity
         {
             tv_noResults.setVisibility(View.INVISIBLE);
         }
+    }
+
+    /**========================================CHURCH FINDER BUTTON CLICK========================================*/
+    private void churchFinderButtonClick()
+    {
+        btn_churchFinder.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Church Finder Button Clicked - Moving to ChurchFinder");
+                startActivity(churchFinderIntent);
+            }
+        });
+    }
+
+    /**========================================HOME BUTTON CLICK========================================*/
+    private void homeButtonClick()
+    {
+        btn_userHome.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserHome");
+                startActivity(userHomeIntent);
+            }
+        });
+    }
+
+    /**========================================MY CHURCH BUTTON CLICK========================================*/
+    private void myChurchButtonClick()
+    {
+        btn_myChurch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "My Church Button Clicked - Moving to MyChurch");
+                startActivity(myChurchIntent);
+            }
+        });
+    }
+
+    /**========================================EDIT PROFILE (USER) BUTTON CLICK========================================*/
+    private void editProfileButtonClick()
+    {
+        btn_editProfile.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Edit (User) Profile Button Clicked - Moving to EditUserProfile");
+                startActivity(editProfileIntent);
+            }
+        });
     }
 }
