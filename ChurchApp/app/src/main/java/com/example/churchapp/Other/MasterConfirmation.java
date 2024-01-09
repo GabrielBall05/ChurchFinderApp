@@ -132,7 +132,7 @@ public class MasterConfirmation extends AppCompatActivity
         }
         else if (cameFrom.equals("myChurchIntent"))
         {
-            tv_areYouSure.setText("Are you sure you want to leave " + church.getName() + "? This will also remove you from any events you are signed up for at this church.");
+            tv_areYouSure.setText("Are you sure you want to leave " + church.getName() + "? You can become a member again anytime.");
         }
     }
 
@@ -181,17 +181,16 @@ public class MasterConfirmation extends AppCompatActivity
                     usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), church.getEmail()); //Become member of church (update emailOfChurchAttending column)
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
-                    Session.login(user); //Log the user in again as to update the user's information in Session
+                    Session.login(user); //Log the user in again to update the user's information in Session
                     startActivity(userHomeIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
-                    Log.v("LEAVING CHURCH", "Leaving " + church.getName() + " & removing user from events - Moving to ChurchFinder");
+                    Log.v("LEAVING CHURCH", "Leaving " + church.getName() + " - Moving to ChurchFinder");
                     usersDb.becomeMemberOrLeaveChurch(Session.getUser().getEmail(), ""); //Leave the church (pass "")
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());
-                    Session.login(user);  //Log the user in again as to update the user's information in Session
-                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail()); //Remove the user from any events
+                    Session.login(user);  //Log the user in again to update the user's information in Session
                     startActivity(churchFinderIntent);
                 }
             }
