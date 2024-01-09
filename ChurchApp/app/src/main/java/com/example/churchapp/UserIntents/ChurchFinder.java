@@ -199,7 +199,6 @@ public class ChurchFinder extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
                 String text = parent.getItemAtPosition(i).toString();
-                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
                 if (text.equals(searchByDenomination)) //IF THE USER WANTS TO SEARCH BY DENOMINATION
                 {
@@ -323,7 +322,6 @@ public class ChurchFinder extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
                 String text = parent.getItemAtPosition(i).toString();
-                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
                 if (SearchParams.getSearchingBy().equals("denomination")) //If the user is searching by denomination
                 {

@@ -46,12 +46,14 @@ public class MasterConfirmation extends AppCompatActivity
     Intent editChurchProfileIntent;
     Intent editUserProfileIntent;
     Intent churchDetailsIntent;
-    Intent userWithChurchHomeIntent;
-    Intent userNoChurchHomeIntent;
+    Intent userHomeIntent;
+    Intent churchFinderIntent;
     Intent myChurchIntent;
 
-    //OTHER
+    //EXTRA
+    Intent origin;
     String cameFrom;
+    String deleteOrSignOut;
     Event eventToDelete;
     Church church;
 
@@ -79,11 +81,11 @@ public class MasterConfirmation extends AppCompatActivity
         editChurchProfileIntent = new Intent(MasterConfirmation.this, EditChurchProfile.class);
         editUserProfileIntent = new Intent(MasterConfirmation.this, EditUserProfile.class);
         churchDetailsIntent = new Intent(MasterConfirmation.this, ChurchDetails.class);
-        userWithChurchHomeIntent = new Intent(MasterConfirmation.this, UserHome.class);
-        userNoChurchHomeIntent = new Intent(MasterConfirmation.this, ChurchFinder.class);
+        userHomeIntent = new Intent(MasterConfirmation.this, UserHome.class);
+        churchFinderIntent = new Intent(MasterConfirmation.this, ChurchFinder.class);
         myChurchIntent = new Intent(MasterConfirmation.this, MyChurch.class);
 
-        Intent origin = getIntent();
+        origin = getIntent();
         cameFrom = origin.getStringExtra("cameFrom"); //Get the name of the previous intent
 
         if (cameFrom.equals("churchHomeIntent")) //If previous intent is ChurchHome, get the event
@@ -114,7 +116,15 @@ public class MasterConfirmation extends AppCompatActivity
         }
         else if (cameFrom.equals("editChurchProfileIntent") || cameFrom.equals("editUserProfileIntent"))
         {
-            tv_areYouSure.setText("Are you sure you want to delete your account?");
+            deleteOrSignOut = origin.getStringExtra("deleteOrSignOut");
+            if (deleteOrSignOut.equals("delete"))
+            {
+                tv_areYouSure.setText("Are you sure you want to delete your account?");
+            }
+            else if (deleteOrSignOut.equals("signOut"))
+            {
+                tv_areYouSure.setText("Are you sure you want to sign out?");
+            }
         }
         else if (cameFrom.equals("churchDetailsIntent"))
         {
@@ -152,11 +162,17 @@ public class MasterConfirmation extends AppCompatActivity
                     churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
                     startActivity(mainActivityIntent);
                 }
-                else if (cameFrom.equals("editUserProfileIntent"))
+                else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("delete"))
                 {
                     Log.v("DELETING", "Deleting User - Moving to MainActivity");
                     bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail()); //Delete bookmarks that the user has
                     usersDb.deleteUser(Session.getUser().getEmail()); //Delete the user
+                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
+                    startActivity(mainActivityIntent);
+                }
+                else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("signOut"))
+                {
+                    Log.v("SIGNING OUT", "Signing Out - Moving to MainActivity");
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
@@ -166,7 +182,7 @@ public class MasterConfirmation extends AppCompatActivity
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
                     Session.login(user); //Log the user in again as to update the user's information in Session
-                    startActivity(userWithChurchHomeIntent);
+                    startActivity(userHomeIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
@@ -176,7 +192,7 @@ public class MasterConfirmation extends AppCompatActivity
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());
                     Session.login(user);  //Log the user in again as to update the user's information in Session
                     participantsDb.removeUserFromAllEvents(Session.getUser().getEmail()); //Remove the user from any events
-                    startActivity(userNoChurchHomeIntent);
+                    startActivity(churchFinderIntent);
                 }
             }
         });
@@ -202,6 +218,11 @@ public class MasterConfirmation extends AppCompatActivity
                 {
                     Log.v("NO", "Not Deleting - Moving back to EditChurchProfile");
                     startActivity(editChurchProfileIntent);
+                }
+                else if (cameFrom.equals("editUserProfileIntent"))
+                {
+                    Log.v("NO", "Not Deleting/Signing Out - Moving back to EditUserProfile");
+                    startActivity(editUserProfileIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
                 {

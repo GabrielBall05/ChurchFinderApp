@@ -2,6 +2,7 @@ package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +49,6 @@ public class EditUserProfile extends AppCompatActivity
     Intent userHomeIntent;
     Intent myChurchIntent;
     Intent masterConfirmationIntent;
-    Intent mainActivityIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,7 +81,6 @@ public class EditUserProfile extends AppCompatActivity
         myChurchIntent = new Intent(EditUserProfile.this, MyChurch.class);
         bookmarksIntent = new Intent(EditUserProfile.this, MyBookmarks.class);
         masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
-        mainActivityIntent = new Intent(EditUserProfile.this, MainActivity.class);
 
         //Fill text boxes with current info
         fillInTextBoxes();
@@ -122,7 +121,6 @@ public class EditUserProfile extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
                 String text = parent.getItemAtPosition(i).toString();
-                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -155,9 +153,9 @@ public class EditUserProfile extends AppCompatActivity
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), password, fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
                     usersDb.updateUser(user); //Update user in database
-                    Session.login(user); //Log the user in so Session... works properly
-                    startActivity(userHomeIntent);
-                    Log.v("UPDATED ACCOUNT", "Updated Profile - Moving to ChurchFinder");
+                    Session.login(user); //Log the user in so Session works properly
+                    Toast.makeText(EditUserProfile.this, "Account information updated", Toast.LENGTH_SHORT).show();
+                    Log.v("UPDATED ACCOUNT", "Updated Profile - Staying in EditUserProfile");
                 }
             }
         });
@@ -173,6 +171,7 @@ public class EditUserProfile extends AppCompatActivity
             {
                 Log.v("BUTTON CLICK", "Delete User Account Button Clicked - Moving to MasterConfirmation");
                 masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
+                masterConfirmationIntent.putExtra("deleteOrSignOut", "delete"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);
             }
         });
@@ -186,8 +185,10 @@ public class EditUserProfile extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
-                startActivity(mainActivityIntent);
+                Log.v("BUTTON CLICK", "Sign Out Button Click - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
+                masterConfirmationIntent.putExtra("deleteOrSignOut", "signOut"); //Put whether the user is signing out or deleting
+                startActivity(masterConfirmationIntent);
             }
         });
     }

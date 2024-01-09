@@ -162,7 +162,6 @@ public class CreateAccount extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id)
             {
                 String text = parent.getItemAtPosition(i).toString();
-                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
