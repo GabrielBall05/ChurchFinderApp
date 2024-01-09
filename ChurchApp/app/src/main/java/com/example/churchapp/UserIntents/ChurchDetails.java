@@ -24,8 +24,7 @@ public class ChurchDetails extends AppCompatActivity
     TextView tv_denomination;
     TextView tv_email;
     TextView tv_number;
-    TextView tv_address;
-    TextView tv_city;
+    TextView tv_addressCity;
     TextView tv_statement;
     Button btn_becomeMember;
     Button btn_bookmark;
@@ -55,8 +54,7 @@ public class ChurchDetails extends AppCompatActivity
         tv_denomination = findViewById(R.id.tv_churchDetails_denomination);
         tv_email = findViewById(R.id.tv_churchDetails_email);
         tv_number = findViewById(R.id.tv_churchDetails_number);
-        tv_address = findViewById(R.id.tv_churchDetails_address);
-        tv_city = findViewById(R.id.tv_churchDetails_city);
+        tv_addressCity = findViewById(R.id.tv_churchDetails_addressCity);
         tv_statement = findViewById(R.id.tv_churchDetails_statement);
         btn_becomeMember = findViewById(R.id.btn_churchDetails_becomeMember);
         btn_bookmark = findViewById(R.id.btn_churchDetails_bookmark);
@@ -86,13 +84,12 @@ public class ChurchDetails extends AppCompatActivity
     /**========================================FILL TEXT BOXES========================================*/
     private void fillTextBoxes()
     {
-        tv_name.setText("Name: " + church.getName());
-        tv_denomination.setText("Denomination: " + church.getDenomination());
-        tv_email.setText("Email: " + church.getEmail());
-        tv_number.setText("Number: " + church.getNumber());
-        tv_address.setText("Address: " + church.getStreetAddress());
-        tv_city.setText("City: " + church.getCity());
-        tv_statement.setText("Statement of Faith: " + church.getStatementOfFaith());
+        tv_name.setText(church.getName());
+        tv_denomination.setText(church.getName() + " is a " + church.getDenomination() + " church");
+        tv_addressCity.setText("Located at " + church.getStreetAddress() + " in " + church.getCity());
+        tv_email.setText("Email them at " + church.getEmail());
+        tv_number.setText("Or call/text them at " + church.getNumber());
+        tv_statement.setText("Their Statement of Faith is: '" + church.getStatementOfFaith() + "'");
 
         //Correct the bookmark button text
         //Checks if the user has a bookmark of this church
@@ -132,7 +129,7 @@ public class ChurchDetails extends AppCompatActivity
             {
                 if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
                 {
-                    Log.v("BUTTON CLICK", "Un/Bookmark Bookmark Clicked - UN-BOOKMARKING");
+                    Log.v("BUTTON CLICK", "Un/Bookmark Button Clicked - UN-BOOKMARKING");
                     bookmarksDb.deleteBookmark(Session.getUser().getEmail(), church.getEmail()); //Delete the bookmark from the database
                 }
                 else

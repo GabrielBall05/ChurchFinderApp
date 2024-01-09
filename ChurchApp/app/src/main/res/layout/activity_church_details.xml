@@ -28,7 +28,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="54dp"
         android:text="Name: "
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +40,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="57dp"
         android:layout_marginEnd="54dp"
-        android:text="Denomination: "
-        android:textAlignment="textStart"
+        android:text=" is a   church"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,12 +53,12 @@
         android:layout_height="50dp"
         android:layout_marginStart="57dp"
         android:layout_marginEnd="54dp"
-        android:text="Contact Email: "
-        android:textAlignment="textStart"
+        android:text="Email them at "
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_denomination" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_addressCity" />
 
     <TextView
         android:id="@+id/tv_churchDetails_number"
@@ -66,37 +66,39 @@
         android:layout_height="50dp"
         android:layout_marginStart="57dp"
         android:layout_marginEnd="54dp"
-        android:text="Phone Number:"
-        android:textAlignment="textStart"
+        android:text="Or call/text them at"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_email" />
 
     <TextView
-        android:id="@+id/tv_churchDetails_address"
+        android:id="@+id/tv_churchDetails_addressCity"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="57dp"
         android:layout_marginEnd="54dp"
-        android:text="Street Address: "
-        android:textAlignment="textStart"
+        android:text="Located at   in"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_number" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_denomination" />
 
     <Button
         android:id="@+id/btn_churchDetails_bookmark"
         android:layout_width="170dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="13dp"
         android:text="Bookmark\nChurch"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_churchDetails_back"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_churchDetails_becomeMember" />
 
     <Button
         android:id="@+id/btn_churchDetails_back"
@@ -116,37 +118,27 @@
         android:layout_width="170dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="13dp"
         android:text="Become\nMember"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_churchDetails_back"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchDetails_bookmark"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_churchDetails_city"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="54dp"
-        android:text="City: "
-        android:textAlignment="textStart"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_address" />
 
     <TextView
         android:id="@+id/tv_churchDetails_statement"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginStart="57dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="54dp"
-        android:text="Statement of Faith: "
-        android:textAlignment="textStart"
+        android:text="Their statement of faith is:"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_city" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_churchDetails_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -96,7 +96,7 @@ public class MyChurch extends AppCompatActivity
             tv_addressCity.setText("Located at " + church.getStreetAddress() + " in " + church.getCity());
             tv_email.setText("Email them at " + church.getEmail());
             tv_number.setText("Or call/text them at " + church.getNumber());
-            tv_statement.setText("Their statement of Faith is: " + church.getStatementOfFaith());
+            tv_statement.setText("Their Statement of Faith is: " + church.getStatementOfFaith());
             btn_leave.setText("Leave " + church.getName());
             tv_notMember.setVisibility(View.INVISIBLE);
         }
