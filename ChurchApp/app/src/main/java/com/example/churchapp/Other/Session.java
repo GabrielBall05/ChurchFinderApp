@@ -10,6 +10,7 @@ public class Session
     private static String sessionType;
     private static User user;
     private static Church church;
+    private static String originPage;
 
     public static void login(User u) //Log the User in
     {
@@ -36,5 +37,13 @@ public class Session
     public static String getSessionType()
     {
         return sessionType;
+    }
+    public static String getOriginPage()
+    {
+        return originPage;
+    }
+    public static void setOriginPage(String s)
+    {
+        originPage = s;
     }
 }

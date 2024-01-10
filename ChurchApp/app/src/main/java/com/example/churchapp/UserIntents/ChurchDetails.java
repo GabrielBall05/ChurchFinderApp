@@ -36,7 +36,7 @@ public class ChurchDetails extends AppCompatActivity
 
     //INTENTS
     Intent masterConfirmationIntent;
-    Intent userNoChurchHomeIntent;
+    Intent churchFinderIntent;
     Intent bookmarkedChurchesIntent;
 
     //EXTRA
@@ -66,7 +66,7 @@ public class ChurchDetails extends AppCompatActivity
 
         //INTENTS
         masterConfirmationIntent = new Intent(ChurchDetails.this, MasterConfirmation.class);
-        userNoChurchHomeIntent = new Intent(ChurchDetails.this, ChurchFinder.class);
+        churchFinderIntent = new Intent(ChurchDetails.this, ChurchFinder.class);
         bookmarkedChurchesIntent = new Intent(ChurchDetails.this, MyBookmarks.class);
 
         //EXTRA
@@ -84,7 +84,7 @@ public class ChurchDetails extends AppCompatActivity
     /**========================================FILL TEXT BOXES========================================*/
     private void fillTextBoxes()
     {
-        tv_name.setText(church.getName());
+        tv_name.setText(church.getName() + "");
         tv_denomination.setText(church.getName() + " is a " + church.getDenomination() + " church");
         tv_addressCity.setText("Located at " + church.getStreetAddress() + " in " + church.getCity());
         tv_email.setText("Email them at " + church.getEmail());
@@ -163,12 +163,16 @@ public class ChurchDetails extends AppCompatActivity
                 if (cameFrom.equals("userNoChurchHomeIntent"))
                 {
                     Log.d("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
-                    startActivity(userNoChurchHomeIntent);
+                    startActivity(churchFinderIntent);
                 }
                 else if (cameFrom.equals("bookmarkedChurchesIntent"))
                 {
                     Log.d("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
                     startActivity(bookmarkedChurchesIntent);
+                }
+                else if (cameFrom.equals("masterConfirmationIntent")) //WILL BE CHANGED LATER TO A FEW DIFFERENT THINGS
+                {
+                    startActivity(churchFinderIntent);
                 }
             }
         });

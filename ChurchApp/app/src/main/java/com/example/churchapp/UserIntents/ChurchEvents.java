@@ -21,7 +21,7 @@ import com.example.churchapp.R;
 
 import java.util.ArrayList;
 
-public class MyChurchEvents extends AppCompatActivity
+public class ChurchEvents extends AppCompatActivity
 {
     //GUI
     TextView tv_title;
@@ -34,7 +34,7 @@ public class MyChurchEvents extends AppCompatActivity
     ChurchesTableHelper churchesDb;
 
     //INTENTS
-    Intent userWithChurchHomeIntent;
+    Intent userHomeIntent;
     Intent eventDetailsIntent;
 
     //ARRAYLIST
@@ -43,38 +43,49 @@ public class MyChurchEvents extends AppCompatActivity
     //ADAPTER
     MyEventsAdapter adapter;
 
+    //EXTRA
+    String cameFrom;
+    Church church;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_church_events);
+        setContentView(R.layout.activity_church_events);
 
         //GUI
-        tv_title = findViewById(R.id.tv_myChurchEvents_title);
-        tv_noResults = findViewById(R.id.tv_myChurchEvents_noResults);
-        btn_back = findViewById(R.id.btn_myChurchEvents_back);
-        lv_events = findViewById(R.id.lv_myChurchEvents_events);
+        tv_title = findViewById(R.id.tv_churchEvents_title);
+        tv_noResults = findViewById(R.id.tv_churchEvents_noResults);
+        btn_back = findViewById(R.id.btn_churchEvents_back);
+        lv_events = findViewById(R.id.lv_churchEvents_events);
 
         //DATABASE
         eventsDb = new EventsTableHelper(this);
         churchesDb = new ChurchesTableHelper(this);
 
         //INTENTS
-        userWithChurchHomeIntent = new Intent(MyChurchEvents.this, UserHome.class);
-        eventDetailsIntent = new Intent(MyChurchEvents.this, EventDetails.class);
+        userHomeIntent = new Intent(ChurchEvents.this, UserHome.class);
+        eventDetailsIntent = new Intent(ChurchEvents.this, EventDetails.class);
+
+        //EXTRA
+        Intent origin = getIntent();
+        cameFrom = origin.getStringExtra("cameFrom");
+        church = (Church) origin.getSerializableExtra("thisChurch");
 
         //ARRAYLIST
         listOfEvents = new ArrayList<Event>();
-        if (eventsDb.doesChurchHaveEvents(Session.getUser().getEmailOfChurchAttending())) //If the user's church has events
+        church = (Church) origin.getSerializableExtra("thisChurch");
+        if (eventsDb.doesChurchHaveEvents(church.getEmail()))
         {
-            //Get all the events from the user's church
-            listOfEvents = eventsDb.getAllEventsByChurchEmail(Session.getUser().getEmailOfChurchAttending());
+            tv_noResults.setVisibility(View.INVISIBLE);
+            listOfEvents = eventsDb.getAllEventsByChurchEmail(church.getEmail());
             fillListView();
         }
         else
         {
             tv_noResults.setVisibility(View.VISIBLE); //Show no results
         }
+
 
         //FUNCTIONS
         fillTitleText();
@@ -108,7 +119,8 @@ public class MyChurchEvents extends AppCompatActivity
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to EventDetails");
                 eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i)); //Put extra the clicked event
-                eventDetailsIntent.putExtra("cameFrom", "myChurchEventsIntent"); //Put extra the name of this intent
+                eventDetailsIntent.putExtra("cameFrom", "churchEventsIntent"); //Put extra the name of this intent
+                eventDetailsIntent.putExtra("thisChurch", church);
                 startActivity(eventDetailsIntent);
             }
         });
@@ -122,8 +134,21 @@ public class MyChurchEvents extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
-                startActivity(userWithChurchHomeIntent);
+                Log.v("BUTTON CLICK", "Back Button Clicked");
+
+                if (Session.getOriginPage().equals("userHomeIntent"))
+                {
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
+                    startActivity(userHomeIntent);
+                }
+                else if (Session.getOriginPage().equals("churchFinderIntent"))
+                {
+                    //startActivity();
+                }
+                else if (Session.getOriginPage().equals("bookmarksIntent"))
+                {
+                    //startActivity();
+                }
             }
         });
     }

@@ -44,7 +44,7 @@ public class UserHome extends AppCompatActivity
     //INTENTS
     Intent myChurchIntent;
     Intent editUserProfileIntent;
-    Intent myChurchEventsIntent;
+    Intent churchEventsIntent;
     Intent eventDetailsIntent;
     Intent myBookmarksIntent;
     Intent churchFinderIntent;
@@ -82,7 +82,7 @@ public class UserHome extends AppCompatActivity
         churchFinderIntent = new Intent(UserHome.this, ChurchFinder.class);
         myChurchIntent = new Intent(UserHome.this, MyChurch.class);
         editUserProfileIntent = new Intent(UserHome.this, EditUserProfile.class);
-        myChurchEventsIntent = new Intent(UserHome.this, MyChurchEvents.class);
+        churchEventsIntent = new Intent(UserHome.this, ChurchEvents.class);
         eventDetailsIntent = new Intent(UserHome.this, EventDetails.class);
 
         //ARRAYLIST
@@ -138,8 +138,9 @@ public class UserHome extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to EventDetails");
+                Session.setOriginPage("userHomeIntent");
                 eventDetailsIntent.putExtra("thisEvent", listOfEvents.get(i)); //Put extra the clicked event
-                eventDetailsIntent.putExtra("cameFrom", "userWithChurchHomeIntent"); //Put extra the name of this intent
+                eventDetailsIntent.putExtra("cameFrom", "userHomeIntent"); //Put extra the name of this intent
                 startActivity(eventDetailsIntent);
             }
         });
@@ -166,8 +167,12 @@ public class UserHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "My Church Events Button Clicked - Moving to MyChurchEvents");
-                startActivity(myChurchEventsIntent);
+                Log.v("BUTTON CLICK", "My Church Events Button Clicked - Moving to ChurchEvents");
+                Session.setOriginPage("userHomeIntent");
+                churchEventsIntent.putExtra("cameFrom", "userHomeIntent");
+                Church churchToPass = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
+                churchEventsIntent.putExtra("thisChurch", churchToPass);
+                startActivity(churchEventsIntent);
             }
         });
     }

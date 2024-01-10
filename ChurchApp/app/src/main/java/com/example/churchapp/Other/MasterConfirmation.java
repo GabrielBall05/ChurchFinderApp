@@ -227,6 +227,7 @@ public class MasterConfirmation extends AppCompatActivity
                 {
                     Log.v("NO", "Not Becoming Member - Moving back to ChurchDetails");
                     churchDetailsIntent.putExtra("thisChurch", church);
+                    churchDetailsIntent.putExtra("cameFrom", "masterConfirmationIntent");
                     startActivity(churchDetailsIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))

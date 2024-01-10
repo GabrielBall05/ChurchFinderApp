@@ -16,7 +16,7 @@
             android:name=".UserIntents.EventDetails"
             android:exported="false" />
         <activity
-            android:name=".UserIntents.MyChurchEvents"
+            android:name=".UserIntents.ChurchEvents"
             android:exported="false" />
         <activity
             android:name=".UserIntents.MyChurch"

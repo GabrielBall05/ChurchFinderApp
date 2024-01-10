@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.Database.EventParticipantsTableHelper;
+import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Other.Session;
@@ -26,14 +28,13 @@ public class EventDetails extends AppCompatActivity
     TextView tv_desc;
     Button btn_sign;
     Button btn_back;
-    Button btn_home;
 
     //DATABASE
     EventParticipantsTableHelper participantsDb;
 
     //INTENTS
-    Intent userWithChurchHomeIntent;
-    Intent myChurchEventsIntent;
+    Intent userHomeIntent;
+    Intent churchEventsIntent;
 
     //EXTRA
     String cameFrom;
@@ -54,14 +55,13 @@ public class EventDetails extends AppCompatActivity
         tv_desc = findViewById(R.id.tv_eventDetails_desc);
         btn_sign = findViewById(R.id.btn_eventDetails_sign);
         btn_back = findViewById(R.id.btn_eventDetails_back);
-        btn_home = findViewById(R.id.btn_eventDetails_home);
 
         //DATABASE
         participantsDb = new  EventParticipantsTableHelper(this);
 
         //INTENTS
-        userWithChurchHomeIntent = new Intent(EventDetails.this, UserHome.class);
-        myChurchEventsIntent = new Intent(EventDetails.this, MyChurchEvents.class);
+        userHomeIntent = new Intent(EventDetails.this, UserHome.class);
+        churchEventsIntent = new Intent(EventDetails.this, ChurchEvents.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -72,7 +72,6 @@ public class EventDetails extends AppCompatActivity
         fillTextBoxes();
         signButtonClick();
         backButtonClick();
-        homeButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -85,7 +84,7 @@ public class EventDetails extends AppCompatActivity
         tv_time.setText("Time: " + event.getTime());
         tv_desc.setText("Description: " + event.getDescription());
 
-        //Correct the bookmark button text
+        //Correct the join/leave event button text
         //Checks if the user is signed up for the event passed to me
         if(participantsDb.isUserSignedUpForEvent(event.getEventId(), Session.getUser().getEmail()))
         {
@@ -110,15 +109,17 @@ public class EventDetails extends AppCompatActivity
                     Log.v("BUTTON CLICK", "LEAVING EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
                     participantsDb.deleteEventParticipant(p); //Remove user from event
+                    Toast.makeText(EventDetails.this, "Leaving event", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     Log.v("BUTTON CLICK", "SIGNING UP FOR EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
                     participantsDb.createEventParticipant(p); //Add user as participant to this event
+                    Toast.makeText(EventDetails.this, "Joining event", Toast.LENGTH_SHORT).show();
                 }
 
-                //Correct the bookmark button text
+                //Correct the leave/join event button text
                 if(participantsDb.isUserSignedUpForEvent(event.getEventId(), Session.getUser().getEmail()))
                 {
                     btn_sign.setText("Leave\nEvent");
@@ -131,20 +132,6 @@ public class EventDetails extends AppCompatActivity
         });
     }
 
-    /**========================================HOME BUTTON CLICK========================================*/
-    private void homeButtonClick()
-    {
-        btn_home.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.v("BUTTON CLICK", "Home Button Clicked - Moving to UserHome");
-                startActivity(userWithChurchHomeIntent);
-            }
-        });
-    }
-
     /**========================================BACK BUTTON CLICK========================================*/
     private void backButtonClick()
     {
@@ -153,17 +140,18 @@ public class EventDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (cameFrom.equals("myChurchEventsIntent")) //If came from MyChurchEvents, go back there
+                if (cameFrom.equals("churchEventsIntent"))
                 {
-                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to MyChurchEvents");
-                    startActivity(myChurchEventsIntent);
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to ChurchEvents");
+                    churchEventsIntent.putExtra("cameFrom", "eventDetailsIntent");
+                    churchEventsIntent.putExtra("thisChurch", (Church) getIntent().getSerializableExtra("thisChurch"));
+                    startActivity(churchEventsIntent);
                 }
-                else if (cameFrom.equals("userWithChurchHomeIntent")) //If came from UserHome, go back there
+                else if (cameFrom.equals("userHomeIntent"))
                 {
                     Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
-                    startActivity(userWithChurchHomeIntent);
+                    startActivity(userHomeIntent);
                 }
-
             }
         });
     }
