@@ -10,7 +10,7 @@ public class Session
     private static String sessionType;
     private static User user;
     private static Church church;
-    private static String originPage;
+    private static String originPage; //Used to help wireframe
 
     public static void login(User u) //Log the User in
     {

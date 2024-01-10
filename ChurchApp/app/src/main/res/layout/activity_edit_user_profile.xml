@@ -8,49 +8,54 @@
 
     <ImageView
         android:id="@+id/btn_editUserProfile_bookmarks"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_editUserProfile_churchFinder"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bookmark3" />
 
     <ImageView
         android:id="@+id/btn_editUserProfile_churchFinder"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_editUserProfile_bookmarks"
         app:srcCompat="@drawable/search2" />
 
     <ImageView
         android:id="@+id/btn_editUserProfile_userHome"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_editUserProfile_myChurch"
         app:layout_constraintStart_toEndOf="@+id/btn_editUserProfile_churchFinder"
         app:srcCompat="@drawable/home" />
 
     <ImageView
         android:id="@+id/btn_editUserProfile_myChurch"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:srcCompat="@drawable/church" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/profile" />
@@ -60,13 +65,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="147dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="18dp"
         android:text="Sign Out"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_editUserProfile_churchFinder"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_editUserProfile_userHome"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -102,6 +107,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="City"
@@ -116,9 +122,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="298dp"
         android:text="Password:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_city" />
 
@@ -153,7 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="105dp"
         android:text="*Please keep all fields filled out*"
         android:textAlignment="center"
@@ -168,6 +176,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +187,7 @@
         android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="68dp"
         android:text="Update Account Info"
         android:textSize="24sp"
@@ -191,8 +200,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
+        android:layout_marginEnd="270dp"
         android:text="Denomination:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_password" />
 
@@ -216,8 +227,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
+        android:layout_marginEnd="342dp"
         android:text="City:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_lname" />
 
@@ -227,8 +240,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="83dp"
+        android:layout_marginEnd="291dp"
         android:text="First Name:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -237,9 +252,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
+        android:layout_marginEnd="291dp"
         android:text="Last Name:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_fname" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="14dp"
+        android:text="Edit Profile"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -122,6 +122,7 @@ public class MyChurch extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Leave Church Button Clicked - Moving to MasterConfirmation");
+                Session.setOriginPage("myChurchIntent");
                 masterConfirmationIntent.putExtra("cameFrom", "myChurchIntent"); //Put extra the name of this intent
                 Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
                 masterConfirmationIntent.putExtra("myChurch", church); //Put extra the church that the user attends

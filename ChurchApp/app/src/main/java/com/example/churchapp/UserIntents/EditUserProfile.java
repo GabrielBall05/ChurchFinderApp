@@ -170,6 +170,7 @@ public class EditUserProfile extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Delete User Account Button Clicked - Moving to MasterConfirmation");
+                Session.setOriginPage("editUserProfileIntent");
                 masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 masterConfirmationIntent.putExtra("deleteOrSignOut", "delete"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);
@@ -186,6 +187,7 @@ public class EditUserProfile extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Sign Out Button Click - Moving to MasterConfirmation");
+                Session.setOriginPage("editUserProfileIntent");
                 masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 masterConfirmationIntent.putExtra("deleteOrSignOut", "signOut"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);

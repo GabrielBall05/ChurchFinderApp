@@ -8,49 +8,54 @@
 
     <ImageView
         android:id="@+id/btn_myChurch_myBookmarks"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bookmark3" />
 
     <ImageView
         android:id="@+id/btn_myChurch_churchFinder"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_myChurch_userHome"
         app:layout_constraintStart_toEndOf="@+id/btn_myChurch_myBookmarks"
         app:srcCompat="@drawable/search2" />
 
     <ImageView
         android:id="@+id/btn_myChurch_userHome"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/btn_myChurch_churchFinder"
         app:srcCompat="@drawable/home" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_myChurch_editProfile"
+        app:layout_constraintStart_toEndOf="@+id/btn_myChurch_userHome"
         app:srcCompat="@drawable/church" />
 
     <ImageView
         android:id="@+id/btn_myChurch_editProfile"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/profile" />
@@ -67,6 +72,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_myChurch_notMember"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="-297dp"
+        android:text="You currently do not attend a church\nSearch for a church in the &quot;Church Finder&quot;"
+        android:textAlignment="center"
+        android:textColor="#A7A2A9"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_myChurch_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_myChurch_name"
@@ -162,17 +181,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_myChurch_statement" />
 
     <TextView
-        android:id="@+id/tv_myChurch_notMember"
-        android:layout_width="0dp"
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-300dp"
-        android:layout_marginTop="11dp"
-        android:text="You currently do not attend a church\nSearch for a church in the &quot;Church Finder&quot;"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="40dp"
+        android:text="My Church"
         android:textAlignment="center"
-        android:textColor="#A7A2A9"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_myChurch_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView40"
-        tools:visibility="invisible" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_myChurch_editProfile"
+        app:layout_constraintStart_toEndOf="@+id/btn_myChurch_userHome"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

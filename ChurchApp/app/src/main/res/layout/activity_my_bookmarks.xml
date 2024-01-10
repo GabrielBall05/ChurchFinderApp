@@ -8,29 +8,31 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bookmark3" />
 
     <ImageView
         android:id="@+id/btn_myBookmarks_churchFinder"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:srcCompat="@drawable/search2" />
 
     <ImageView
         android:id="@+id/btn_myBookmarks_userHome"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_myBookmarks_myChurch"
         app:layout_constraintStart_toEndOf="@+id/btn_myBookmarks_churchFinder"
@@ -38,20 +40,20 @@
 
     <ImageView
         android:id="@+id/btn_myBookmarks_myChurch"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_myBookmarks_editProfile"
         app:srcCompat="@drawable/church" />
 
     <ImageView
         android:id="@+id/btn_myBookmarks_editProfile"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/profile" />
@@ -62,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="79dp"
+        android:layout_marginEnd="78dp"
         android:text="Your Bookmarked\nChurches"
         android:textAlignment="center"
         android:textSize="32sp"
@@ -106,10 +108,24 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_myBookmarks_search" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="37dp"
+        android:text="Bookmarks"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_myBookmarks_churchFinder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
