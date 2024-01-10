@@ -36,6 +36,7 @@ public class ChurchEvents extends AppCompatActivity
     //INTENTS
     Intent userHomeIntent;
     Intent eventDetailsIntent;
+    Intent churchDetailsIntent;
 
     //ARRAYLIST
     ArrayList<Event> listOfEvents;
@@ -66,6 +67,7 @@ public class ChurchEvents extends AppCompatActivity
         //INTENTS
         userHomeIntent = new Intent(ChurchEvents.this, UserHome.class);
         eventDetailsIntent = new Intent(ChurchEvents.this, EventDetails.class);
+        churchDetailsIntent = new Intent(ChurchEvents.this, ChurchDetails.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -96,8 +98,7 @@ public class ChurchEvents extends AppCompatActivity
     /**========================================FILL TITLE TEXT========================================*/
     private void fillTitleText()
     {
-        Church church = churchesDb.getChurchByEmail(Session.getUser().getEmailOfChurchAttending());
-        tv_title.setText("All " + church.getName() + "'s events");
+        tv_title.setText("All " + churchesDb.getChurchByEmail(church.getEmail()).getName() + "'s events");
     }
 
     /**========================================FILL LIST VIEW========================================*/
@@ -141,13 +142,12 @@ public class ChurchEvents extends AppCompatActivity
                     Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
                     startActivity(userHomeIntent);
                 }
-                else if (Session.getOriginPage().equals("churchFinderIntent"))
+                else
                 {
-                    //startActivity();
-                }
-                else if (Session.getOriginPage().equals("bookmarksIntent"))
-                {
-                    //startActivity();
+                    Log.v("BUTTON CLICK", "Back Button Clicked - Moving to ChurchDetails");
+                    churchDetailsIntent.putExtra("cameFrom", "churchEventsIntent");
+                    churchDetailsIntent.putExtra("thisChurch", church);
+                    startActivity(churchDetailsIntent);
                 }
             }
         });

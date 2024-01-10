@@ -9,9 +9,9 @@
     <TextView
         android:id="@+id/tv_churchEvents_title"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="125dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="31dp"
         android:text="'s Events"
         android:textAlignment="center"
@@ -25,21 +25,20 @@
         android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="18dp"
         android:layout_marginEnd="68dp"
+        android:layout_marginBottom="32dp"
         android:text="Back"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lv_churchEvents_events" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_churchEvents_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="167dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginEnd="79dp"
         android:text="Your church has no upcoming events"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
@@ -52,10 +51,11 @@
     <ListView
         android:id="@+id/lv_churchEvents_events"
         android:layout_width="409dp"
-        android:layout_height="450dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="47dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_churchEvents_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_churchEvents_title" />

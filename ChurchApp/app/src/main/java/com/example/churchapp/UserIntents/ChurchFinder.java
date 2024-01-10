@@ -183,8 +183,9 @@ public class ChurchFinder extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
+                Session.setOriginPage("churchFinderIntent");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
-                churchDetailsIntent.putExtra("cameFrom", "userNoChurchHomeIntent");
+                churchDetailsIntent.putExtra("cameFrom", "churchFinderIntent");
                 startActivity(churchDetailsIntent);
             }
         });

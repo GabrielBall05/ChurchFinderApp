@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.BookmarksTableHelper;
@@ -29,6 +30,7 @@ public class ChurchDetails extends AppCompatActivity
     Button btn_becomeMember;
     Button btn_bookmark;
     Button btn_back;
+    Button btn_viewEvents;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -37,7 +39,8 @@ public class ChurchDetails extends AppCompatActivity
     //INTENTS
     Intent masterConfirmationIntent;
     Intent churchFinderIntent;
-    Intent bookmarkedChurchesIntent;
+    Intent bookmarksIntent;
+    Intent churchEventsIntent;
 
     //EXTRA
     Church church;
@@ -59,6 +62,7 @@ public class ChurchDetails extends AppCompatActivity
         btn_becomeMember = findViewById(R.id.btn_churchDetails_becomeMember);
         btn_bookmark = findViewById(R.id.btn_churchDetails_bookmark);
         btn_back = findViewById(R.id.btn_churchDetails_back);
+        btn_viewEvents = findViewById(R.id.btn_churchDetails_viewEvents);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
@@ -67,7 +71,8 @@ public class ChurchDetails extends AppCompatActivity
         //INTENTS
         masterConfirmationIntent = new Intent(ChurchDetails.this, MasterConfirmation.class);
         churchFinderIntent = new Intent(ChurchDetails.this, ChurchFinder.class);
-        bookmarkedChurchesIntent = new Intent(ChurchDetails.this, MyBookmarks.class);
+        bookmarksIntent = new Intent(ChurchDetails.this, MyBookmarks.class);
+        churchEventsIntent = new Intent(ChurchDetails.this, ChurchEvents.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -79,6 +84,7 @@ public class ChurchDetails extends AppCompatActivity
         becomeMemberButtonClick();
         bookmarkButtonClick();
         backButtonClick();
+        viewEventsButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -92,7 +98,6 @@ public class ChurchDetails extends AppCompatActivity
         tv_statement.setText("Their Statement of Faith is: '" + church.getStatementOfFaith() + "'");
 
         //Correct the bookmark button text
-        //Checks if the user has a bookmark of this church
         if(bookmarksDb.doesBookmarkExist(Session.getUser().getEmail(), church.getEmail()))
         {
             btn_bookmark.setText("Remove\nBookmark");
@@ -100,6 +105,13 @@ public class ChurchDetails extends AppCompatActivity
         else
         {
             btn_bookmark.setText("Bookmark\nChurch");
+        }
+
+        //Disable become member button if user is already member of this church
+        if (Session.getUser().getEmailOfChurchAttending().equals(church.getEmail()))
+        {
+            btn_becomeMember.setText("Already\nMember");
+            btn_becomeMember.setEnabled(false);
         }
     }
 
@@ -131,12 +143,14 @@ public class ChurchDetails extends AppCompatActivity
                 {
                     Log.v("BUTTON CLICK", "Un/Bookmark Button Clicked - UN-BOOKMARKING");
                     bookmarksDb.deleteBookmark(Session.getUser().getEmail(), church.getEmail()); //Delete the bookmark from the database
+                    Toast.makeText(ChurchDetails.this, "Deleted Bookmark", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     Log.v("BUTTON CLICK", "Un/Bookmark Button Clicked - BOOKMARKING");
                     Bookmark bookmark = new Bookmark(Session.getUser().getEmail(), church.getEmail());
                     bookmarksDb.createBookmark(bookmark); //Create a bookmark in the database with the emails of the user and the church
+                    Toast.makeText(ChurchDetails.this, "Created Bookmark", Toast.LENGTH_SHORT).show();
                 }
 
                 //Correct the bookmark button text
@@ -152,6 +166,22 @@ public class ChurchDetails extends AppCompatActivity
         });
     }
 
+    /**========================================VIEW EVENTS BUTTON CLICK========================================*/
+    private void viewEventsButtonClick()
+    {
+        btn_viewEvents.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "View Events Button Click - Moving to ChurchEvents");
+                churchEventsIntent.putExtra("cameFrom", "churchDetailsIntent");
+                churchEventsIntent.putExtra("thisChurch", church);
+                startActivity(churchEventsIntent);
+            }
+        });
+    }
+
     /**========================================BACK BUTTON CLICK========================================*/
     private void backButtonClick()
     {
@@ -160,19 +190,25 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (cameFrom.equals("userNoChurchHomeIntent"))
+                if (cameFrom.equals("churchFinderIntent"))
                 {
-                    Log.d("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
+                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
                     startActivity(churchFinderIntent);
                 }
-                else if (cameFrom.equals("bookmarkedChurchesIntent"))
+                else if (cameFrom.equals("masterConfirmationIntent") && Session.getOriginPage().equals("churchFinderIntent"))
                 {
-                    Log.d("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
-                    startActivity(bookmarkedChurchesIntent);
-                }
-                else if (cameFrom.equals("masterConfirmationIntent")) //WILL BE CHANGED LATER TO A FEW DIFFERENT THINGS
-                {
+                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
                     startActivity(churchFinderIntent);
+                }
+                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("churchFinderIntent"))
+                {
+                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
+                    startActivity(churchFinderIntent);
+                }
+                else if (cameFrom.equals("myBookmarksIntent"))
+                {
+                    Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
+                    startActivity(bookmarksIntent);
                 }
             }
         });

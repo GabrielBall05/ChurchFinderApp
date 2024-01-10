@@ -109,14 +109,14 @@ public class EventDetails extends AppCompatActivity
                     Log.v("BUTTON CLICK", "LEAVING EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
                     participantsDb.deleteEventParticipant(p); //Remove user from event
-                    Toast.makeText(EventDetails.this, "Leaving event", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventDetails.this, "Left event", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     Log.v("BUTTON CLICK", "SIGNING UP FOR EVENT");
                     EventParticipant p = new EventParticipant(event.getEventId(), Session.getUser().getEmail());
                     participantsDb.createEventParticipant(p); //Add user as participant to this event
-                    Toast.makeText(EventDetails.this, "Joining event", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventDetails.this, "Joined event", Toast.LENGTH_SHORT).show();
                 }
 
                 //Correct the leave/join event button text

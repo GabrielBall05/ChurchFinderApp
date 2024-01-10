@@ -180,7 +180,7 @@ public class MyChurch extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Edit Profile Button Clicked - Moving to EditUserProfile2");
+                Log.v("BUTTON CLICK", "Edit Profile Button Clicked - Moving to EditUserProfile");
                 startActivity(editUserProfileIntent);
             }
         });

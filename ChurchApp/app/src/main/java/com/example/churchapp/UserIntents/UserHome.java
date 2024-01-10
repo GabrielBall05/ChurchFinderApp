@@ -227,7 +227,7 @@ public class UserHome extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile2");
+                Log.v("BUTTON CLICK", "Edit Profile (User) Button Clicked - Moving to EditUserProfile");
                 startActivity(editUserProfileIntent);
             }
         });
