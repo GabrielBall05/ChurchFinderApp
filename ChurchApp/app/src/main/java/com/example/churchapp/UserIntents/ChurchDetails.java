@@ -210,6 +210,11 @@ public class ChurchDetails extends AppCompatActivity
                     Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
                     startActivity(bookmarksIntent);
                 }
+                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("myBookmarksIntent"))
+                {
+                    Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
+                    startActivity(bookmarksIntent);
+                }
             }
         });
     }

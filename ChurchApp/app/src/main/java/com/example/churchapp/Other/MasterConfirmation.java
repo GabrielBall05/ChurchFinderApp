@@ -128,7 +128,7 @@ public class MasterConfirmation extends AppCompatActivity
         }
         else if (cameFrom.equals("churchDetailsIntent"))
         {
-            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "? You can leave at any time in the 'My Church' page. Your bookmarks will remain intact");
+            tv_areYouSure.setText("Are you sure you want to become a member of " + church.getName() + "? You can leave at any time in the 'My Church' page.");
         }
         else if (cameFrom.equals("myChurchIntent"))
         {
@@ -182,7 +182,7 @@ public class MasterConfirmation extends AppCompatActivity
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
                     Session.login(user); //Log the user in again to update the user's information in Session
-                    startActivity(userHomeIntent);
+                    startActivity(myChurchIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {

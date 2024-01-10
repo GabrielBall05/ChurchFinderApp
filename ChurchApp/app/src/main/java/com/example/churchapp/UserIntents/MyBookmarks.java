@@ -150,6 +150,7 @@ public class MyBookmarks extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int i, long id)
             {
                 Log.v("LIST VIEW ITEM CLICK", "List View Item Clicked - Moving to ChurchDetails");
+                Session.setOriginPage("myBookmarksIntent");
                 churchDetailsIntent.putExtra("thisChurch", listOfChurches.get(i)); //Put extra the clicked church
                 churchDetailsIntent.putExtra("cameFrom", "myBookmarksIntent");
                 startActivity(churchDetailsIntent);
