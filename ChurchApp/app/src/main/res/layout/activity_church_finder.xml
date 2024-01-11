@@ -7,6 +7,16 @@
     tools:context=".UserIntents.ChurchFinder">
 
     <ImageView
+        android:id="@+id/btn_churchFinder_myChurch"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_editProfile"
+        app:srcCompat="@drawable/church" />
+
+    <ImageView
         android:id="@+id/btn_churchFinder_myBookmarks"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -17,7 +27,7 @@
         app:srcCompat="@drawable/bookmark3" />
 
     <ImageView
-        android:id="@+id/btn_churchFinder_churchFinder"
+        android:id="@+id/ignore"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginStart="40dp"
@@ -25,28 +35,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_churchFinder_myBookmarks"
         app:srcCompat="@drawable/search2" />
-
-    <ImageView
-        android:id="@+id/btn_churchFinder_userHome"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_churchFinder_churchFinder"
-        app:srcCompat="@drawable/home" />
-
-    <ImageView
-        android:id="@+id/btn_churchFinder_myChurch"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_editProfile"
-        app:layout_constraintStart_toEndOf="@+id/btn_churchFinder_userHome"
-        app:srcCompat="@drawable/church" />
 
     <ImageView
         android:id="@+id/btn_churchFinder_editProfile"
@@ -57,6 +45,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/profile" />
+
+    <ImageView
+        android:id="@+id/btn_churchFinder_userHome"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_myChurch"
+        app:layout_constraintStart_toEndOf="@+id/ignore"
+        app:srcCompat="@drawable/home" />
 
     <TextView
         android:id="@+id/textView13"
@@ -133,23 +133,22 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_churchFinder_churchFinder"
+        app:layout_constraintBottom_toTopOf="@+id/ignore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_churchFinder_denominations" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
         android:text="Find Church"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_churchFinder_userHome"
         app:layout_constraintStart_toEndOf="@+id/btn_churchFinder_myBookmarks"
-        app:layout_constraintTop_toBottomOf="@+id/btn_churchFinder_churchFinder" />
+        app:layout_constraintTop_toBottomOf="@+id/ignore" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
