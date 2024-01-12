@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Models.Event;
@@ -25,8 +27,8 @@ public class CreateEvent extends AppCompatActivity
     EditText et_desc;
     TextView tv_fieldsError;
     Button btn_create;
-    Button btn_churchHome;
-    Button btn_editProfile;
+    ImageView btn_churchHome;
+    ImageView btn_editProfile;
 
     //DATABASE
     EventsTableHelper eventsDb;
@@ -93,6 +95,7 @@ public class CreateEvent extends AppCompatActivity
                     //Order: churchHostingEmail, churchName, eventName, address, date, time, description
                     Event e = new Event(Session.getChurch().getEmail(), Session.getChurch().getName(), eventName, address, date, time, description);
                     eventsDb.createEvent(e); //Create the event in the database
+                    Toast.makeText(CreateEvent.this, "Event Created", Toast.LENGTH_SHORT).show();
                     Log.v("CREATED EVENT", "Event Created - Moving to ChurchHome");
                     startActivity(churchHomeIntent);
                 }

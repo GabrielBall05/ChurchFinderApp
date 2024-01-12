@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,8 +27,8 @@ public class ChurchHome extends AppCompatActivity
     //GUI
     ListView lv_myEvents;
     Button btn_viewMembers;
-    Button btn_createEvent;
-    Button btn_editProfile;
+    ImageView btn_createEvent;
+    ImageView btn_editProfile;
     TextView tv_noResults;
 
     //DATABASE

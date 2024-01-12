@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +35,8 @@ public class EditChurchProfile extends AppCompatActivity
     TextView tv_fieldsError;
     Button btn_update;
     Button btn_delete;
-    Button btn_createEvent;
-    Button btn_churchHome;
+    ImageView btn_createEvent;
+    ImageView btn_churchHome;
     Button btn_signOut;
 
     //DATABASE
@@ -65,7 +66,7 @@ public class EditChurchProfile extends AppCompatActivity
         btn_update = findViewById(R.id.btn_editChurchProfile_update);
         btn_delete = findViewById(R.id.btn_editChurchProfile_delete);
         btn_createEvent = findViewById(R.id.btn_editChurchProfile_createEvent);
-        btn_churchHome = findViewById(R.id.btn_editChurchProfile_churchHome);
+        btn_churchHome = findViewById(R.id.btn_editChurchProfile_home);
         btn_signOut = findViewById(R.id.btn_editChurchProfile_signOut);
 
         //DATABASE
@@ -158,6 +159,7 @@ public class EditChurchProfile extends AppCompatActivity
             {
                 Log.v("BUTTON CLICK", "Delete Church Account Button Clicked - Moving to MasterConfirmation");
                 masterConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent"); //Put extra the name of this intent
+                masterConfirmationIntent.putExtra("deleteOrSignOut", "delete"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);
             }
         });
@@ -211,7 +213,9 @@ public class EditChurchProfile extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.v("BUTTON CLICK", "Signing Out - Moving to MainActivity");
-                startActivity(mainActivityIntent);
+                masterConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
+                masterConfirmationIntent.putExtra("deleteOrSignOut", "signOut"); //Put whether the user is signing out or deleting
+                startActivity(masterConfirmationIntent);
             }
         });
     }

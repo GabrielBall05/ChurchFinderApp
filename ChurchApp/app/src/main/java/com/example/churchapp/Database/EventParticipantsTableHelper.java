@@ -116,7 +116,7 @@ public class EventParticipantsTableHelper
         }
     }
 
-    /**========================================REMOVE USER FROM ALL EVENTS========================================*/
+    /**========================================REMOVE ALL PARTICIPANTS FROM EVENT========================================*/
     public void removeAllParticipantsFromEvent(int id)
     {
         SQLiteDatabase db = ctx.getWritableDatabase();

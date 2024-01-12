@@ -26,6 +26,8 @@ import com.example.churchapp.UserIntents.ChurchFinder;
 import com.example.churchapp.UserIntents.MyChurch;
 import com.example.churchapp.UserIntents.UserHome;
 
+import java.util.ArrayList;
+
 public class MasterConfirmation extends AppCompatActivity
 {
     //GUI
@@ -154,12 +156,26 @@ public class MasterConfirmation extends AppCompatActivity
                     eventsDb.deleteEvent(eventToDelete.getEventId()); //Delete the event
                     startActivity(churchHomeIntent);
                 }
-                else if (cameFrom.equals("editChurchProfileIntent"))
+                else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("delete"))
                 {
                     Log.v("DELETING", "Deleting Church - Moving to MainActivity");
+                    ArrayList<Event> ls = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
+                    if (eventsDb.doesChurchHaveEvents(Session.getChurch().getEmail()))
+                    {
+                        for (int i = 0; i < ls.size(); i++) //Deletes all participants under every event this church has
+                        {
+                            participantsDb.removeAllParticipantsFromEvent(ls.get(i).getEventId());
+                        }
+                    }
                     eventsDb.deleteChurchEvents(Session.getChurch().getEmail()); //Delete the church's events
                     bookmarksDb.deleteChurchBookmarks(Session.getChurch().getEmail()); //Delete bookmarks (that any user has) of the church
+                    usersDb.removeAllUsersFromChurch(Session.getChurch().getEmail());
                     churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
+                    startActivity(mainActivityIntent);
+                }
+                else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("signOut"))
+                {
+                    Log.v("SIGNING OUT", "Signing Out - Moving to MainActivity");
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("delete"))

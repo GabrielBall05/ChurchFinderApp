@@ -89,7 +89,7 @@
     <Button
         android:id="@+id/btn_userHome_allEvents"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="35dp"
@@ -119,7 +119,7 @@
         android:layout_marginStart="77dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="77dp"
-        android:text="You are not signed up for any events\nClick the button below to sign up\nfor events from your church"
+        android:text="You are not signed up for any events.\nSelect the Church Finder to find\nchurches and their events, or if\nyou are already a member of a\nchurch, click the button below."
         android:textAlignment="center"
         android:textColor="#A7A2A9"
         android:textSize="16sp"

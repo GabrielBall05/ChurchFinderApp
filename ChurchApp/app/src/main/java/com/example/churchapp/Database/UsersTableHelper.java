@@ -175,6 +175,14 @@ public class UsersTableHelper
         return listOfUsers;
     }
 
+    /**========================================REMOVE ALL USERS FROM A SPECIFIC CHURCH (DELETING CHURCH)========================================*/
+    public void removeAllUsersFromChurch(String e)
+    {
+        SQLiteDatabase db = ctx.getWritableDatabase();
+        String query = "UPDATE " + DatabaseVariables.USERS_TABLE + " SET emailOfChurchAttending = '' WHERE emailOfChurchAttending = '" + e + "';";
+        db.execSQL(query);
+        db.close();
+    }
 
     /**========================================DOES EMAIL EXIST========================================*/
     public boolean doesEmailExist(String e)

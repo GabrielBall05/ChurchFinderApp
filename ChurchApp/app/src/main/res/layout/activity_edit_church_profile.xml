@@ -6,50 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ChurchIntents.EditChurchProfile">
 
-    <Button
+    <ImageView
         android:id="@+id/btn_editChurchProfile_createEvent"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Create Event"
-        android:textAlignment="center"
-        android:textSize="24sp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/event" />
 
-    <Button
-        android:id="@+id/btn_editChurchProfile_churchHome"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="1dp"
-        android:text="Home Page"
-        android:textAlignment="center"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/btn_editChurchProfile_home"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent" />
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent"
+        app:srcCompat="@drawable/church" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Edit Profile"
-        android:textAlignment="center"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/profile" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="129dp"
         android:text="Edit Profile"
         android:textSize="32sp"
@@ -57,132 +51,25 @@
         app:layout_constraintStart_toEndOf="@+id/textView23"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_editChurchProfile_name"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-    <EditText
-        android:id="@+id/et_editChurchProfile_number"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="Number"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
-
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="313dp"
-        android:text="Address:"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="24dp"
+        android:text="Name:"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_number" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="315dp"
-        android:text="Number:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_name" />
-
-    <EditText
-        android:id="@+id/et_editChurchProfile_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-    <Button
-        android:id="@+id/btn_editChurchProfile_delete"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="19dp"
-        android:text="Delete Account"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_editChurchProfile_update" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="301dp"
-        android:text="Password:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_statement" />
-
-    <Button
-        android:id="@+id/btn_editChurchProfile_update"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="71dp"
-        android:text="Update Account Info"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_editChurchProfile_fieldsError" />
-
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="273dp"
-        android:text="Denomination:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_password" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_editChurchProfile_fieldsError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginEnd="99dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginEnd="100dp"
         android:text="*Please keep all fields filled out*"
         android:textAlignment="center"
         android:textColor="#FF0000"
@@ -191,59 +78,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_editChurchProfile_denomination" />
 
-    <Spinner
-        android:id="@+id/sp_editChurchProfile_denomination"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="345dp"
-        android:text="City:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_address" />
-
-    <EditText
-        android:id="@+id/et_editChurchProfile_city"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="City"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="238dp"
-        android:text="Statement Of Faith:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_city" />
-
     <EditText
         android:id="@+id/et_editChurchProfile_statement"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="57dp"
         android:ems="10"
         android:hint="Statement of Faith"
         android:inputType="text"
@@ -252,11 +93,152 @@
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
     <EditText
+        android:id="@+id/et_editChurchProfile_city"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="57dp"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="316dp"
+        android:text="Number:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_name" />
+
+    <Button
+        android:id="@+id/btn_editChurchProfile_delete"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="7dp"
+        android:text="Delete Account"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_editChurchProfile_update" />
+
+    <EditText
+        android:id="@+id/et_editChurchProfile_number"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="57dp"
+        android:ems="10"
+        android:hint="Number"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <Button
+        android:id="@+id/btn_editChurchProfile_update"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="66dp"
+        android:text="Update Account Info"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_editChurchProfile_fieldsError" />
+
+    <Spinner
+        android:id="@+id/sp_editChurchProfile_denomination"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="57dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="274dp"
+        android:text="Denomination:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_password" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="302dp"
+        android:text="Password:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_statement" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="239dp"
+        android:text="Statement Of Faith:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_city" />
+
+    <Button
+        android:id="@+id/btn_editChurchProfile_signOut"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="5dp"
+        android:text="Sign Out"
+        android:textAlignment="center"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_editChurchProfile_home"
+        app:layout_constraintEnd_toStartOf="@+id/textView42"
+        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent" />
+
+    <EditText
+        android:id="@+id/et_editChurchProfile_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="57dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <EditText
         android:id="@+id/et_editChurchProfile_address"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="57dp"
         android:ems="10"
         android:hint="Street Address"
         android:inputType="text"
@@ -264,29 +246,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
-    <Button
-        android:id="@+id/btn_editChurchProfile_signOut"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="100dp"
-        android:text="Sign Out"
-        android:textAlignment="center"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent" />
-
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="50dp"
-        android:text="Name:"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="314dp"
+        android:text="Address:"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_number" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="346dp"
+        android:text="City:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_address" />
+
+    <EditText
+        android:id="@+id/et_editChurchProfile_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="57dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="50dp"
+        android:text="Edit Profile"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_home"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

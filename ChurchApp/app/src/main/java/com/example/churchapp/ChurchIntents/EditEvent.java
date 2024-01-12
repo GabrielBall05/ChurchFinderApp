@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.EventsTableHelper;
@@ -111,6 +112,7 @@ public class EditEvent extends AppCompatActivity
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //Order: eventId, churchHostingEmail, churchName, eventName, address, date, time, description
                     eventsDb.updateEvent(new Event(event.getEventId(), Session.getChurch().getEmail(), Session.getChurch().getName(), name, address, date, time, desc));
+                    Toast.makeText(EditEvent.this, "Event Updated", Toast.LENGTH_SHORT).show();
                     Log.v("UPDATED EVENT", "Updated Event - Moving to ChurchHome");
                     startActivity(churchHomeIntent);
                 }

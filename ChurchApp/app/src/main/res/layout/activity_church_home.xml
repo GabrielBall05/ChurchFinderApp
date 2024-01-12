@@ -36,8 +36,10 @@
     <ListView
         android:id="@+id/lv_churchHome_myEvents"
         android:layout_width="410dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="1dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_churchHome_viewMembers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -46,8 +48,8 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginEnd="89dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginEnd="72dp"
         android:text="Press and hold to delete event\nTap to edit event/view participants"
         android:textAlignment="center"
         android:textColor="#615E5E"
@@ -59,60 +61,24 @@
 
     <Button
         android:id="@+id/btn_churchHome_viewMembers"
-        android:layout_width="298dp"
-        android:layout_height="136dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="20dp"
-        android:text="View members of your church"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="17dp"
+        android:text="Your Members"
         android:textAlignment="center"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_churchHome_createEvent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_churchHome_createEvent" />
-
-    <Button
-        android:id="@+id/btn_churchHome_createEvent"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Create Event"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
-        android:text="Home Page"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_churchHome_editProfile"
-        app:layout_constraintStart_toEndOf="@+id/btn_churchHome_createEvent" />
-
-    <Button
-        android:id="@+id/btn_churchHome_editProfile"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Edit Profile"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tv_churchHome_noResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginEnd="117dp"
         android:text="You have no events made"
         android:textColor="#A7A2A9"
         android:textSize="16sp"
@@ -121,5 +87,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <ImageView
+        android:id="@+id/btn_churchHome_createEvent"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/event" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchHome_editProfile"
+        app:layout_constraintStart_toEndOf="@+id/btn_churchHome_createEvent"
+        app:srcCompat="@drawable/church" />
+
+    <ImageView
+        android:id="@+id/btn_churchHome_editProfile"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/profile" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="102dp"
+        android:text="Home"
+        app:layout_constraintEnd_toStartOf="@+id/btn_churchHome_editProfile"
+        app:layout_constraintStart_toEndOf="@+id/btn_churchHome_createEvent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
