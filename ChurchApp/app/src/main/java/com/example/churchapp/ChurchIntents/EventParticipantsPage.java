@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Models.User;
+import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.R;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class EventParticipantsPage extends AppCompatActivity
 
     //INTENTS
     Intent editEventIntent;
+    Intent masterConfirmationIntent;
 
     //ADAPTER
     ParticipantsAdapter adapter;
@@ -64,6 +67,7 @@ public class EventParticipantsPage extends AppCompatActivity
 
         //INTENTS
         editEventIntent = new Intent(EventParticipantsPage.this, EditEvent.class);
+        masterConfirmationIntent = new Intent(EventParticipantsPage.this, MasterConfirmation.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -84,6 +88,7 @@ public class EventParticipantsPage extends AppCompatActivity
         //FUNCTIONS
         fillText();
         fillListView();
+        listViewLongClick();
         backButtonClick();
     }
 
@@ -100,6 +105,26 @@ public class EventParticipantsPage extends AppCompatActivity
         lv_participants.setAdapter(adapter);
 
         ifNoResultsShow();
+    }
+
+    /**========================================LIST VIEW LONG CLICK (REMOVE PARTICIPANT)========================================*/
+    private void listViewLongClick()
+    {
+        lv_participants.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id)
+            {
+                Log.v("LIST VIEW LONG CLICK", "Remove Event Participant Action - Moving to MasterConfirmation");
+                masterConfirmationIntent.putExtra("cameFrom", "eventParticipantsIntent");
+                masterConfirmationIntent.putExtra("thisParticipant", listOfParticipants.get(i));
+                masterConfirmationIntent.putExtra("thisUser", listOfUsers.get(i));
+                masterConfirmationIntent.putExtra("thisEvent", event);
+                startActivity(masterConfirmationIntent);
+
+                return false;
+            }
+        });
     }
 
     /**========================================BACK BUTTON CLICK========================================*/

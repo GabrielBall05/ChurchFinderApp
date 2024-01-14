@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.ChurchIntents.ChurchHome;
 import com.example.churchapp.ChurchIntents.EditChurchProfile;
+import com.example.churchapp.ChurchIntents.EventParticipantsPage;
 import com.example.churchapp.Database.BookmarksTableHelper;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
@@ -18,6 +20,7 @@ import com.example.churchapp.Database.EventsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
+import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Models.User;
 import com.example.churchapp.R;
 import com.example.churchapp.UserIntents.ChurchDetails;
@@ -51,6 +54,7 @@ public class MasterConfirmation extends AppCompatActivity
     Intent userHomeIntent;
     Intent churchFinderIntent;
     Intent myChurchIntent;
+    Intent eventParticipantsIntent;
 
     //EXTRA
     Intent origin;
@@ -58,6 +62,9 @@ public class MasterConfirmation extends AppCompatActivity
     String deleteOrSignOut;
     Event eventToDelete;
     Church church;
+    EventParticipant participantToDelete;
+    Event eventToPassBack;
+    User userToShowInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -86,6 +93,7 @@ public class MasterConfirmation extends AppCompatActivity
         userHomeIntent = new Intent(MasterConfirmation.this, UserHome.class);
         churchFinderIntent = new Intent(MasterConfirmation.this, ChurchFinder.class);
         myChurchIntent = new Intent(MasterConfirmation.this, MyChurch.class);
+        eventParticipantsIntent = new Intent(MasterConfirmation.this, EventParticipantsPage.class);
 
         origin = getIntent();
         cameFrom = origin.getStringExtra("cameFrom"); //Get the name of the previous intent
@@ -101,6 +109,12 @@ public class MasterConfirmation extends AppCompatActivity
         else if (cameFrom.equals("myChurchIntent")) //If previous intent is MyChurch, get the church
         {
             church = (Church) origin.getSerializableExtra("myChurch");
+        }
+        else if (cameFrom.equals("eventParticipantsIntent"))
+        {
+            participantToDelete = (EventParticipant) origin.getSerializableExtra("thisParticipant");
+            eventToPassBack = (Event) origin.getSerializableExtra("thisEvent");
+            userToShowInfo = (User) origin.getSerializableExtra("thisUser");
         }
 
         //FUNCTIONS
@@ -135,6 +149,10 @@ public class MasterConfirmation extends AppCompatActivity
         else if (cameFrom.equals("myChurchIntent"))
         {
             tv_areYouSure.setText("Are you sure you want to leave " + church.getName() + "? You can become a member again anytime.");
+        }
+        else if (cameFrom.equals("eventParticipantsIntent"))
+        {
+            tv_areYouSure.setText("Are you sure you want to remove " + userToShowInfo.getFirstName() + " " + userToShowInfo.getLastName() + " from this event?");
         }
     }
 
@@ -209,6 +227,14 @@ public class MasterConfirmation extends AppCompatActivity
                     Session.login(user);  //Log the user in again to update the user's information in Session
                     startActivity(churchFinderIntent);
                 }
+                else if (cameFrom.equals("eventParticipantsIntent"))
+                {
+                    Log.v("REMOVING PARTICIPANT", "Removing " + userToShowInfo.getFirstName() + " " + userToShowInfo.getLastName() + " from event - Moving to EventParticipantsPage");
+                    EventParticipant part = new EventParticipant(eventToPassBack.getEventId(), participantToDelete.getEmailOfParticipant());
+                    participantsDb.deleteEventParticipant(part);
+                    eventParticipantsIntent.putExtra("myEvent", eventToPassBack);
+                    startActivity(eventParticipantsIntent);
+                }
             }
         });
     }
@@ -250,6 +276,12 @@ public class MasterConfirmation extends AppCompatActivity
                 {
                     Log.v("NO", "Staying Member - Moving back to MyChurch");
                     startActivity(myChurchIntent);
+                }
+                else if (cameFrom.equals("eventParticipantsIntent"))
+                {
+                    Log.v("NO", "Participant not being removed - Moving back to EventParticipantsPage");
+                    eventParticipantsIntent.putExtra("myEvent", eventToPassBack);
+                    startActivity(eventParticipantsIntent);
                 }
             }
         });
