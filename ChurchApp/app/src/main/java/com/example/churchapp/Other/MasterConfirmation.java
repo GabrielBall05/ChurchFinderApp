@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class MasterConfirmation extends AppCompatActivity
     TextView tv_areYouSure;
     Button btn_yes;
     Button btn_no;
+    EditText et_pass;
+    TextView tv_incorrect;
 
     //DATABASE
     ChurchesTableHelper churchesDb;
@@ -76,6 +79,8 @@ public class MasterConfirmation extends AppCompatActivity
         tv_areYouSure = findViewById(R.id.tv_masterConfirmation_areYouSure);
         btn_yes = findViewById(R.id.btn_masterConfirmation_yes);
         btn_no = findViewById(R.id.btn_masterConfirmation_no);
+        et_pass = findViewById(R.id.et_masterConfirmation_password);
+        tv_incorrect = findViewById(R.id.tv_masterConfirmation_incorrect);
 
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
@@ -126,6 +131,9 @@ public class MasterConfirmation extends AppCompatActivity
     /**========================================FILL TEXT VIEW========================================*/
     private void fillTextView()
     {
+        tv_incorrect.setVisibility(View.INVISIBLE);
+        et_pass.setVisibility(View.INVISIBLE);
+
         if (cameFrom.equals("churchHomeIntent"))
         {
             tv_areYouSure.setText("Are you sure you want to delete this event?");
@@ -136,6 +144,8 @@ public class MasterConfirmation extends AppCompatActivity
             if (deleteOrSignOut.equals("delete"))
             {
                 tv_areYouSure.setText("Are you sure you want to delete your account?");
+                et_pass.setVisibility(View.VISIBLE);
+                tv_incorrect.setVisibility(View.INVISIBLE);
             }
             else if (deleteOrSignOut.equals("signOut"))
             {
@@ -176,20 +186,29 @@ public class MasterConfirmation extends AppCompatActivity
                 }
                 else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("delete"))
                 {
-                    Log.v("DELETING", "Deleting Church - Moving to MainActivity");
-                    ArrayList<Event> ls = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
-                    if (eventsDb.doesChurchHaveEvents(Session.getChurch().getEmail()))
+                    if (et_pass.getText().toString().equals(Session.getChurch().getPassword()))
                     {
-                        for (int i = 0; i < ls.size(); i++) //Deletes all participants under every event this church has
+                        tv_incorrect.setVisibility(View.INVISIBLE);
+
+                        Log.v("DELETING", "Deleting Church - Moving to MainActivity");
+                        ArrayList<Event> ls = eventsDb.getAllEventsByChurchEmail(Session.getChurch().getEmail());
+                        if (eventsDb.doesChurchHaveEvents(Session.getChurch().getEmail()))
                         {
-                            participantsDb.removeAllParticipantsFromEvent(ls.get(i).getEventId());
+                            for (int i = 0; i < ls.size(); i++) //Deletes all participants under every event this church has
+                            {
+                                participantsDb.removeAllParticipantsFromEvent(ls.get(i).getEventId());
+                            }
                         }
+                        eventsDb.deleteChurchEvents(Session.getChurch().getEmail()); //Delete the church's events
+                        bookmarksDb.deleteChurchBookmarks(Session.getChurch().getEmail()); //Delete bookmarks (that any user has) of the church
+                        usersDb.removeAllUsersFromChurch(Session.getChurch().getEmail());
+                        churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
+                        startActivity(mainActivityIntent);
                     }
-                    eventsDb.deleteChurchEvents(Session.getChurch().getEmail()); //Delete the church's events
-                    bookmarksDb.deleteChurchBookmarks(Session.getChurch().getEmail()); //Delete bookmarks (that any user has) of the church
-                    usersDb.removeAllUsersFromChurch(Session.getChurch().getEmail());
-                    churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
-                    startActivity(mainActivityIntent);
+                    else
+                    {
+                        tv_incorrect.setVisibility(View.VISIBLE);
+                    }
                 }
                 else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("signOut"))
                 {
@@ -198,11 +217,20 @@ public class MasterConfirmation extends AppCompatActivity
                 }
                 else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("delete"))
                 {
-                    Log.v("DELETING", "Deleting User - Moving to MainActivity");
-                    bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail()); //Delete bookmarks that the user has
-                    usersDb.deleteUser(Session.getUser().getEmail()); //Delete the user
-                    participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
-                    startActivity(mainActivityIntent);
+                    if (et_pass.getText().toString().equals(Session.getUser().getPassword()))
+                    {
+                        tv_incorrect.setVisibility(View.INVISIBLE);
+
+                        Log.v("DELETING", "Deleting User - Moving to MainActivity");
+                        bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail()); //Delete bookmarks that the user has
+                        usersDb.deleteUser(Session.getUser().getEmail()); //Delete the user
+                        participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
+                        startActivity(mainActivityIntent);
+                    }
+                    else
+                    {
+                        tv_incorrect.setVisibility(View.VISIBLE);
+                    }
                 }
                 else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("signOut"))
                 {

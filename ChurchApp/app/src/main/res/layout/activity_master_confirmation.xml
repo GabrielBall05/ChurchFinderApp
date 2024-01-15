@@ -8,44 +8,74 @@
 
     <TextView
         android:id="@+id/tv_masterConfirmation_areYouSure"
-        android:layout_width="0dp"
+        android:layout_width="351dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="139dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="74dp"
         android:text="Are you sure you want to..."
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_masterConfirmation_no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/et_masterConfirmation_password"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="81dp"
+        android:ems="10"
+        android:hint='Type password to confirm'
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_masterConfirmation_areYouSure"
+        tools:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_masterConfirmation_incorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="106dp"
+        android:text="*Incorrect Password. Try Again*"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_masterConfirmation_password"
+        tools:visibility="invisible" />
+
     <Button
         android:id="@+id/btn_masterConfirmation_yes"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:text="Yes"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_masterConfirmation_no"
         app:layout_constraintEnd_toStartOf="@+id/btn_masterConfirmation_no"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_masterConfirmation_incorrect" />
 
     <Button
         android:id="@+id/btn_masterConfirmation_no"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="363dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:text="No"
         android:textAlignment="center"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_masterConfirmation_yes"
-        app:layout_constraintTop_toBottomOf="@+id/tv_masterConfirmation_areYouSure" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_masterConfirmation_incorrect" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
