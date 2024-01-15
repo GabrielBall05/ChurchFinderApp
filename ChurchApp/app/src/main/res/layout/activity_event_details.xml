@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".UserIntents.EventDetails">
 
+    <Button
+        android:id="@+id/btn_eventDetails_viewParts"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="15dp"
+        android:text="See All\nGoing"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_eventDetails_back"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_eventDetails_back"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="47dp"
+        android:text="Back"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_eventDetails_sign"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="15dp"
+        android:text="Sign\nUp"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_eventDetails_back"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
@@ -92,29 +130,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_eventDetails_date" />
-
-    <Button
-        android:id="@+id/btn_eventDetails_sign"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="38dp"
-        android:text="Sign\nUp"
-        android:textAlignment="center"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_eventDetails_desc" />
-
-    <Button
-        android:id="@+id/btn_eventDetails_back"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="38dp"
-        android:text="Back"
-        android:textAlignment="center"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_eventDetails_desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

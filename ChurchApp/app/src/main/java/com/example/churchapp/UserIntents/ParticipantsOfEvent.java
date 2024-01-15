@@ -1,4 +1,4 @@
-package com.example.churchapp.ChurchIntents;
+package com.example.churchapp.UserIntents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,72 +6,74 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.churchapp.Adapters.ListOfBookmarksAdapter;
 import com.example.churchapp.Adapters.ParticipantsAdapter;
+import com.example.churchapp.ChurchIntents.EventParticipantsPage;
 import com.example.churchapp.Database.EventParticipantsTableHelper;
 import com.example.churchapp.Database.UsersTableHelper;
+import com.example.churchapp.Models.Church;
 import com.example.churchapp.Models.Event;
 import com.example.churchapp.Models.EventParticipant;
 import com.example.churchapp.Models.User;
-import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EventParticipantsPage extends AppCompatActivity
+public class ParticipantsOfEvent extends AppCompatActivity
 {
     //GUI
     TextView tv_title;
     TextView tv_noResults;
-    ListView lv_participants;
     Button btn_back;
+    ListView lv_parts;
 
     //DATABASE
     EventParticipantsTableHelper participantsDb;
     UsersTableHelper usersDb;
 
     //INTENTS
-    Intent editEventIntent;
-    Intent masterConfirmationIntent;
-
-    //ADAPTER
-    ParticipantsAdapter adapter;
+    Intent eventDetailsIntent;
 
     //ARRAYLISTS
     ArrayList<User> listOfUsers;
     ArrayList<EventParticipant> listOfParticipants;
 
+    //ADAPTER
+    ParticipantsAdapter adapter;
+
     //EXTRA
     Event event;
+    Church church;
+    String lastCameFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_participants_page);
+        setContentView(R.layout.activity_participants_of_event);
 
         //GUI
-        tv_title = findViewById(R.id.tv_eventPartsPage_title);
-        tv_noResults = findViewById(R.id.tv_eventPartsPage_noResults);
-        lv_participants = findViewById(R.id.lv_eventPartsPage_participants);
-        btn_back = findViewById(R.id.btn_eventPartsPage_back);
+        tv_title = findViewById(R.id.tv_partsOfEvent_title);
+        tv_noResults = findViewById(R.id.tv_partsOfEvent_noResults);
+        btn_back = findViewById(R.id.btn_partsOfEvent_back);
+        lv_parts = findViewById(R.id.lv_partsOfEvent_parts);
 
         //DATABASE
-        participantsDb = new EventParticipantsTableHelper(this);
         usersDb = new UsersTableHelper(this);
+        participantsDb = new EventParticipantsTableHelper(this);
 
         //INTENTS
-        editEventIntent = new Intent(EventParticipantsPage.this, EditEvent.class);
-        masterConfirmationIntent = new Intent(EventParticipantsPage.this, MasterConfirmation.class);
+        eventDetailsIntent = new Intent(ParticipantsOfEvent.this, EventDetails.class);
 
         //EXTRA
         Intent origin = getIntent();
-        event = (Event) origin.getSerializableExtra("myEvent"); //Get the event passed
+        event = (Event) origin.getSerializableExtra("thisEvent");
+        church = (Church) origin.getSerializableExtra("thisChurch");
+        lastCameFrom = origin.getStringExtra("lastCameFrom");
 
         //ARRAYLISTS
         listOfParticipants = new ArrayList<EventParticipant>();
@@ -85,10 +87,8 @@ public class EventParticipantsPage extends AppCompatActivity
             listOfUsers.add(user);
         }
 
-        //FUNCTIONS
         fillText();
         fillListView();
-        listViewLongClick();
         backButtonClick();
     }
 
@@ -102,29 +102,9 @@ public class EventParticipantsPage extends AppCompatActivity
     private void fillListView()
     {
         adapter = new ParticipantsAdapter(this, listOfUsers);
-        lv_participants.setAdapter(adapter);
+        lv_parts.setAdapter(adapter);
 
         ifNoResultsShow();
-    }
-
-    /**========================================LIST VIEW LONG CLICK (REMOVE PARTICIPANT)========================================*/
-    private void listViewLongClick()
-    {
-        lv_participants.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id)
-            {
-                Log.v("LIST VIEW LONG CLICK", "Remove Event Participant Action - Moving to MasterConfirmation");
-                masterConfirmationIntent.putExtra("cameFrom", "eventParticipantsIntent");
-                masterConfirmationIntent.putExtra("thisParticipant", listOfParticipants.get(i));
-                masterConfirmationIntent.putExtra("thisUser", listOfUsers.get(i));
-                masterConfirmationIntent.putExtra("thisEvent", event);
-                startActivity(masterConfirmationIntent);
-
-                return false;
-            }
-        });
     }
 
     /**========================================BACK BUTTON CLICK========================================*/
@@ -135,9 +115,11 @@ public class EventParticipantsPage extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to EditEvent");
-                editEventIntent.putExtra("myEvent", event); //Put extra the event
-                startActivity(editEventIntent);
+                Log.v("BUTTON CLICK", "Back Button Clicked - Moving to EventDetails");
+                eventDetailsIntent.putExtra("cameFrom", lastCameFrom);
+                eventDetailsIntent.putExtra("thisChurch", church);
+                eventDetailsIntent.putExtra("thisEvent", event);
+                startActivity(eventDetailsIntent);
             }
         });
     }

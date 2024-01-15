@@ -28,6 +28,7 @@ public class EventDetails extends AppCompatActivity
     TextView tv_desc;
     Button btn_sign;
     Button btn_back;
+    Button btn_viewParts;
 
     //DATABASE
     EventParticipantsTableHelper participantsDb;
@@ -35,6 +36,7 @@ public class EventDetails extends AppCompatActivity
     //INTENTS
     Intent userHomeIntent;
     Intent churchEventsIntent;
+    Intent participantsOfEventIntent;
 
     //EXTRA
     String cameFrom;
@@ -55,6 +57,7 @@ public class EventDetails extends AppCompatActivity
         tv_desc = findViewById(R.id.tv_eventDetails_desc);
         btn_sign = findViewById(R.id.btn_eventDetails_sign);
         btn_back = findViewById(R.id.btn_eventDetails_back);
+        btn_viewParts = findViewById(R.id.btn_eventDetails_viewParts);
 
         //DATABASE
         participantsDb = new  EventParticipantsTableHelper(this);
@@ -62,6 +65,7 @@ public class EventDetails extends AppCompatActivity
         //INTENTS
         userHomeIntent = new Intent(EventDetails.this, UserHome.class);
         churchEventsIntent = new Intent(EventDetails.this, ChurchEvents.class);
+        participantsOfEventIntent = new Intent(EventDetails.this, ParticipantsOfEvent.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -72,6 +76,7 @@ public class EventDetails extends AppCompatActivity
         fillTextBoxes();
         signButtonClick();
         backButtonClick();
+        viewParticipantsButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -152,6 +157,23 @@ public class EventDetails extends AppCompatActivity
                     Log.v("BUTTON CLICK", "Back Button Clicked - Moving to UserHome");
                     startActivity(userHomeIntent);
                 }
+            }
+        });
+    }
+
+    /**========================================VIEW PARTICIPANTS BUTTON CLICK========================================*/
+    private void viewParticipantsButtonClick()
+    {
+        btn_viewParts.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "View Participants Button Clicked - Moving to ParticipantsOfEvent");
+                participantsOfEventIntent.putExtra("lastCameFrom", cameFrom);
+                participantsOfEventIntent.putExtra("thisEvent", event);
+                participantsOfEventIntent.putExtra("thisChurch", (Church) getIntent().getSerializableExtra("thisChurch"));
+                startActivity(participantsOfEventIntent);
             }
         });
     }
