@@ -31,6 +31,7 @@ public class ChurchDetails extends AppCompatActivity
     Button btn_bookmark;
     Button btn_back;
     Button btn_viewEvents;
+    Button btn_viewMembers;
 
     //DATABASE
     UsersTableHelper usersDb;
@@ -41,6 +42,7 @@ public class ChurchDetails extends AppCompatActivity
     Intent churchFinderIntent;
     Intent bookmarksIntent;
     Intent churchEventsIntent;
+    Intent churchMembersIntent;
 
     //EXTRA
     Church church;
@@ -63,6 +65,7 @@ public class ChurchDetails extends AppCompatActivity
         btn_bookmark = findViewById(R.id.btn_churchDetails_bookmark);
         btn_back = findViewById(R.id.btn_churchDetails_back);
         btn_viewEvents = findViewById(R.id.btn_churchDetails_viewEvents);
+        btn_viewMembers = findViewById(R.id.btn_churchDetails_viewMembers);
 
         //DATABASE
         usersDb = new UsersTableHelper(this);
@@ -73,6 +76,7 @@ public class ChurchDetails extends AppCompatActivity
         churchFinderIntent = new Intent(ChurchDetails.this, ChurchFinder.class);
         bookmarksIntent = new Intent(ChurchDetails.this, MyBookmarks.class);
         churchEventsIntent = new Intent(ChurchDetails.this, ChurchEvents.class);
+        churchMembersIntent = new Intent(ChurchDetails.this, ChurchMembers.class);
 
         //EXTRA
         Intent origin = getIntent();
@@ -85,6 +89,7 @@ public class ChurchDetails extends AppCompatActivity
         bookmarkButtonClick();
         backButtonClick();
         viewEventsButtonClick();
+        viewMembersButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -190,31 +195,57 @@ public class ChurchDetails extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (cameFrom.equals("churchFinderIntent"))
+//                if (cameFrom.equals("churchFinderIntent"))
+//                {
+//                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
+//                    startActivity(churchFinderIntent);
+//                }
+//                else if (cameFrom.equals("masterConfirmationIntent") && Session.getOriginPage().equals("churchFinderIntent"))
+//                {
+//                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
+//                    startActivity(churchFinderIntent);
+//                }
+//                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("churchFinderIntent"))
+//                {
+//                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
+//                    startActivity(churchFinderIntent);
+//                }
+//                else if (cameFrom.equals("myBookmarksIntent"))
+//                {
+//                    Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
+//                    startActivity(bookmarksIntent);
+//                }
+//                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("myBookmarksIntent"))
+//                {
+//                    Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
+//                    startActivity(bookmarksIntent);
+//                }
+                if (Session.getOriginPage().equals("churchFinderIntent"))
                 {
                     Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
                     startActivity(churchFinderIntent);
                 }
-                else if (cameFrom.equals("masterConfirmationIntent") && Session.getOriginPage().equals("churchFinderIntent"))
-                {
-                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
-                    startActivity(churchFinderIntent);
-                }
-                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("churchFinderIntent"))
-                {
-                    Log.v("BUTTON CLICK", "Back Button Click - Moving to ChurchFinder");
-                    startActivity(churchFinderIntent);
-                }
-                else if (cameFrom.equals("myBookmarksIntent"))
+                else if (Session.getOriginPage().equals("myBookmarksIntent"))
                 {
                     Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
                     startActivity(bookmarksIntent);
                 }
-                else if (cameFrom.equals("churchEventsIntent") && Session.getOriginPage().equals("myBookmarksIntent"))
-                {
-                    Log.v("BUTTON CLICK", "Back Button Click - Moving to MyBookmarks");
-                    startActivity(bookmarksIntent);
-                }
+            }
+        });
+    }
+
+    /**========================================VIEW MEMBERS BUTTON CLICK========================================*/
+    private void viewMembersButtonClick()
+    {
+        btn_viewMembers.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "View Members Button Click - Moving to ChurchMembers");
+                churchMembersIntent.putExtra("cameFrom", "churchDetailsIntent");
+                churchMembersIntent.putExtra("thisChurch", church);
+                startActivity(churchMembersIntent);
             }
         });
     }
