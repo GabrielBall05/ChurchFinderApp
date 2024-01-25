@@ -182,6 +182,7 @@ public class MasterConfirmation extends AppCompatActivity
                     Log.v("DELETING", "Deleting Event - Moving to ChurchHome");
                     participantsDb.removeAllParticipantsFromEvent(eventToDelete.getEventId()); //Remove all participants of that event
                     eventsDb.deleteEvent(eventToDelete.getEventId()); //Delete the event
+                    Toast.makeText(MasterConfirmation.this, "Event Deleted", Toast.LENGTH_SHORT).show();
                     startActivity(churchHomeIntent);
                 }
                 else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("delete"))
@@ -203,6 +204,7 @@ public class MasterConfirmation extends AppCompatActivity
                         bookmarksDb.deleteChurchBookmarks(Session.getChurch().getEmail()); //Delete bookmarks (that any user has) of the church
                         usersDb.removeAllUsersFromChurch(Session.getChurch().getEmail());
                         churchesDb.deleteChurch(Session.getChurch().getEmail()); //Delete the church
+                        Toast.makeText(MasterConfirmation.this, "Your Account Has Been Deleted", Toast.LENGTH_SHORT).show();
                         startActivity(mainActivityIntent);
                     }
                     else
@@ -213,6 +215,7 @@ public class MasterConfirmation extends AppCompatActivity
                 else if (cameFrom.equals("editChurchProfileIntent")  && deleteOrSignOut.equals("signOut"))
                 {
                     Log.v("SIGNING OUT", "Signing Out - Moving to MainActivity");
+                    Toast.makeText(MasterConfirmation.this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("delete"))
@@ -225,6 +228,7 @@ public class MasterConfirmation extends AppCompatActivity
                         bookmarksDb.deleteUserBookmarks(Session.getUser().getEmail()); //Delete bookmarks that the user has
                         usersDb.deleteUser(Session.getUser().getEmail()); //Delete the user
                         participantsDb.removeUserFromAllEvents(Session.getUser().getEmail());
+                        Toast.makeText(MasterConfirmation.this, "Your Account Has Been Deleted", Toast.LENGTH_SHORT).show();
                         startActivity(mainActivityIntent);
                     }
                     else
@@ -235,6 +239,7 @@ public class MasterConfirmation extends AppCompatActivity
                 else if (cameFrom.equals("editUserProfileIntent") && deleteOrSignOut.equals("signOut"))
                 {
                     Log.v("SIGNING OUT", "Signing Out - Moving to MainActivity");
+                    Toast.makeText(MasterConfirmation.this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(mainActivityIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
@@ -244,6 +249,7 @@ public class MasterConfirmation extends AppCompatActivity
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), church.getEmail(), Session.getUser().getDenomination(), Session.getUser().getCity());
                     Session.login(user); //Log the user in again to update the user's information in Session
+                    Toast.makeText(MasterConfirmation.this, "Became Member", Toast.LENGTH_SHORT).show();
                     startActivity(myChurchIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
@@ -253,6 +259,7 @@ public class MasterConfirmation extends AppCompatActivity
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
                     User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), Session.getUser().getFirstName(), Session.getUser().getLastName(), "", Session.getUser().getDenomination(), Session.getUser().getCity());
                     Session.login(user);  //Log the user in again to update the user's information in Session
+                    Toast.makeText(MasterConfirmation.this, "Left Church", Toast.LENGTH_SHORT).show();
                     startActivity(churchFinderIntent);
                 }
                 else if (cameFrom.equals("eventParticipantsIntent"))
@@ -261,6 +268,7 @@ public class MasterConfirmation extends AppCompatActivity
                     EventParticipant part = new EventParticipant(eventToPassBack.getEventId(), participantToDelete.getEmailOfParticipant());
                     participantsDb.deleteEventParticipant(part);
                     eventParticipantsIntent.putExtra("myEvent", eventToPassBack);
+                    Toast.makeText(MasterConfirmation.this, "Removed Participant From Event", Toast.LENGTH_SHORT).show();
                     startActivity(eventParticipantsIntent);
                 }
             }
@@ -281,16 +289,19 @@ public class MasterConfirmation extends AppCompatActivity
                 if (cameFrom.equals("churchHomeIntent"))
                 {
                     Log.v("NO", "Not Deleting - Moving back to ChurchHome");
+                    Toast.makeText(MasterConfirmation.this, "NOT Deleting Event", Toast.LENGTH_SHORT).show();
                     startActivity(churchHomeIntent);
                 }
                 else if (cameFrom.equals("editChurchProfileIntent"))
                 {
                     Log.v("NO", "Not Deleting - Moving back to EditChurchProfile");
+                    Toast.makeText(MasterConfirmation.this, "Selected 'NO'", Toast.LENGTH_SHORT).show();
                     startActivity(editChurchProfileIntent);
                 }
                 else if (cameFrom.equals("editUserProfileIntent"))
                 {
                     Log.v("NO", "Not Deleting/Signing Out - Moving back to EditUserProfile");
+                    Toast.makeText(MasterConfirmation.this, "Selected 'NO'", Toast.LENGTH_SHORT).show();
                     startActivity(editUserProfileIntent);
                 }
                 else if (cameFrom.equals("churchDetailsIntent"))
@@ -298,17 +309,20 @@ public class MasterConfirmation extends AppCompatActivity
                     Log.v("NO", "Not Becoming Member - Moving back to ChurchDetails");
                     churchDetailsIntent.putExtra("thisChurch", church);
                     churchDetailsIntent.putExtra("cameFrom", "masterConfirmationIntent");
+                    Toast.makeText(MasterConfirmation.this, "NOT Becoming Member", Toast.LENGTH_SHORT).show();
                     startActivity(churchDetailsIntent);
                 }
                 else if (cameFrom.equals("myChurchIntent"))
                 {
                     Log.v("NO", "Staying Member - Moving back to MyChurch");
+                    Toast.makeText(MasterConfirmation.this, "Staying Member", Toast.LENGTH_SHORT).show();
                     startActivity(myChurchIntent);
                 }
                 else if (cameFrom.equals("eventParticipantsIntent"))
                 {
                     Log.v("NO", "Participant not being removed - Moving back to EventParticipantsPage");
                     eventParticipantsIntent.putExtra("myEvent", eventToPassBack);
+                    Toast.makeText(MasterConfirmation.this, "NOT Removing Participant", Toast.LENGTH_SHORT).show();
                     startActivity(eventParticipantsIntent);
                 }
             }

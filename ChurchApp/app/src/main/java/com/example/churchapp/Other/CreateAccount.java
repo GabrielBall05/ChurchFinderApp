@@ -139,8 +139,9 @@ public class CreateAccount extends AppCompatActivity
                             User user = new User(email, password, firstname, lastname, "", denomination, city);
                             usersDb.createUser(user); //Create the user in the database
                             Session.login(user); //Log the User in
-                            startActivity(userNoChurchHome);
                             Log.v("CREATED USER", "Created User Account - Moving to ChurchFinder");
+                            Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+                            startActivity(userNoChurchHome);
                         }
                     }
                 }

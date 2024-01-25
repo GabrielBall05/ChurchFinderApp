@@ -140,6 +140,7 @@ public class CreateChurch extends AppCompatActivity
                             churchesDb.createChurch(church); //Create the church in database
                             Session.login(church); //Log the church in
                             Log.v("CREATED CHURCH", "Created Church Account - Moving to ChurchHome");
+                            Toast.makeText(CreateChurch.this, "Church Account Created", Toast.LENGTH_SHORT).show();
                             startActivity(churchHomeIntent);
                         }
                         else

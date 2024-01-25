@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.churchapp.ChurchIntents.ChurchHome;
 import com.example.churchapp.Database.BookmarksTableHelper;
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             Session.login(user); //Log the user in
                             Log.v("LOGGING IN", "Logged in User - Moving to UserHome");
+                            Toast.makeText(MainActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
                             startActivity(userHomeIntent);
                         }
                         else
