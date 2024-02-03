@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.churchapp.Other.ChangePassword;
 import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.ChurchesTableHelper;
 import com.example.churchapp.Other.MainActivity;
@@ -30,7 +31,6 @@ public class EditChurchProfile extends AppCompatActivity
     EditText et_address;
     EditText et_city;
     EditText et_statement;
-    EditText et_password;
     Spinner sp_denomination;
     TextView tv_fieldsError;
     Button btn_update;
@@ -38,6 +38,7 @@ public class EditChurchProfile extends AppCompatActivity
     ImageView btn_createEvent;
     ImageView btn_churchHome;
     Button btn_signOut;
+    Button btn_changePassword;
 
     //DATABASE
     ChurchesTableHelper churchesDb;
@@ -47,6 +48,7 @@ public class EditChurchProfile extends AppCompatActivity
     Intent createEventIntent;
     Intent masterConfirmationIntent;
     Intent mainActivityIntent;
+    Intent changePasswordIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,7 +62,6 @@ public class EditChurchProfile extends AppCompatActivity
         et_address = findViewById(R.id.et_editChurchProfile_address);
         et_city = findViewById(R.id.et_editChurchProfile_city);
         et_statement = findViewById(R.id.et_editChurchProfile_statement);
-        et_password = findViewById(R.id.et_editChurchProfile_password);
         sp_denomination = findViewById(R.id.sp_editChurchProfile_denomination);
         tv_fieldsError = findViewById(R.id.tv_editChurchProfile_fieldsError);
         btn_update = findViewById(R.id.btn_editChurchProfile_update);
@@ -68,6 +69,7 @@ public class EditChurchProfile extends AppCompatActivity
         btn_createEvent = findViewById(R.id.btn_editChurchProfile_createEvent);
         btn_churchHome = findViewById(R.id.btn_editChurchProfile_home);
         btn_signOut = findViewById(R.id.btn_editChurchProfile_signOut);
+        btn_changePassword = findViewById(R.id.btn_editChurchProfile_changePassword);
 
         //DATABASE
         churchesDb = new ChurchesTableHelper(this);
@@ -77,6 +79,7 @@ public class EditChurchProfile extends AppCompatActivity
         createEventIntent = new Intent(EditChurchProfile.this, CreateEvent.class);
         masterConfirmationIntent = new Intent(EditChurchProfile.this, MasterConfirmation.class);
         mainActivityIntent = new Intent(EditChurchProfile.this, MainActivity.class);
+        changePasswordIntent = new Intent(EditChurchProfile.this, ChangePassword.class);
 
         //FILL TEXT BOXES WITH CURRENT INFO
         fillInTextBoxes();
@@ -95,6 +98,7 @@ public class EditChurchProfile extends AppCompatActivity
         churchHomeButtonClick();
         denominationSelect();
         signOutButtonClick();
+        changePasswordButtonClick();
     }
 
     /**========================================UPDATE BUTTON CLICK========================================*/
@@ -112,11 +116,10 @@ public class EditChurchProfile extends AppCompatActivity
                 String address = et_address.getText().toString();
                 String city = et_city.getText().toString();
                 String statement = et_statement.getText().toString();
-                String password = et_password.getText().toString();
                 String denomination = sp_denomination.getSelectedItem().toString();
 
                 //A field is empty
-                if(name.equals("") || number.equals("") || address.equals("") || city.equals("") || statement.equals("") || password.equals(""))
+                if(name.equals("") || number.equals("") || address.equals("") || city.equals("") || statement.equals(""))
                 {
                     tv_fieldsError.setVisibility(View.VISIBLE); //Tell them
                 }
@@ -124,7 +127,7 @@ public class EditChurchProfile extends AppCompatActivity
                 {
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //ORDER: email, password, name, denomination, statementOfFaith, streetAddress, city, number
-                    Church church = new Church(Session.getChurch().getEmail(), password, name, denomination, statement, address, city, number);
+                    Church church = new Church(Session.getChurch().getEmail(), Session.getChurch().getPassword(), name, denomination, statement, address, city, number);
                     churchesDb.updateChurch(church); //Update the church in the database
                     Session.login(church); //Log the church in again to update the church's information in Session
                     startActivity(churchHomeIntent);
@@ -201,7 +204,6 @@ public class EditChurchProfile extends AppCompatActivity
         et_address.setText(Session.getChurch().getStreetAddress());
         et_city.setText(Session.getChurch().getCity());
         et_statement.setText(Session.getChurch().getStatementOfFaith());
-        et_password.setText(Session.getChurch().getPassword());
     }
 
     /**========================================SIGN OUT BUTTON CLICK========================================*/
@@ -216,6 +218,21 @@ public class EditChurchProfile extends AppCompatActivity
                 masterConfirmationIntent.putExtra("cameFrom", "editChurchProfileIntent");
                 masterConfirmationIntent.putExtra("deleteOrSignOut", "signOut"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);
+            }
+        });
+    }
+
+    /**========================================CHANGE PASSWORD BUTTON CLICK========================================*/
+    private void changePasswordButtonClick()
+    {
+        btn_changePassword.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", "Change Password Button Click - Moving to ChangePassword");
+                changePasswordIntent.putExtra("cameFrom", "editChurchProfileIntent");
+                startActivity(changePasswordIntent);
             }
         });
     }

@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.churchapp.Other.ChangePassword;
 import com.example.churchapp.Other.MasterConfirmation;
 import com.example.churchapp.Database.UsersTableHelper;
 import com.example.churchapp.Other.MainActivity;
@@ -29,12 +30,12 @@ public class EditUserProfile extends AppCompatActivity
     EditText et_fname;
     EditText et_lname;
     EditText et_city;
-    EditText et_password;
     Spinner sp_denomination;
     TextView tv_fieldsError;
     Button btn_update;
     Button btn_delete;
     Button btn_signOut;
+    Button btn_changePassword;
     ImageView btn_bookmarks;
     ImageView btn_churchFinder;
     ImageView btn_userHome;
@@ -49,6 +50,7 @@ public class EditUserProfile extends AppCompatActivity
     Intent userHomeIntent;
     Intent myChurchIntent;
     Intent masterConfirmationIntent;
+    Intent changePasswordIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,13 +62,13 @@ public class EditUserProfile extends AppCompatActivity
         et_fname = findViewById(R.id.et_editUserProfile_fname);
         et_lname = findViewById(R.id.et_editUserProfile_lname);
         et_city = findViewById(R.id.et_editUserProfile_city);
-        et_password = findViewById(R.id.et_editUserProfile_password);
         sp_denomination = findViewById(R.id.sp_editUserProfile_denomination);
         tv_fieldsError = findViewById(R.id.tv_editUserProfile_fieldsError);
         btn_update = findViewById(R.id.btn_editUserProfile_update);
         btn_delete = findViewById(R.id.btn_editUserProfile_delete);
         btn_bookmarks = findViewById(R.id.btn_editUserProfile_bookmarks);
         btn_signOut = findViewById(R.id.btn_editUserProfile_signOut);
+        btn_changePassword = findViewById(R.id.btn_editUserProfile_changePassword);
         btn_bookmarks = findViewById(R.id.btn_editUserProfile_bookmarks);
         btn_churchFinder = findViewById(R.id.btn_editUserProfile_churchFinder);
         btn_userHome = findViewById(R.id.btn_editUserProfile_userHome);
@@ -81,6 +83,7 @@ public class EditUserProfile extends AppCompatActivity
         myChurchIntent = new Intent(EditUserProfile.this, MyChurch.class);
         bookmarksIntent = new Intent(EditUserProfile.this, MyBookmarks.class);
         masterConfirmationIntent = new Intent(EditUserProfile.this, MasterConfirmation.class);
+        changePasswordIntent = new Intent(EditUserProfile.this, ChangePassword.class);
 
         //Fill text boxes with current info
         fillInTextBoxes();
@@ -101,6 +104,7 @@ public class EditUserProfile extends AppCompatActivity
         userHomeButtonClick();
         denominationSelect();
         signOutButtonClick();
+        changePasswordButtonClick();
     }
 
     /**========================================FILL TEXT BOXES========================================*/
@@ -109,7 +113,6 @@ public class EditUserProfile extends AppCompatActivity
         et_fname.setText(Session.getUser().getFirstName());
         et_lname.setText(Session.getUser().getLastName());
         et_city.setText(Session.getUser().getCity());
-        et_password.setText(Session.getUser().getPassword());
     }
 
     /**========================================DENOMINATION SELECT========================================*/
@@ -140,10 +143,9 @@ public class EditUserProfile extends AppCompatActivity
                 String fname = et_fname.getText().toString();
                 String lname = et_lname.getText().toString();
                 String city = et_city.getText().toString();
-                String password = et_password.getText().toString();
                 String denomination = sp_denomination.getSelectedItem().toString();
 
-                if (fname.equals("") || lname.equals("") || city.equals("") || password.equals(""))
+                if (fname.equals("") || lname.equals("") || city.equals(""))
                 {
                     tv_fieldsError.setVisibility(View.VISIBLE);
                 }
@@ -151,7 +153,7 @@ public class EditUserProfile extends AppCompatActivity
                 {
                     tv_fieldsError.setVisibility(View.INVISIBLE);
                     //ORDER: email, password, firstname, lastname, emailOfChurchAttending, denomination, city
-                    User user = new User(Session.getUser().getEmail(), password, fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
+                    User user = new User(Session.getUser().getEmail(), Session.getUser().getPassword(), fname, lname, Session.getUser().getEmailOfChurchAttending(), denomination, city);
                     usersDb.updateUser(user); //Update user in database
                     Session.login(user); //Log the user in so Session works properly
                     Toast.makeText(EditUserProfile.this, "Account information updated", Toast.LENGTH_SHORT).show();
@@ -191,6 +193,21 @@ public class EditUserProfile extends AppCompatActivity
                 masterConfirmationIntent.putExtra("cameFrom", "editUserProfileIntent"); //Put extra the name of this intent
                 masterConfirmationIntent.putExtra("deleteOrSignOut", "signOut"); //Put whether the user is signing out or deleting
                 startActivity(masterConfirmationIntent);
+            }
+        });
+    }
+
+    /**========================================CHANGE PASSWORD BUTTON CLICk========================================*/
+    private void changePasswordButtonClick()
+    {
+        btn_changePassword.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.v("BUTTON CLICK", " Button Click - Moving to MasterConfirmation");
+                changePasswordIntent.putExtra("cameFrom", "editUserProfileIntent");
+                startActivity(changePasswordIntent);
             }
         });
     }

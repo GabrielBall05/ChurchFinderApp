@@ -114,20 +114,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
-    <EditText
-        android:id="@+id/et_editUserProfile_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="text"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
-
     <Spinner
         android:id="@+id/sp_editUserProfile_denomination"
         android:layout_width="300dp"
@@ -150,6 +136,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_editUserProfile_fieldsError" />
+
+    <Button
+        android:id="@+id/btn_editUserProfile_changePassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="68dp"
+        android:text="Change Password"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_editUserProfile_update" />
 
     <TextView
         android:id="@+id/tv_editUserProfile_fieldsError"
@@ -175,18 +175,7 @@
         android:text="Denomination:"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_password" />
-
-    <TextView
-        android:id="@+id/textView38"
-        android:layout_width="74dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="299dp"
-        android:text="Password:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editUserProfile_city" />
 

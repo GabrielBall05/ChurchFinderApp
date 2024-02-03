@@ -121,14 +121,14 @@
         android:id="@+id/btn_editChurchProfile_delete"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginEnd="93dp"
         android:text="Delete Account"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_editChurchProfile_update" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_editChurchProfile_signOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/et_editChurchProfile_number"
@@ -148,15 +148,27 @@
         android:id="@+id/btn_editChurchProfile_update"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="66dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="68dp"
         android:text="Update Account Info"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_editChurchProfile_fieldsError" />
+
+    <Button
+        android:id="@+id/btn_editChurchProfile_changePassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="81dp"
+        android:text="Change Password"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_editChurchProfile_update" />
 
     <Spinner
         android:id="@+id/sp_editChurchProfile_denomination"
@@ -173,23 +185,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
-        android:layout_marginTop="1dp"
         android:layout_marginEnd="274dp"
         android:text="Denomination:"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_password" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginEnd="302dp"
-        android:text="Password:"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_editChurchProfile_statement" />
 
@@ -218,20 +218,6 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_editChurchProfile_home"
         app:layout_constraintEnd_toStartOf="@+id/textView42"
         app:layout_constraintStart_toEndOf="@+id/btn_editChurchProfile_createEvent" />
-
-    <EditText
-        android:id="@+id/et_editChurchProfile_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="57dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <EditText
         android:id="@+id/et_editChurchProfile_address"
